@@ -11,6 +11,7 @@ This project has just begun, the content of this document will be added as the p
 
 ### [User Experience (UX)](#user-experience-ux)
 - [User Stories](#user-stories)
+- [Design](#design)
 
 <br>
 
@@ -36,3 +37,31 @@ This project has just begun, the content of this document will be added as the p
   - I want to be able to check my rank, so that I can see how good I am.
   - I want to be able to contact the developer, so that I can suggest my ideas.
   - I want to play the game against other players online, so that I can experience different play styles.
+
+<br>
+
+## Design
+
+- Colour Scheme
+
+  The best-known version of the physical game set which has been produced by [Hasbro](https://shop.hasbro.com/en-us/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4) uses 3 colours: blue for the grid, yellow and red for discs. I have followed this colour convention with my own interpretation using [Canva](https://www.canva.com/) > Create a design > Logo > Styles and the colour picker.
+
+  ![Colour Scheme](documentation/colour-scheme.png)
+
+- Typography
+
+  - Headings: [Fredoka One](https://fonts.google.com/specimen/Fredoka+One) is used with Cursive as the fallback font in case the font isn’t being imported into the site correctly. I have chosen Fredoka One for its big, bold and rounded shape which gives a soft feeling and adds a little fun to headings.
+
+  - Paragraph: [Poppins](https://fonts.google.com/specimen/Poppins) is used with Sans Serif as the fallback font. I have chosen Poppins for readability and its sharp corners as opposed to Fredoka One.
+
+- Logo
+
+  The logo has the website name _CONNECT 4_ with the number 4 in a yellow colour on a red background circle which are the main colours of the game.
+
+  ![Logo](assets/images/logo.png)
+
+- Favicon
+
+  The number 4 in a yellow colour on a red background circle in the same style as the logo.
+
+  ![Favicon](assets/images/favicon/favicon.ico)
