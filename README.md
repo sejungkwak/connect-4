@@ -12,6 +12,7 @@ This project has just begun, the content of this document will be added as the p
 ### [User Experience (UX)](#user-experience-ux)
 - [User Stories](#user-stories)
 - [Design](#design)
+- [Wireframes / Mockups](#wireframes--mockups)
 
 <br>
 
@@ -65,3 +66,17 @@ This project has just begun, the content of this document will be added as the p
   The number 4 in a yellow colour on a red background circle in the same style as the logo.
 
   ![Favicon](assets/images/favicon/favicon.ico)
+
+<br>
+
+## Wireframes / Mockups
+
+- _CONNECT 4_ is designed with the following goals in mind:
+	- A user can navigate to other sections while playing a game and resume the game without having to restart.
+	- A user can start a game with as few clicks as possible.
+- To achieve these goals:
+	- It is designed as a one-page website.
+	- One section is shown at a time. Others are hidden to the user.
+	- The Settings section is on the landing screen.
+- I created wireframes and mockups for mobile and desktop.
+- [View Wireframes and Mockups](documentation/DESIGN.md)
