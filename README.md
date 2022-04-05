@@ -13,6 +13,7 @@ This project has just begun, the content of this document will be added as the p
 - [User Stories](#user-stories)
 - [Design](#design)
 - [Wireframes / Mockups](#wireframes--mockups)
+- [Flowchart](#flowchart)
 
 <br>
 
@@ -80,3 +81,13 @@ This project has just begun, the content of this document will be added as the p
 	- The Settings section is on the landing screen.
 - I created wireframes and mockups for mobile and desktop.
 - [View Wireframes and Mockups](documentation/DESIGN.md)
+
+<br>
+
+## Flowchart
+
+I created a flowchart to visualise the process before writing JavaScript code.
+
+![Flowchart](documentation/flowchart.png)
+
+[Back To **Table of Contents**](#table-of-contents)
