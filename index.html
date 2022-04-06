@@ -168,10 +168,31 @@
         <li class="leaderboard-btn-item"><button class="leaderboard-btn" id="leaderboardCloseBtn">close</button></li>
       </ul>
     </section>
-    <section>
-      contact
-      text
-      form
+    <!-- Contact form -->
+    <section class="section" id="contact">
+      <h2 class="heading">contact developer</h2>
+      <div class="contact-text">
+        <p>👋 Hi there!</p>
+        <p>My name is Sejung and I'm based in Dublin, Ireland.</p>
+        <p>I'm the developer of this website and currently learning full stack software development with Code Institute.
+        </p>
+        <p>I hope you have enjoyed playing my version of Connect Four!</p>
+        <p>If you would like to give me feedback about this project, send me a message using the contact form!</p>
+      </div>
+      <form class="contact-form">
+        <p>All fields are required.</p>
+        <label class="contact-label" for="name">name</label>
+        <input class="contact-input" id="name" type="text" required>
+        <label class="contact-label" for="email">email</label>
+        <input class="contact-input" id="email" type="email" required>
+        <label class="contact-label" for="message">message</label>
+        <textarea class="contact-message" id="message" name="message" cols="30" rows="10"></textarea>
+        <ul class="contact-btns">
+          <li class="contact-btn-item"><button class="contact-btn" id="contactSendBtn">send</button>
+          </li>
+          <li class="contact-btn-item"><button class="contact-btn" id="contactCloseBtn">close</button></li>
+        </ul>
+      </form>
     </section>
     <section>
       success
