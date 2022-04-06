@@ -1,0 +1,11 @@
+/*--------------- Google fonts ---------------*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;700&display=swap');
+
+/*--------------- Custom properties ---------------*/
+
+:root {
+  --main-dark-color: #1c304a;
+  --main-light-color: #fafafa;
+  --yellow-disc-color: #ffc736;
+  --red-disc-color: #de0f3f;
+}
