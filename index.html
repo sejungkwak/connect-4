@@ -23,7 +23,8 @@
   <header>
     <!-- Logo -->
     <a class="logo-link" href="index.html" aria-label="Go to the Home page">
-      <img class="logo-img" src="assets/images/logo.png" alt="Connect 4 logo, consisting of the word 'Connect' and the number 4 in a yellow colour on a red background circle">
+      <img class="logo-img" src="assets/images/logo.png"
+        alt="Connect 4 logo, consisting of the word 'Connect' and the number 4 in a yellow colour on a red background circle">
     </a>
     <!-- Navigation menu buttons -->
     <nav class="nav">
@@ -63,7 +64,8 @@
             Red
           </label>
           <label class="setting-label" for="player1Name">
-            <input class="setting-input" id="player1Name" type="text" name="player1-name" maxlength="10" placeholder="What should I call Player 1?">
+            <input class="setting-input" id="player1Name" type="text" name="player1-name" maxlength="10"
+              placeholder="What should I call Player 1?">
           </label>
         </fieldset>
         <fieldset class="setting-fieldset">
@@ -81,7 +83,8 @@
             Red
           </label>
           <label class="setting-label" for="player2Name">
-            <input class="setting-input" id="player2Name" type="text" name="player2-name" maxlength="10" placeholder="What should I call Player 2?">
+            <input class="setting-input" id="player2Name" type="text" name="player2-name" maxlength="10"
+              placeholder="What should I call Player 2?">
           </label>
         </fieldset>
         <ul class="setting-btns">
@@ -96,23 +99,55 @@
         <h2 class="heading"><span id="currentPlayer"></span>'s Turn</h2>
         <ul class="volume-btns" id="volumeBtns">
           <li class="volume-item"><button class="volume-btn high" aria-label="Turn on sound effects">
-            <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path class="volume-icon-path" d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z"/></svg>
-          </button></li>
+              <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path class="volume-icon-path"
+                  d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z" />
+              </svg>
+            </button></li>
           <li class="volume-item"><button class="volume-btn mute" aria-label="Turn off sound effects">
-            <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="volume-icon-path" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM461.64 256l45.64-45.64c6.3-6.3 6.3-16.52 0-22.82l-22.82-22.82c-6.3-6.3-16.52-6.3-22.82 0L416 210.36l-45.64-45.64c-6.3-6.3-16.52-6.3-22.82 0l-22.82 22.82c-6.3 6.3-6.3 16.52 0 22.82L370.36 256l-45.63 45.63c-6.3 6.3-6.3 16.52 0 22.82l22.82 22.82c6.3 6.3 16.52 6.3 22.82 0L416 301.64l45.64 45.64c6.3 6.3 16.52 6.3 22.82 0l22.82-22.82c6.3-6.3 6.3-16.52 0-22.82L461.64 256z"/></svg>
-          </button></li>
+              <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path class="volume-icon-path"
+                  d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM461.64 256l45.64-45.64c6.3-6.3 6.3-16.52 0-22.82l-22.82-22.82c-6.3-6.3-16.52-6.3-22.82 0L416 210.36l-45.64-45.64c-6.3-6.3-16.52-6.3-22.82 0l-22.82 22.82c-6.3 6.3-6.3 16.52 0 22.82L370.36 256l-45.63 45.63c-6.3 6.3-6.3 16.52 0 22.82l22.82 22.82c6.3 6.3 16.52 6.3 22.82 0L416 301.64l45.64 45.64c6.3 6.3 16.52 6.3 22.82 0l22.82-22.82c6.3-6.3 6.3-16.52 0-22.82L461.64 256z" />
+              </svg>
+            </button></li>
         </ul>
       </header>
       <!-- Game board will be injected using JS -->
       <div class="board-grid" id="boardGrid"></div>
     </section>
-    <section>
-      help
-      objective
-      how to play
-      points system
-      leaderboard
-      button
+    <!-- Help section -->
+    <section class="section" id="help">
+      <h2 class="heading">help</h2>
+      <article class="help-article">
+        <h3 class="help-heading">objective</h3>
+        <p class="help-text">To be the first player to connect 4 of your coloured discs in a line either vertically,
+          horizontally, or diagonally.</p>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">how to play</h3>
+        <ol class="help-rules">
+          <li>The player who plays yellow discs starts the first game.</li>
+          <li>Players will alternate turns after playing a disc.</li>
+          <li>On your turn, click the mouse on any of the columns which you want to place your disc into.</li>
+          <li>The disc will be dropped into the available lowest cell of your chosen column.</li>
+          <li>Play alternates until one player gets 4 discs of their colour in a line which can be horizontal, vertical
+            or diagonal.</li>
+          <li>The game can also end without a winner if there is a stalemate.</li>
+          <li>The player starting the previous game will play second in the new game.</li>
+        </ol>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">points system</h3>
+        <p class="help-text">Points are calculated by the number of a winner's moves deducted from 42 which is the total
+          number of cells.</p>
+        <p class="help-text">For example, if a player wins with 4 moves, 42 - 4 = 38 points go to the winner.</p>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">leaderboard</h3>
+        <p class="help-text">This site uses local storage of the browser. The results of the game you play in a browser
+          will be stored in your browser local storage and the top 5 results will be shown on the leaderboard.</p>
+      </article>
+      <button class="btn" id="helpCloseBtn">close</button>
     </section>
     <section>
       leaderboard
