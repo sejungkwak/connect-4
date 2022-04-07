@@ -59,3 +59,11 @@ footer {
 .logo-img {
   width: min(60vw, 15em);
 }
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--main-dark-color);
+}
