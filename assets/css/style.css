@@ -204,3 +204,8 @@ h2 {
   width: min(90vw, 25rem);
   padding: 1em;
 }
+
+.setting-legend {
+  font-weight: 700;
+  padding: 0 .5em;
+}
