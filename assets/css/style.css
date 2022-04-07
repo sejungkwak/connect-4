@@ -67,3 +67,15 @@ footer {
   width: 100%;
   background-color: var(--main-dark-color);
 }
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  width: min(95vw, 50em);
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
