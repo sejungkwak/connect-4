@@ -265,3 +265,29 @@ h2 {
   font-size: 1rem;
   color: var(--main-dark-color);
 }
+
+.setting-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  list-style: none;
+}
+
+.setting-btn {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--main-dark-color);
+  border-radius: 10px;
+  padding: .5em 1em;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: transform .3s ease-in-out;
+}
+
+.setting-btn:hover {
+  transform: scale(1.1);
+}
+
+.setting-btn-item:last-child .setting-btn {
+  background-color: inherit;
+}
