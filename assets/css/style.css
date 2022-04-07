@@ -41,6 +41,18 @@ footer {
   justify-self: flex-end;
 }
 
+h1,
+h2,
+h3 {
+  font-family: 'Fredoka One', cursive;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
 /*--------------- Header ---------------*/
 
 .header {
