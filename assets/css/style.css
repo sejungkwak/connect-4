@@ -79,3 +79,19 @@ footer {
   display: flex;
   align-items: center;
 }
+
+.nav-btn {
+  border: none;
+  padding: .5em 0;
+  background-color: inherit;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--main-light-color);
+  transition: transform .3s ease-in-out;
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
