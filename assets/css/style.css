@@ -122,3 +122,53 @@ h2 {
   text-underline-offset: 2px;
   color: var(--main-dark-color);
 }
+
+/*=============== Main ===============*/
+
+/*--------------- Menu section ---------------*/
+
+.menu-heading {
+  margin: 1em auto;
+}
+
+.menu-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+
+.menu-item {
+  width: 12rem;
+}
+
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--main-dark-color);
+  border-radius: 10px;
+  width: 100%;
+  padding: .5em 1em;
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: capitalize;
+  transition: transform .3s ease-in-out;
+}
+
+.menu-btn:hover {
+  transform: scale(1.1);
+}
+
+.btn-primary {
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+}
+
+.str-text {
+  text-transform: uppercase;
+}
