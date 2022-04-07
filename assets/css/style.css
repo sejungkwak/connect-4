@@ -9,3 +9,30 @@
   --yellow-disc-color: #ffc736;
   --red-disc-color: #de0f3f;
 }
+
+/*--------------- Basic styling ---------------*/
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  height: 100vh;
+  background-color: var(--main-light-color);
+  color: var(--main-dark-color);
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  justify-self: flex-end;
+}
