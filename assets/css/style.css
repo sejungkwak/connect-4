@@ -222,3 +222,37 @@ h2 {
   position: absolute;
   opacity: 0;
 }
+
+.setting-slider {
+  position: relative;
+  justify-self: center;
+  border-radius: 15px;
+  width: 2.8rem;
+  height: 1.8rem;
+  background-color: var(--main-dark-color);
+  cursor: pointer;
+}
+
+.setting-slider.colour {
+  background-color: var(--yellow-disc-color);
+}
+
+.setting-slider::before {
+  content: "";
+  position: absolute;
+  top: .25rem;
+  left: .25rem;
+  border-radius: 50%;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: var(--main-light-color);
+  transition: transform .3s ease-in-out;
+}
+
+.setting-checkbox:checked~.setting-slider::before {
+  transform: translateX(calc(2.8rem - 1.3rem - .5rem));
+}
+
+.setting-checkbox:checked~.setting-slider.colour {
+  background-color: var(--red-disc-color);
+}
