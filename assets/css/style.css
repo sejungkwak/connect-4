@@ -95,3 +95,14 @@ footer {
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.nav-btn.active {
+  border-radius: 35px;
+  padding: .4em;
+  background-color: var(--main-light-color);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  color: var(--main-dark-color);
+}
