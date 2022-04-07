@@ -186,3 +186,10 @@ h2 {
   height: 100%;
   background-color: var(--main-light-color);
 }
+
+.section.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
