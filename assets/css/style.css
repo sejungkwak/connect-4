@@ -209,3 +209,16 @@ h2 {
   font-weight: 700;
   padding: 0 .5em;
 }
+
+.setting-label {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5em;
+  margin: .3em;
+}
+
+.setting-checkbox {
+  position: absolute;
+  opacity: 0;
+}
