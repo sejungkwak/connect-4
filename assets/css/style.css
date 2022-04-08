@@ -291,3 +291,58 @@ h2 {
 .setting-btn-item:last-child .setting-btn {
   background-color: inherit;
 }
+
+/*--------------- Game section ---------------*/
+
+.board-header {
+  display: flex;
+  justify-content: center;
+  width: min(90vw, 50em);
+}
+
+.board-header .heading {
+  flex: 1;
+}
+
+.volume-btns {
+  justify-self: right;
+  list-style: none;
+}
+
+.volume-btn {
+  display: none;
+  border: none;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: .6em;
+  background-color: inherit;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.volume-btn:hover {
+  background-color: var(--main-dark-color);
+}
+
+.volume-btn.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume-icon {
+  overflow: visible;
+}
+
+.volume-icon-path {
+  fill: var(--main-dark-color);
+  transition: .3s ease-in-out;
+  transition-property: transform, fill;
+}
+
+.volume-btn:hover .volume-icon-path {
+  transform: scale(1.2);
+  transform-origin: center;
+  fill: var(--main-light-color);
+}
