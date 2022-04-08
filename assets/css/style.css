@@ -56,7 +56,7 @@ h2 {
   text-align: center;
 }
 
-/*--------------- Button ---------------*/
+/* Button */
 
 .btns {
   display: flex;
@@ -88,6 +88,17 @@ h2 {
 
 .btn:hover {
   transform: scale(1.1);
+}
+
+/* Text and email input */
+
+input[type="text"],
+input[type="email"] {
+  border: none;
+  border-bottom: 2px solid var(--main-dark-color);
+  background-color: inherit;
+  font-size: 1rem;
+  color: var(--main-dark-color);
 }
 
 /*--------------- Header ---------------*/
@@ -272,11 +283,6 @@ h2 {
 
 .setting-input {
   grid-column: span 3;
-  border: none;
-  border-bottom: 2px solid var(--main-dark-color);
-  background-color: inherit;
-  font-size: 1rem;
-  color: var(--main-dark-color);
 }
 
 /*--------------- Game section ---------------*/
