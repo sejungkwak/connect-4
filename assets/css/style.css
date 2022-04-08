@@ -56,6 +56,40 @@ h2 {
   text-align: center;
 }
 
+/*--------------- Button ---------------*/
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--main-dark-color);
+  border-radius: 10px;
+  padding: .5em 1em;
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: transform .3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
 /*--------------- Header ---------------*/
 
 .header {
@@ -135,11 +169,7 @@ h2 {
 }
 
 .menu-btns {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1em;
-  list-style: none;
 }
 
 .menu-item {
@@ -147,29 +177,9 @@ h2 {
 }
 
 .menu-btn {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--main-dark-color);
-  border-radius: 10px;
   width: 100%;
-  padding: .5em 1em;
-  background-color: inherit;
-  cursor: pointer;
-  font-size: 1rem;
   text-transform: capitalize;
-  transition: transform .3s ease-in-out;
-}
-
-.menu-btn:hover {
-  transform: scale(1.1);
-}
-
-.btn-primary {
-  background-color: var(--main-dark-color);
-  color: var(--main-light-color);
 }
 
 .str-text {
@@ -269,32 +279,6 @@ h2 {
   color: var(--main-dark-color);
 }
 
-.setting-btns {
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  list-style: none;
-}
-
-.setting-btn {
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--main-dark-color);
-  border-radius: 10px;
-  padding: .5em 1em;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  transition: transform .3s ease-in-out;
-}
-
-.setting-btn:hover {
-  transform: scale(1.1);
-}
-
-.setting-btn-item:last-child .setting-btn {
-  background-color: inherit;
-}
-
 /*--------------- Game section ---------------*/
 
 .board-header {
@@ -364,26 +348,6 @@ h2 {
   list-style-position: inside;
 }
 
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--main-dark-color);
-  border-radius: 10px;
-  padding: .5em 1em;
-  background-color: inherit;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  transition: transform .3s ease-in-out;
-}
-
-.btn:hover {
-  transform: scale(1.1);
-  transform-origin: center;
-}
-
 /*--------------- Leaderboard section ---------------*/
 
 .leaderboard-table {
@@ -398,31 +362,4 @@ h2 {
 
 .no-data-text {
   margin: 1em auto;
-}
-
-.leaderboard-btns {
-  display: flex;
-  gap: 1em;
-  list-style: none;
-}
-
-.leaderboard-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1em;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--main-dark-color);
-  border-radius: 10px;
-  padding: .5em 1em;
-  background-color: inherit;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  transition: transform .3s ease-in-out;
-}
-
-.leaderboard-btn:hover {
-  transform: scale(1.1);
-  transform-origin: center;
 }
