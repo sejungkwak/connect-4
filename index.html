@@ -39,12 +39,14 @@
     <h1 class="welcome-heading">welcome to connect 4</h1>
     <section class="menu-section">
       <h2 class="menu-heading">Are you ready to play?</h2>
-      <ul class="menu-btns">
-        <li class="menu-item"><button class="menu-btn btn-primary"><strong class="str-text">yes</strong>born
+      <ul class="btns menu-btns">
+        <li class="menu-item"><button class="btn menu-btn btn-primary"><strong class="str-text">yes</strong>born
             ready!</button></li>
-        <li class="menu-item"><button class="menu-btn"><strong class="str-text">no</strong>tell me the rules!</button>
+        <li class="menu-item"><button class="btn menu-btn"><strong class="str-text">no</strong>tell me the
+            rules!</button>
         </li>
-        <li class="menu-item"><button class="menu-btn"><strong class="str-text">maybe</strong>show me my score!</button>
+        <li class="menu-item"><button class="btn menu-btn"><strong class="str-text">maybe</strong>show me my
+            score!</button>
         </li>
       </ul>
     </section>
@@ -90,16 +92,16 @@
               placeholder="What should I call Player 2?">
           </label>
         </fieldset>
-        <ul class="setting-btns">
-          <li class="setting-btn-item"><button class="setting-btn btn-primary" id="settingStartBtn">start</button></li>
-          <li class="setting-btn-item"><button class="setting-btn" id="settingCloseBtn">close</button></li>
+        <ul class="btns">
+          <li><button class="btn btn-primary" id="settingStartBtn">start</button></li>
+          <li><button class="btn" id="settingCloseBtn">close</button></li>
         </ul>
       </form>
     </section>
     <!-- Game section -->
     <section class="section" id="board">
       <header class="board-header">
-        <h2 class="heading"><span id="currentPlayer"></span>'s Turn</h2>
+        <h2 class="heading"><span id="currentPlayer"></span> Turn</h2>
         <ul class="volume-btns" id="volumeBtns">
           <li class="volume-item"><button class="volume-btn high active" aria-label="Turn on sound effects">
               <svg class="volume-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
@@ -153,7 +155,7 @@
       <button class="btn" id="helpCloseBtn">close</button>
     </section>
     <!-- Leaderboard section -->
-    <section class="section active" id="leaderboard">
+    <section class="section" id="leaderboard">
       <h2 class="heading">leaderboard</h2>
       <table class="leaderboard-table">
         <thead class="leaderboard-table-head">
@@ -166,10 +168,10 @@
         </thead>
       </table>
       <p class="no-data-text">Unable to find save data.</p>
-      <ul class="leaderboard-btns">
-        <li class="leaderboard-btn-item"><button class="leaderboard-btn" id="leaderboardDeleteBtn">delete data</button>
+      <ul class="btns">
+        <li><button class="btn" id="leaderboardDeleteBtn">delete data</button>
         </li>
-        <li class="leaderboard-btn-item"><button class="leaderboard-btn" id="leaderboardCloseBtn">close</button></li>
+        <li><button class="btn" id="leaderboardCloseBtn">close</button></li>
       </ul>
     </section>
     <!-- Contact form -->
@@ -191,10 +193,10 @@
         <input class="contact-input" id="email" type="email" required>
         <label class="contact-label" for="message">message</label>
         <textarea class="contact-message" id="message" name="message" cols="30" rows="10"></textarea>
-        <ul class="contact-btns">
-          <li class="contact-btn-item"><button class="contact-btn" id="contactSendBtn">send</button>
+        <ul class="btns">
+          <li><button class="btn btn-primary" id="contactSendBtn">send</button>
           </li>
-          <li class="contact-btn-item"><button class="contact-btn" id="contactCloseBtn">close</button></li>
+          <li><button class="btn" id="contactCloseBtn">close</button></li>
         </ul>
       </form>
     </section>
