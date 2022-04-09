@@ -103,7 +103,7 @@ input[type="email"] {
   color: var(--main-dark-color);
 }
 
-/*--------------- Header ---------------*/
+/*=============== Header ===============*/
 
 .header {
   position: sticky;
@@ -346,6 +346,7 @@ input[type="email"] {
 
 .help-article {
   margin: min(2.5vw, 1em);
+  max-width: 48rem;
 }
 
 .help-heading {
@@ -420,7 +421,7 @@ input[type="email"] {
   margin-bottom: 1em;
 }
 
-/*--------------- Footer ---------------*/
+/*=============== Footer ===============*/
 
 .footer {
   display: flex;
@@ -464,4 +465,57 @@ input[type="email"] {
 
 .footer-icon-path {
   fill: var(--main-light-color);
+}
+
+/****************************************************************
+************************* Media queries *************************
+*****************************************************************/
+
+/*=============== Large screen size devices from 64rem/1024px width  ===============*/
+
+@media screen and ( min-width: 64rem ) {
+
+  /*--------------- Help section ---------------*/
+
+  .section.help.active {
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+      "heading heading"
+      "objective points"
+      "rules leaderboard"
+      "button button";
+    align-items: start;
+    max-width: 87.5rem;
+  }
+
+  .help > .heading {
+    grid-area: heading;
+    align-self: center;
+  }
+
+  .help > .help-article:nth-child(2) {
+    grid-area: objective;
+  }
+
+  .help > .help-article:nth-child(3) {
+    grid-area: rules;
+  }
+
+  .help > .help-article:nth-child(4) {
+    grid-area: points;
+  }
+
+  .help > .help-article:nth-child(5) {
+    grid-area: leaderboard;
+  }
+
+  .help > .btn {
+    grid-area: button;
+    justify-self: center;
+    width: fit-content;
+  }
+
 }
