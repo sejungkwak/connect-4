@@ -119,11 +119,15 @@ input[type="email"] {
 .logo-link {
   display: flex;
   align-items: center;
-  padding: .5em 0;
+  border: none;
+  width: min(60vw, 18em);
+  padding: .8em 0;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 .logo-img {
-  width: min(60vw, 15em);
+  width: 100%;
 }
 
 .nav {
