@@ -78,6 +78,7 @@ h2 {
   cursor: pointer;
   font-size: 1rem;
   text-transform: uppercase;
+  text-decoration: none;
   transition: transform .3s ease-in-out;
 }
 
@@ -393,4 +394,27 @@ input[type="email"] {
   background-color: inherit;
   font-size: 1rem;
   color: var(--main-dark-color);
+}
+
+/*--------------- Contact feedback(Success) section ---------------*/
+
+.success-icon {
+  margin-bottom: 1em;
+  width: 5em;
+}
+
+.success-icon-path {
+  fill: var(--main-dark-color);
+}
+
+.success-text {
+  text-align: center;
+}
+
+.success-text:nth-child(3) {
+  margin-top: 1em;
+}
+
+.success-text:nth-child(4) {
+  margin-bottom: 1em;
 }
