@@ -1,3 +1,23 @@
+// Get button elements
+const logoLink = elById('logoLink');
+const navNewGameBtn = elById('primaryNewGame');
+const navHelpBtn = elById('primaryHelp');
+const navLeaderboardBtn = elById('primaryLeaderboard');
+const menuNewGameBtn = elById('newGameBtn');
+const menuHelpBtn = elById('helpBtn');
+const menuLeaderboardBtn = elById('leaderboardBtn');
+const settingStartBtn = elById('settingStartBtn');
+const settingCloseBtn = elById('settingCloseBtn');
+const soundBtn = elById('soundBtn');
+const muteBtn = elById('muteBtn');
+const helpCloseBtn = elById('helpCloseBtn');
+const leaderboardDeleteBtn = elById('leaderboardDeleteBtn');
+const leaderboardCloseBtn = elById('leaderboardCloseBtn');
+const contactSendBtn = elById('contactSendBtn');
+const contactCloseBtn = elById('contactCloseBtn');
+const successHomeBtn = elById('successHomeBtn');
+const footerContactBtn = elById('footerContactBtn');
+
 /* 
 Helper functions
 Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
