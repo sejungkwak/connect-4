@@ -377,15 +377,17 @@ input[type="email"] {
 /*--------------- Contact form ---------------*/
 
 .contact-text {
-  margin: min(2.5vw, 1em);
+  max-width: 48rem;
+  padding: min(2.5vw, 1em);
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: .5em;
-  padding: min(2.5vw, 1em);
   width: 100%;
+  max-width: 48rem;
+  padding: min(2.5vw, 1em);
 }
 
 .contact-label {
@@ -476,20 +478,26 @@ input[type="email"] {
 
 @media screen and ( min-width: 64rem ) {
 
-  /*--------------- Help section ---------------*/
+  /* Grid template for Help section and contact form */
 
-  .section.help.active {
+  .section.help.active,
+  .section.contact.active {
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    max-width: 87.5rem;
+  }
+
+  /*--------------- Help section ---------------*/
+
+  .section.help {
     grid-template-areas: 
       "heading heading"
       "objective points"
       "rules leaderboard"
       "button button";
-    align-items: start;
-    max-width: 87.5rem;
   }
 
   .help > .heading {
@@ -517,6 +525,27 @@ input[type="email"] {
     grid-area: button;
     justify-self: center;
     width: fit-content;
+  }
+
+  /*--------------- Contact form ---------------*/
+
+  .section.contact {
+    grid-template-areas: 
+      "heading heading"
+      "intro form";
+  }
+
+  .contact > .heading {
+    grid-area: heading;
+    align-self: center;
+  }
+
+  .contact > .contact-text {
+    grid-area: intro;
+  }
+
+  .contact > .contact-form {
+    grid-area: form;
   }
 
 }
