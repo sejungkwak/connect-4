@@ -18,6 +18,14 @@ const contactCloseBtn = elById('contactCloseBtn');
 const successHomeBtn = elById('successHomeBtn');
 const footerContactBtn = elById('footerContactBtn');
 
+// Get section elements
+const settingsSection = elById('settings');
+const gameSection = elById('board');
+const helpSection = elById('help');
+const leaderboardSection = elById('leaderboard');
+const contactSection = elById('contact');
+const successSection = elById('success');
+
 /* 
 Helper functions
 Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
