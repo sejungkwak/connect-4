@@ -111,7 +111,7 @@ checkboxes.forEach(checkbox =>
     overlay.innerHTML = `
     <div class="alert-container">
       <p class="alert-text">Please select at least one human player.</p>
-      <button class="btn">OK</button>
+      <button class="btn" onclick="confirmSetting('player')">OK</button>
     </div>
     `
     settingsSection.appendChild(overlay);
@@ -124,10 +124,29 @@ checkboxes.forEach(checkbox =>
     overlay.innerHTML = `
     <div class="alert-container">
       <p class="alert-text">Please select a unique colour for each player.</p>
-      <button class="btn">OK</button>
+      <button class="btn" onclick="confirmSetting('colour')">OK</button>
     </div>
     `
     settingsSection.appendChild(overlay);
+  }
+}
+
+/**
+ * Removes alert modal overlay and
+ * change the checkbox value to default.
+ * @param {string} type 
+ */
+function confirmSetting(type) {
+  const overlays = qsa('.overlay');
+  overlays.forEach(overlay => overlay.remove());
+
+  if ( type === 'player' ) {
+    checkboxes[0].checked = false;
+    checkboxes[2].checked = true;
+  }
+  if ( type === 'colour' ) {
+    checkboxes[1].checked = false;
+    checkboxes[3].checked = true;
   }
 }
 
