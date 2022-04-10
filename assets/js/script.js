@@ -107,7 +107,7 @@ footerContactBtn.addEventListener('click', () => {
 function openSection(name) {
 
   for ( i = 0; i < sections.length; i++ ) {
-    if ( i === 1 ) continue;
+    if ( i === 1 ) { continue; }
     sections[i].classList.remove('active');
   }
 
@@ -126,9 +126,14 @@ function openSection(name) {
   }
 }
 
-// closes all section except game board section
+/**
+ * Closes all the sections except the game section
+ */
 function closeSection() {
-
+  for ( i = 0; i < sections.length; i++ ) {
+    if ( i === 1 ) { continue; }
+    sections[i].classList.remove('active');
+  }
 }
 
 // Sound button click handler
