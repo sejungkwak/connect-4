@@ -224,6 +224,10 @@ input[type="email"] {
   align-items: center;
 }
 
+.section.settings {
+  z-index: 1;
+}
+
 .setting-fieldset {
   display: flex;
   flex-direction: column;
@@ -292,6 +296,10 @@ input[type="email"] {
 }
 
 /*--------------- Game section ---------------*/
+
+.section.game {
+  z-index: 0;
+}
 
 .board-header {
   display: flex;
