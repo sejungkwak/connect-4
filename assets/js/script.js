@@ -27,6 +27,9 @@ const leaderboardSection = elById('leaderboard');
 const contactSection = elById('contact');
 const successSection = elById('success');
 
+// Get checkbox input elements in the settings section
+const checkboxes = qsa('.setting-checkbox');
+
 // Button Click EventListeners
 logoLink.addEventListener('click', () => {
   openSection('settings');
