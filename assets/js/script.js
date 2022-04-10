@@ -28,34 +28,31 @@ const contactSection = elById('contact');
 const successSection = elById('success');
 
 // Button Click EventListeners
-
-// logoLink => opens settingsSection, closes other sections
 logoLink.addEventListener('click', () => {
   openSection('settings');
 });
-
-// navNewGameBtn => opens settingsSection, closes other sections except gameSection if active
 navNewGameBtn.addEventListener('click', () => {
   openSection('settings');
 });
-
-// navHelpBtn => opens helpSection, closes other sections except gameSection if active
 navHelpBtn.addEventListener('click', () => {
   openSection('help');
 });
-
-// navLeaderboardBtn => opens leaderboardSection, closes other sections except gameSection if active
 navLeaderboardBtn.addEventListener('click', () => {
   openSection('leaderboard');
 });
-
-// settingStartBtn => oepns gameSection, closes other sections
+menuNewGameBtn.addEventListener('click', () => {
+  openSection('settings');
+});
+menuHelpBtn.addEventListener('click', () => {
+  openSection('help');
+});
+menuLeaderboardBtn.addEventListener('click', () => {
+  openSection('leaderboard');
+})
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
   openSection('game');
 });
-
-// settingCloseBtn => closes settingsSection
 settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   closeSection();
@@ -67,13 +64,11 @@ soundBtn.addEventListener('click', soundBtnHander);
 // muteBtn => turns off sound effects
 muteBtn.addEventListener('click', soundBtnHander);
 
-// helpCloseBtn => closes helpSection
 helpCloseBtn.addEventListener('click', closeSection);
 
 // leaderboardDeleteBtn => deletes local storage data
 leaderboardDeleteBtn.addEventListener('click', deleteData);
 
-// leaderboardCloseBtn => closes leaderboardSection
 leaderboardCloseBtn.addEventListener('click', closeSection);
 
 // contactSendBtn => sends message, opens successSection, closes contact section
@@ -83,18 +78,15 @@ contactSendBtn.addEventListener('click', (e) => {
   openSection('success');
 });
 
-// contactCloseBtn => closes contactSection
 contactCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   closeSection();
 });
 
-// successHomeBtn => closes successSection, opens settingsSection
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
 });
 
-// footerContactBtn => opens contactSection, closes other sections except gameSection if active
 footerContactBtn.addEventListener('click', () => {
   openSection('contact');
 });
