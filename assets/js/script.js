@@ -30,6 +30,9 @@ const successSection = elById('success');
 // Get checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
 
+// Stores input values from the settings section form
+let playerData;
+
 // Button Click EventListeners
 logoLink.addEventListener('click', () => {
   openSection('settings');
@@ -54,7 +57,7 @@ menuLeaderboardBtn.addEventListener('click', () => {
 })
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  openSection('game');
+  startBtnHandler();
 });
 settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -97,6 +100,53 @@ footerContactBtn.addEventListener('click', () => {
 // Checkbox change EventListener
 checkboxes.forEach(checkbox => 
   checkbox.addEventListener('change', invalidChangeHandler));
+
+/**
+ * Checks input values from the settings section form and
+ * calls functions that creates the game grid, clears it and opens the game section respectively.
+ */
+function startBtnHandler() {
+  let player1Type = elById('player1Type').checked ? 'human' : 'computer';
+  let player1Colour = elById('player1Colour').checked ? 'red' : 'yellow';
+  let player1Name = elById('player1Name').value.trim();
+  let player2Type = elById('player2Type') ? 'human' : 'computer';
+  let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
+  let player2Name = elById('player2Name').value.trim();
+
+  if ( player1Type === 'computer' && player2Type === 'human' ) {
+    player1Name = player1Name === '' ? 'Computer' : player1Name;
+    player2Name = player2Name === '' ? 'Player' : player2Name;
+  }
+  if ( player1Type === 'human' && player2Type === 'computer' ) {
+    player1Name = player1Name === '' ? 'Player' : player1Name;
+    player2Name = player2Name === '' ? 'Computer' : player2Name;
+  }
+  if ( player1Type === 'human' && player2Type === 'human' ) {
+    player1Name = player1Name === '' ? player1Colour : player1Name;
+    player2Name = player2Name === '' ? player2Colour : player2Name;
+  }
+
+  playerData = {
+    player1Type,
+    player1Colour,
+    player1Name,
+    player2Type,
+    player2Colour,
+    player2Name
+  }
+
+  createGrid();
+  clearGrid();
+  openSection('game');
+}
+
+function createGrid() {
+
+}
+
+function clearGrid() {
+
+}
 
 /**
  * Checkes invalid game settings:
