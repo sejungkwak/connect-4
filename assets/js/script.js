@@ -94,6 +94,14 @@ footerContactBtn.addEventListener('click', () => {
   openSection('contact');
 });
 
+// Checkbox change EventListener
+checkboxes.forEach(checkbox => 
+  checkbox.addEventListener('change', invalidChangeHandler));
+
+function invalidChangeHandler() {
+  
+}
+
 /**
  * Opens the section specified by the argument and
  * closes other sections except the game section
