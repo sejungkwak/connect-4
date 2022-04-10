@@ -19,6 +19,7 @@ const successHomeBtn = elById('successHomeBtn');
 const footerContactBtn = elById('footerContactBtn');
 
 // Get section elements
+const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('board');
 const helpSection = elById('help');
@@ -31,32 +32,27 @@ const successSection = elById('success');
 // logoLink => opens settingsSection, closes other sections
 logoLink.addEventListener('click', () => {
   openSection('settings');
-  closeSection();
 });
 
 // navNewGameBtn => opens settingsSection, closes other sections except gameSection if active
 navNewGameBtn.addEventListener('click', () => {
   openSection('settings');
-  closeSection();
 });
 
 // navHelpBtn => opens helpSection, closes other sections except gameSection if active
 navHelpBtn.addEventListener('click', () => {
   openSection('help');
-  closeSection();
 });
 
 // navLeaderboardBtn => opens leaderboardSection, closes other sections except gameSection if active
 navLeaderboardBtn.addEventListener('click', () => {
   openSection('leaderboard');
-  closeSection();
 });
 
 // settingStartBtn => oepns gameSection, closes other sections
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
   openSection('game');
-  closeSection();
 });
 
 // settingCloseBtn => closes settingsSection
@@ -85,7 +81,6 @@ contactSendBtn.addEventListener('click', (e) => {
   e.preventDefault();
   sendMessage();
   openSection('success');
-  closeSection();
 });
 
 // contactCloseBtn => closes contactSection
@@ -97,18 +92,38 @@ contactCloseBtn.addEventListener('click', (e) => {
 // successHomeBtn => closes successSection, opens settingsSection
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
-  closeSection();
 });
 
 // footerContactBtn => opens contactSection, closes other sections except gameSection if active
 footerContactBtn.addEventListener('click', () => {
   openSection('contact');
-  closeSection();
 });
 
-// Opens a section
+/**
+ * Opens the section specified by the argument and
+ * closes other sections except the game section
+ * @param {string} name
+ */
 function openSection(name) {
 
+  for ( i = 0; i < sections.length; i++ ) {
+    if ( i === 1 ) continue;
+    sections[i].classList.remove('active');
+  }
+
+  if ( name === 'settings' ) {
+    sections[0].classList.add('active');
+  } else if ( name === 'game' ) {
+    sections[1].classList.add('active');
+  } else if ( name === 'help' ) {
+    sections[2].classList.add('active');
+  } else if ( name === 'leaderboard' ) {
+    sections[3].classList.add('active');
+  } else if ( name === 'contact' ) {
+    sections[4].classList.add('active');
+  } else {
+    throw `Invalid section name: ${name}. Aborting!`;
+  }
 }
 
 // closes all section except game board section
