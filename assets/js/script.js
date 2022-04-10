@@ -118,7 +118,7 @@ checkboxes.forEach(checkbox =>
   }
 
   // checkboxes[1] and checkboxes[3] are for the player colour. If unchecked, it's yellow.
-  if ( !checkboxes[1].checked && !checkboxes[3].checked || checkboxes[1].checked && checkboxes[3].checked ) {
+  if ( checkboxes[1].checked === checkboxes[3].checked ) {
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
     overlay.innerHTML = `
