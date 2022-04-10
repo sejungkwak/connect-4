@@ -98,8 +98,37 @@ footerContactBtn.addEventListener('click', () => {
 checkboxes.forEach(checkbox => 
   checkbox.addEventListener('change', invalidChangeHandler));
 
-function invalidChangeHandler() {
-  
+/**
+ * Checkes invalid game settings:
+ * at least one player must be a human and
+ * each player must have a different colour.
+ */
+ function invalidChangeHandler() {
+  // checkboxes[0] and checkboxes[2] are for the player type. If unchecked, it's a computer.
+  if ( !checkboxes[0].checked && !checkboxes[2].checked ) {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.innerHTML = `
+    <div class="alert-container">
+      <p class="alert-text">Please select at least one human player.</p>
+      <button class="btn">OK</button>
+    </div>
+    `
+    settingsSection.appendChild(overlay);
+  }
+
+  // checkboxes[1] and checkboxes[3] are for the player colour. If unchecked, it's yellow.
+  if ( !checkboxes[1].checked && !checkboxes[3].checked || checkboxes[1].checked && checkboxes[3].checked ) {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.innerHTML = `
+    <div class="alert-container">
+      <p class="alert-text">Please select a unique colour for each player.</p>
+      <button class="btn">OK</button>
+    </div>
+    `
+    settingsSection.appendChild(overlay);
+  }
 }
 
 /**
