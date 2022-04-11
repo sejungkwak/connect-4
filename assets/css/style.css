@@ -384,6 +384,47 @@ input[type="email"] {
   fill: var(--main-light-color);
 }
 
+.board-grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(7, 1fr);
+  gap: min(.5em, 1vw) min(1em, 2vw);
+  margin-top: 2em;
+  border-radius: 10px;
+  width: min(90vw, 40em);
+  padding: .5em;
+  background-color: var(--main-dark-color);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+	width: 100%;
+	aspect-ratio: 1/1;
+	background-color: var(--main-light-color);
+  cursor: pointer;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.yellow {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: var(--yellow-disc-color);
+}
+
+.red {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: var(--red-disc-color);
+}
+
 /*--------------- Help section ---------------*/
 
 .help-article {
