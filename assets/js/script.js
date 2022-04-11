@@ -130,10 +130,10 @@ function startBtnHandler() {
 
   if (player1Type === 'computer' && player2Type === 'human') {
     player1Name = player1Name === '' ? 'Computer' : player1Name;
-    player2Name = player2Name === '' ? 'Player' : player2Name;
+    player2Name = player2Name === '' ? 'You' : player2Name;
   }
   if (player1Type === 'human' && player2Type === 'computer') {
-    player1Name = player1Name === '' ? 'Player' : player1Name;
+    player1Name = player1Name === '' ? 'You' : player1Name;
     player2Name = player2Name === '' ? 'Computer' : player2Name;
   }
   if (player1Type === 'human' && player2Type === 'human') {
@@ -169,8 +169,21 @@ function runGame() {
   }
 }
 
+/**
+ * Displays the current player's name on the screen
+ * @param {string} currentPlayerName
+ */
 function updateName(currentPlayerName) {
+  const currentPlayerEl = elById('currentPlayer');
+  let text;
 
+  if (currentPlayerName === 'You') {
+    text = 'Your'
+  } else {
+    text = `${currentPlayerName}'s`
+  }
+
+  currentPlayerEl.innerText = text;
 }
 
 function updateColour(currentPlayerColour) {
