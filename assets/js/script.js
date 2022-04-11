@@ -30,6 +30,10 @@ const successSection = elById('success');
 // Get checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
 
+// Constant values for the game board grid
+const NUM_OF_COLUMN = 7;
+const NUM_OF_ROW = 6;
+
 // Stores input values from the settings section form
 let playerData;
 
@@ -140,8 +144,28 @@ function startBtnHandler() {
   openSection('game');
 }
 
+/**
+ * Creates a 6-row by 7-column game board grid
+ * with 1 extra row for showing the mouse-over state.
+ */
 function createGrid() {
+  const boardEl = elById('boardGrid');
 
+  for ( let i = 0; i < NUM_OF_ROW + 1; i++ ) {
+    for ( let j = 0; j < NUM_OF_COLUMN; j++ ) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      if ( i === 0 ) {
+        cell.setAttribute('tabindex', 0);
+        cell.className += ' invisible';
+      } else {
+        cell.dataset.coordsRow = i - 1;
+        cell.dataset.coordsCol = j;
+      }
+      boardEl.appendChild(cell);
+    }
+  }
 }
 
 function clearGrid() {
