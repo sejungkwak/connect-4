@@ -186,8 +186,18 @@ function updateName(currentPlayerName) {
   currentPlayerEl.innerText = text;
 }
 
+/**
+ * Displays the current player's colour
+ * in the first row of the grid on mouseover
+ * @param {string} currentPlayerColour 
+ */
 function updateColour(currentPlayerColour) {
-
+  const topCells = qsa('.cell');
+  for (let i = 0; i < NUM_OF_COLUMN; i++) {
+    topCells[i].classList.remove('yellow');
+    topCells[i].classList.remove('red');
+    topCells[i].classList.add(currentPlayerColour);
+  }
 }
 
 function multiPlayerGame() {
