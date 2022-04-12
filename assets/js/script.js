@@ -164,40 +164,76 @@ function startBtnHandler() {
  */
 function runGame() {
 
-  if ( !gamePlayed % 2 === 0 ) {
+  if (!gamePlayed % 2 === 0) {
     player1Turn = true;
   }
-  
+
   createGrid();
 
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
   updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
 
   if (playerData.player1Type === 'human' && playerData.player2Type === 'human') {
-    multiPlayerGame();
+    playerMove();
+  } else if (
+    (playerData.player1Type === 'computer' && player1Turn) ||
+    (playerData.player2Type === 'computer' && !player1Turn)
+  ) {
+    computerMove();
+    playerMove();
   } else {
-    singlePlayerGame();
+    playerMove();
   }
 }
 
 /**
- * Calls when both players are human.
+ * Runs when it's a computer's turn:
+ * picks a cell and places a disc into the cell.
  */
-function multiPlayerGame() {
+function computerMove() {
+  if (gameOver) return;
+
+  const randomNumber = Math.floor(Math.random() * NUM_OF_COLUMN);
+  const freeCell = findFreeCell(randomNumber);
+
+  if (!freeCell) {
+    computerMove();
+  }
+
+  setTimeout(() => {
+    freeCell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    freeCell.textContent = `
+      ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
+    `
+
+    freeCellCounter--;
+
+    if (freeCellCounter === 0) {
+      gameOver = true;
+      displayResult();
+    } else {
+      checkWinner();
+    }
+
+    player1Turn = player1Turn = true ? !player1Turn : player1Turn;
+
+    updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
+    updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  }, 500);
+}
+
+/**
+ * Runs when it's a human player's turn:
+ * handles mouse events on each cell.
+ */
+function playerMove() {
   const cells = qsa('.cell');
 
-  for ( let cell of cells ) {
-    cell.addEventListener('mouseover', e => cellMouseoverHandler(e));
-    cell.addEventListener('mouseout', e => cellMouseoutHandler(e));
-    cell.addEventListener('click', e => placeDisc(e));
+  for (let cell of cells) {
+    cell.addEventListener('mouseover', cellMouseoverHandler);
+    cell.addEventListener('mouseout', cellMouseoutHandler);
+    cell.addEventListener('click', placeDisc);
   }
-}
-
-/**
- * Calls when one of players is a computer.
- */
-function singlePlayerGame() {
-
 }
 
 /**
@@ -205,7 +241,7 @@ function singlePlayerGame() {
  * in the first row on mouseover.
  * @param {object} event 
  */
- function cellMouseoverHandler(event) {
+function cellMouseoverHandler(event) {
   if (gameOver) return;
 
   const cells = qsa('.cell');
@@ -218,7 +254,7 @@ function singlePlayerGame() {
  * Hides the current player's coloured disc on mouseout.
  * @param {object} event
  */
- function cellMouseoutHandler(event) {
+function cellMouseoutHandler(event) {
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
 
@@ -254,8 +290,12 @@ function placeDisc(event) {
 
   player1Turn = player1Turn = true ? !player1Turn : player1Turn;
 
-  updateName( player1Turn ? playerData.player1Name : playerData.player2Name );
-  updateColour( player1Turn ? playerData.player1Colour : playerData.player2Colour );
+  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
+  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+
+  if (playerData.player1Type === 'computer' || playerData.player2Type === 'computer') {
+    computerMove();
+  }
 }
 
 /**
@@ -266,24 +306,21 @@ function placeDisc(event) {
 function findFreeCell(colIndex) {
   const cells = qsa(`[data-coords-col="${colIndex}"]`);
 
-  for ( let i = cells.length - 1; i >= 0; i-- ) {
-    if ( !cells[i].classList.contains('red') && !cells[i].classList.contains('yellow') ) {
+  for (let i = cells.length - 1; i >= 0; i--) {
+    if (!cells[i].classList.contains('red') && !cells[i].classList.contains('yellow')) {
       return cells[i];
     }
   }
 }
 
 // checks if there's 4 in a row: horizonal, vertical, main diagonal or off diagonal.
-function checkWinner() {
-}
+function checkWinner() {}
 
 // stores the result in the local storage.
-function addToLocalstorage() {
-}
+function addToLocalstorage() {}
 
 // displays the game result and the play again button
-function displayResult() { 
-}
+function displayResult() {}
 
 /**
  * Displays the current player's name on the screen
