@@ -258,9 +258,19 @@ function placeDisc(event) {
   updateColour( player1Turn ? playerData.player1Colour : playerData.player2Colour );
 }
 
-// Checks if there is an available cell in the column the player clicks on.
+/**
+ * Checks if there is an available cell in the column the player clicks on.
+ * @param {number} colIndex 
+ * @returns 
+ */
 function findFreeCell(colIndex) {
+  const cells = qsa(`[data-coords-col="${colIndex}"]`);
 
+  for ( let i = cells.length - 1; i >= 0; i-- ) {
+    if ( !cells[i].classList.contains('red') && !cells[i].classList.contains('yellow') ) {
+      return cells[i];
+    }
+  }
 }
 
 // checks if there's 4 in a row: horizonal, vertical, main diagonal or off diagonal.
