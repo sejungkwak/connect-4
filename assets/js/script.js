@@ -225,8 +225,42 @@ function singlePlayerGame() {
   cells[colIndex].classList.add('invisible');
 }
 
-// place the disc in the lowest available cell of the column the player clicks on.
+/**
+ * Places the disc in the lowest available cell 
+ * of the column the player clicks on.
+ * @param {object} event 
+ */
 function placeDisc(event) {
+  if (gameOver) return;
+
+  const cells = qsa('.cell');
+  const colIndex = cells.indexOf(event.target) % 7;
+  const freeCell = findFreeCell(colIndex);
+
+  if (!freeCell) return;
+
+  freeCellCounter--;
+  freeCell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  freeCell.textContent = `
+    ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
+  `
+
+  if (freeCellCounter === 0) {
+    gameOver = true;
+    displayResult();
+  } else {
+    checkWinner();
+  }
+
+  player1Turn = player1Turn = true ? !player1Turn : player1Turn;
+
+  updateName( player1Turn ? playerData.player1Name : playerData.player2Name );
+  updateColour( player1Turn ? playerData.player1Colour : playerData.player2Colour );
+}
+
+// Checks if there is an available cell in the column the player clicks on.
+function findFreeCell(colIndex) {
+
 }
 
 // checks if there's 4 in a row: horizonal, vertical, main diagonal or off diagonal.
