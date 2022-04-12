@@ -34,17 +34,20 @@ const checkboxes = qsa('.setting-checkbox');
 const NUM_OF_COLUMN = 7;
 const NUM_OF_ROW = 6;
 
-// Stores input values from the settings section form
-let playerData;
-
-// Current player. The value changes after a player makes a move.
-let player1Turn = true;
-
 // Total available cell. The number decreases after a player places a disc.
 let freeCellCounter = 42;
 
 // The game status. The game loop is running while the value is false.
 let gameOver = false;
+
+// The number of games the user played without resetting.
+let gamePlayed;
+
+// Current player. The value changes after a player makes a move.
+let player1Turn;
+
+// Stores input values from the settings section form
+let playerData;
 
 // Button Click EventListeners
 logoLink.addEventListener('click', () => {
@@ -66,6 +69,7 @@ menuHelpBtn.addEventListener('click', () => {
   openSection('help');
 });
 menuLeaderboardBtn.addEventListener('click', () => {
+  getFromLocalstorage();
   openSection('leaderboard');
 })
 settingStartBtn.addEventListener('click', (e) => {
@@ -150,6 +154,8 @@ function startBtnHandler() {
     player2Name
   }
 
+  gamePlayed = 1;
+
   runGame();
 }
 
@@ -157,6 +163,11 @@ function startBtnHandler() {
  * Creates and configures a new game.
  */
 function runGame() {
+
+  if ( !gamePlayed % 2 === 0 ) {
+    player1Turn = true;
+  }
+  
   createGrid();
 
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
@@ -167,6 +178,50 @@ function runGame() {
   } else {
     singlePlayerGame();
   }
+}
+
+/**
+ * Calls when both players are human.
+ */
+function multiPlayerGame() {
+  const cells = qsa('.cell');
+
+  for ( let cell of cells ) {
+    cell.addEventListener('mouseover', e => cellMouseoverHandler(e));
+    cell.addEventListener('mouseout', e => cellMouseoutHandler(e));
+    cell.addEventListener('click', e => placeDisc(e));
+  }
+}
+
+/**
+ * Calls when one of players is a computer.
+ */
+function singlePlayerGame() {
+
+}
+
+// Display disc on mouseover
+function cellMouseoverHandler(event) {
+}
+
+// Hides disc on mouseout
+function cellMouseoutHandler(event) {
+}
+
+// place the disc in the lowest available cell of the column the player clicks on.
+function placeDisc(event) {
+}
+
+// checks if there's 4 in a row: horizonal, vertical, main diagonal or off diagonal.
+function checkWinner() {
+}
+
+// stores the result in the local storage.
+function addToLocalstorage() {
+}
+
+// displays the game result and the play again button
+function displayResult() { 
 }
 
 /**
@@ -198,14 +253,6 @@ function updateColour(currentPlayerColour) {
     topCells[i].classList.remove('red');
     topCells[i].classList.add(currentPlayerColour);
   }
-}
-
-function multiPlayerGame() {
-
-}
-
-function singlePlayerGame() {
-
 }
 
 /**
@@ -331,6 +378,11 @@ function closeSection() {
 
 // Sound button click handler
 function soundBtnHander() {
+
+}
+
+// pulls data from the local storage
+function getFromLocalstorage() {
 
 }
 
