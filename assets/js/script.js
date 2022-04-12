@@ -200,8 +200,18 @@ function singlePlayerGame() {
 
 }
 
-// Display disc on mouseover
-function cellMouseoverHandler(event) {
+/**
+ * Displays the current player's coloured disc
+ * in the first row on mouseover.
+ * @param {object} event 
+ */
+ function cellMouseoverHandler(event) {
+  if (gameOver) return;
+
+  const cells = qsa('.cell');
+  const colIndex = cells.indexOf(event.target) % 7;
+
+  cells[colIndex].classList.remove('invisible');
 }
 
 // Hides disc on mouseout
