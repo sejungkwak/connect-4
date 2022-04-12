@@ -214,6 +214,7 @@ function singlePlayerGame() {
  */
 function createGrid() {
   const boardEl = elById('boardGrid');
+  boardEl.innerHTML = '';
 
   for (let i = 0; i < NUM_OF_ROW + 1; i++) {
     for (let j = 0; j < NUM_OF_COLUMN; j++) {
