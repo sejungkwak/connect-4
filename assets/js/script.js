@@ -214,8 +214,15 @@ function singlePlayerGame() {
   cells[colIndex].classList.remove('invisible');
 }
 
-// Hides disc on mouseout
-function cellMouseoutHandler(event) {
+/**
+ * Hides the current player's coloured disc on mouseout.
+ * @param {object} event
+ */
+ function cellMouseoutHandler(event) {
+  const cells = qsa('.cell');
+  const colIndex = cells.indexOf(event.target) % 7;
+
+  cells[colIndex].classList.add('invisible');
 }
 
 // place the disc in the lowest available cell of the column the player clicks on.
