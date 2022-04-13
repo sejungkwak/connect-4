@@ -341,6 +341,15 @@ function checkWinner(playerColour) {
     }
 
     // vertical line
+    if (
+      index < NUM_OF_COLUMN * 3 &&
+      cells[index].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN * 2].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN * 3].classList.contains(playerColour)
+    ) {
+      return ([cells[index], cells[index + NUM_OF_COLUMN], cells[index + NUM_OF_COLUMN * 2], cells[index + NUM_OF_COLUMN * 3]]);
+    }
 
     // main diagonal(\) line
 
