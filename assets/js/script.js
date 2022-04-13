@@ -60,6 +60,7 @@ navHelpBtn.addEventListener('click', () => {
   openSection('help');
 });
 navLeaderboardBtn.addEventListener('click', () => {
+  getFromLocalstorage();
   openSection('leaderboard');
 });
 menuNewGameBtn.addEventListener('click', () => {
@@ -612,9 +613,63 @@ function soundBtnHander() {
 
 }
 
-// pulls data from the local storage
+/**
+ * Gets data from local storage
+ */
 function getFromLocalstorage() {
+  const noDataText = elById('noDataText');
+  const table = elById('leaderboardTableBody');
+  const data = JSON.parse(localStorage.getItem('scores'));
 
+  if (!data) {
+    return noDataText.style.display = 'block';
+  }
+
+  // Source: CRice's answer on Stack Overflow(https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
+  const mergedData = data.reduce((newArray, item) => {
+    const duplicateName = newArray.find(obj => obj.name === item.name);
+    if (duplicateName) {
+      duplicateName.point += item.point;
+      duplicateName.win += item.win;
+      duplicateName.games += item.games;
+    } else {
+      newArray.push(item);
+    }
+    return newArray
+  }, []);
+
+  table.innerHTML = '';
+
+  // Source: MDN(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+  mergedData.sort((a, b) => {
+    return b.point - a.point;
+  })
+
+  if (mergedData.length > 5) {
+    noDataText.style.display = 'none';
+    for (let i = 0; i < 5; i++) {
+      table.innerHTML += `
+        <tr>
+          <td class="leaderboard-table-name">${mergedData[i].name}</td>
+          <td>${mergedData[i].point}</td>
+          <td>${mergedData[i].win}</td>
+          <td>${parseFloat(mergedData[i].win / mergedData[i].games).toFixed(2) * 100}%</td>
+        </tr>
+      `
+    }
+  } else {
+    noDataText.style.display = 'none';
+    mergedData.forEach(item => {
+      table.innerHTML += `
+        <tr>
+          <td class="leaderboard-table-name">${item.name}</td>
+          <td>${item.point}</td>
+          <td>${item.win}</td>
+          <td>${parseFloat(item.win / item.games).toFixed(2) * 100}%</td>
+        </tr>
+      `
+    })
+  }
 }
 
 // Deletes Local storage data
