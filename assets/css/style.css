@@ -474,6 +474,15 @@ input[type="email"] {
   text-transform: uppercase;
 }
 
+.leaderboard-table-body {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.leaderboard-table-name {
+  text-transform: capitalize;
+}
+
 .no-data-text {
   margin: 1em auto;
 }
