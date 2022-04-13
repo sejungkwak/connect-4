@@ -363,7 +363,17 @@ function checkWinner(playerColour) {
       return ([cells[index], cells[index + NUM_OF_COLUMN + 1], cells[index + NUM_OF_COLUMN * 2 + 2], cells[index + NUM_OF_COLUMN * 3 + 3]]);
     }
 
-    // off diagonal(/) line
+    // off-diagonal(/) line
+    if (
+      index % NUM_OF_COLUMN >= 3 &&
+      index < NUM_OF_COLUMN * 3 &&
+      cells[index].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN - 1].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN * 2 - 2].classList.contains(playerColour) &&
+      cells[index + NUM_OF_COLUMN * 3 - 3].classList.contains(playerColour)
+    ) {
+      return ([cells[index], cells[index + NUM_OF_COLUMN - 1], cells[index + NUM_OF_COLUMN * 2 - 2], cells[index + NUM_OF_COLUMN * 3 - 3]]);
+    }
   }
 }
 
