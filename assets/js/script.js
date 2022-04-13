@@ -210,9 +210,12 @@ function computerMove() {
 
     if (freeCellCounter === 0) {
       gameOver = true;
-      displayResult();
+      displayResult('draw');
     } else {
-      checkWinner();
+      const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+      if (connected) {
+        displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+      }
     }
 
     player1Turn = player1Turn = true ? !player1Turn : player1Turn;
@@ -283,9 +286,12 @@ function placeDisc(event) {
 
   if (freeCellCounter === 0) {
     gameOver = true;
-    displayResult();
+    displayResult('draw');
   } else {
-    checkWinner();
+    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    if (connected) {
+      displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+    }
   }
 
   player1Turn = player1Turn = true ? !player1Turn : player1Turn;
@@ -313,14 +319,40 @@ function findFreeCell(colIndex) {
   }
 }
 
-// checks if there's 4 in a row: horizonal, vertical, main diagonal or off diagonal.
-function checkWinner() {}
+// Source: Tom Campbell's "Coding Connect 4 with JavaScript"(https://www.youtube.com/watch?v=kA9OOeUXXSU)
+/**
+ * Checks if there's 4 in a line horizonally, vertically and diagonally.
+ * @param {string} playerColour 
+ * @returns array
+ */
+function checkWinner(playerColour) {
+  const cells = qsa('.cell').splice(NUM_OF_COLUMN);
+
+  for (let index = 0; index < NUM_OF_ROW * NUM_OF_COLUMN; index++) {
+    // horizontal line
+    if (
+      index % NUM_OF_COLUMN < 4 &&
+      cells[index].classList.contains(playerColour) &&
+      cells[index + 1].classList.contains(playerColour) &&
+      cells[index + 2].classList.contains(playerColour) &&
+      cells[index + 3].classList.contains(playerColour)
+    ) {
+      return ([cells[index], cells[index + 1], cells[index + 2], cells[index + 3]]);
+    }
+
+    // vertical line
+
+    // main diagonal(\) line
+
+    // off diagonal(/) line
+  }
+}
 
 // stores the result in the local storage.
 function addToLocalstorage() {}
 
 // displays the game result and the play again button
-function displayResult() {}
+function displayResult(result, player, cells) {}
 
 /**
  * Displays the current player's name on the screen
