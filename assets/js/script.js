@@ -216,11 +216,13 @@ function computerMove() {
 
     if (freeCellCounter === 0) {
       gameOver = true;
+      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
       return displayResult('draw');
     } else {
       const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
       if (connected) {
         gameOver = true;
+        addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
         return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
       }
     }
@@ -293,11 +295,13 @@ function placeDisc(event) {
 
   if (freeCellCounter === 0) {
     gameOver = true;
+    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
     return displayResult('draw');
   } else {
     const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
     if (connected) {
       gameOver = true;
+      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, freeCellCounter, 1);
       return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
     }
   }
@@ -385,8 +389,39 @@ function checkWinner(playerColour) {
   }
 }
 
-// stores the result in the local storage.
-function addToLocalstorage() {}
+/**
+ * Stores the result of the game in local storage.
+ * @param {string} name 
+ * @param {number} point 
+ * @param {number} win 
+ */
+function addToLocalstorage(name, point, win) {
+  let opponentName = name === playerData.player1Name ? playerData.player2Name : playerData.player1Name;
+  const scores = JSON.parse(localStorage.getItem('scores'));
+  const array = [];
+  const player = {
+    name,
+    point,
+    win,
+    games: 1
+  };
+  const opponent = {
+    name: opponentName,
+    point: 0,
+    win: 0,
+    games: 1
+  }
+
+  if (scores) {
+    scores.push(player);
+    scores.push(opponent);
+    localStorage.setItem('scores', JSON.stringify(scores));
+  } else {
+    array.push(player);
+    array.push(opponent);
+    localStorage.setItem('scores', JSON.stringify(array));
+  }
+}
 
 /**
  * Displays the result of the game and the "play again" button
