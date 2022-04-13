@@ -35,13 +35,13 @@ const NUM_OF_COLUMN = 7;
 const NUM_OF_ROW = 6;
 
 // Total available cell. The number decreases after a player places a disc.
-let freeCellCounter = 42;
+let freeCellCounter;
 
 // The game status. The game loop is running while the value is false.
-let gameOver = false;
+let gameOver;
 
 // The number of games the user played without resetting.
-let gamePlayed;
+let gamePlayed = 0;
 
 // Current player. The value changes after a player makes a move.
 let player1Turn;
@@ -154,8 +154,6 @@ function startBtnHandler() {
     player2Name
   }
 
-  gamePlayed = 1;
-
   runGame();
 }
 
@@ -163,8 +161,16 @@ function startBtnHandler() {
  * Creates and configures a new game.
  */
 function runGame() {
+  const overlays = qsa('.overlay');
+  overlays.forEach(overlay => overlay.remove());
 
-  if (!gamePlayed % 2 === 0) {
+  freeCellCounter = 42;
+  gameOver = false;
+  gamePlayed++;
+
+  if (gamePlayed % 2 === 0) {
+    player1Turn = false;
+  } else {
     player1Turn = true;
   }
 
@@ -197,7 +203,7 @@ function computerMove() {
   const freeCell = findFreeCell(randomNumber);
 
   if (!freeCell) {
-    computerMove();
+    return computerMove();
   }
 
   setTimeout(() => {
@@ -210,11 +216,12 @@ function computerMove() {
 
     if (freeCellCounter === 0) {
       gameOver = true;
-      displayResult('draw');
+      return displayResult('draw');
     } else {
       const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
       if (connected) {
-        displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+        gameOver = true;
+        return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
       }
     }
 
@@ -286,11 +293,12 @@ function placeDisc(event) {
 
   if (freeCellCounter === 0) {
     gameOver = true;
-    displayResult('draw');
+    return displayResult('draw');
   } else {
     const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
     if (connected) {
-      displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+      gameOver = true;
+      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
     }
   }
 
@@ -380,8 +388,37 @@ function checkWinner(playerColour) {
 // stores the result in the local storage.
 function addToLocalstorage() {}
 
-// displays the game result and the play again button
-function displayResult(result, player, cells) {}
+/**
+ * Displays the result of the game and the "play again" button
+ * @param {string} result
+ * @param {string} player
+ * @param {array} cells
+ */
+function displayResult(result, player, cells) {
+  const overlay = document.createElement('div');
+  let message;
+  overlay.className = 'overlay';
+
+  if (result === 'draw') {
+    message = `<h2>It's a draw!</h2>`
+  }
+
+  if (result === 'winner') {
+    message = `
+      <h2>${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
+      <p>${freeCellCounter} points</p>
+    `
+    cells.forEach(cell => cell.innerText = '★');
+  }
+
+  overlay.innerHTML = `
+    <div class="modal">
+      ${message}
+      <button class="btn" onclick="runGame()">play again</button>
+    </div>
+  `
+  gameSection.appendChild(overlay);
+}
 
 /**
  * Displays the current player's name on the screen
