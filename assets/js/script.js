@@ -672,9 +672,17 @@ function getFromLocalstorage() {
   }
 }
 
-// Deletes Local storage data
+/**
+ * clear local storage data and 
+ * delete it in the leaderboard section
+ */
 function deleteData() {
+  const table = elById('leaderboardTableBody');
+  const noDataText = elById('noDataText');
 
+  localStorage.clear();
+  table.innerHTML = '';
+  noDataText.style.display = 'block';
 }
 
 // Sends user message
