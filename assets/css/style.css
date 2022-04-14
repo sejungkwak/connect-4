@@ -588,6 +588,19 @@ input[type="email"] {
 ************************* Media queries *************************
 *****************************************************************/
 
+/* remove hover effect on touchscreen devices */
+
+@media (hover: none) {
+
+  .btn:hover,
+  .nav-btn:hover,
+  .volume-btn:hover,
+  .footer-link:hover,
+  .volume-btn:hover .volume-icon-path {
+    transform: unset;
+  }
+}
+
 /*=============== Large screen size devices from 64rem/1024px width  ===============*/
 
 @media screen and (min-width: 64rem) {
