@@ -717,8 +717,25 @@ function validateForm() {
   return sendMessage(templateParams);
 }
 
-// Displays an alert modal
+/**
+ * Displays an alert modal
+ * @param {string} message 
+ */
 function alertMessage(message) {
+  const mainEl = elById('mainEl')
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.innerHTML = `
+    <div class="alert-container">
+      <p class="alert-text">${message}</p>
+      <button class="btn" onclick="confirmAlert()">OK</button>
+    </div>
+  `
+  mainEl.appendChild(overlay);
+}
+
+// Removes the alert modal overlay
+function confirmAlert() {
 
 }
 
