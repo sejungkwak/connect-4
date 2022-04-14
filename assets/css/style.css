@@ -515,26 +515,26 @@ input[type="email"] {
   color: var(--main-dark-color);
 }
 
-/*--------------- Contact feedback(Success) section ---------------*/
+/*--------------- Contact feedback(Success, Fail) section ---------------*/
 
-.success-icon {
+.feedback-icon {
   margin-bottom: 1em;
   width: 5em;
 }
 
-.success-icon-path {
+.feedback-icon-path {
   fill: var(--main-dark-color);
 }
 
-.success-text {
+.feedback-text {
   text-align: center;
 }
 
-.success-text:nth-child(3) {
+.feedback-text:nth-of-type(1) {
   margin-top: 1em;
 }
 
-.success-text:nth-child(4) {
+.feedback-text:nth-of-type(2) {
   margin-bottom: 1em;
 }
 
