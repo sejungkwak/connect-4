@@ -82,37 +82,24 @@ menuLeaderboardBtn.addEventListener('click', () => {
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
   startBtnHandler();
-  openSection('game');
 });
 settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   closeSection();
 });
-
-// soundBtn => turns on sound effects
 soundBtn.addEventListener('click', soundBtnHandler);
-
-// muteBtn => turns off sound effects
 muteBtn.addEventListener('click', soundBtnHandler);
-
 helpCloseBtn.addEventListener('click', closeSection);
-
-// leaderboardDeleteBtn => deletes local storage data
 leaderboardDeleteBtn.addEventListener('click', deleteData);
-
 leaderboardCloseBtn.addEventListener('click', closeSection);
-
-// contactSendBtn => sends message, opens successSection, closes contact section
 contactSendBtn.addEventListener('click', (e) => {
   e.preventDefault();
   validateForm();
 });
-
 contactCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   closeSection();
 });
-
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
 });
@@ -140,6 +127,11 @@ function startBtnHandler() {
   let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
   let player2Name = elById('player2Name').value.trim();
 
+  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
+    const text = 'Please make sure each player name is unique!'
+    return alertMessage(text, 'inputName');
+  }
+
   if (player1Type === 'computer' && player2Type === 'human') {
     player1Name = player1Name === '' ? 'Computer' : player1Name;
     player2Name = player2Name === '' ? 'You' : player2Name;
@@ -162,6 +154,7 @@ function startBtnHandler() {
     player2Name
   }
 
+  openSection('game');
   runGame();
 }
 
