@@ -51,6 +51,10 @@ let player1Turn;
 // Stores input values from the settings section form
 let playerData;
 
+let isMuted = true;
+const dropSound = new Audio('assets/sounds/drop.mp3');
+const endGameSound = new Audio('assets/sounds/end.mp3');
+
 // Button Click EventListeners
 logoLink.addEventListener('click', () => {
   openSection('settings');
@@ -86,10 +90,10 @@ settingCloseBtn.addEventListener('click', (e) => {
 });
 
 // soundBtn => turns on sound effects
-soundBtn.addEventListener('click', soundBtnHander);
+soundBtn.addEventListener('click', soundBtnHandler);
 
 // muteBtn => turns off sound effects
-muteBtn.addEventListener('click', soundBtnHander);
+muteBtn.addEventListener('click', soundBtnHandler);
 
 helpCloseBtn.addEventListener('click', closeSection);
 
@@ -226,6 +230,11 @@ function placeDisc(cell) {
   cell.textContent = `
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `
+  if (!isMuted) {
+    // Source: Dani Amsalem's answer on Stack Overflow(https://stackoverflow.com/questions/54896134/sound-not-always-playing-with-javascript)
+    dropSound.currentTime = 0;
+    dropSound.play();
+  }
 
   freeCellCounter--;
 
@@ -440,6 +449,10 @@ function displayResult(result, player, point, cells) {
     cells.forEach(cell => cell.innerText = '★');
   }
 
+  if (!isMuted) {
+    endGameSound.play();
+  }
+
   overlay.innerHTML = `
     <div class="modal">
       ${message}
@@ -585,9 +598,18 @@ function closeSection() {
   }
 }
 
-// Sound button click handler
-function soundBtnHander() {
+/**
+ * Toggles between the volume and mute icon, and
+ * the isMuted variable value.
+ */
+function soundBtnHandler() {
+  const soundBtns = qsa('.volume-btn');
 
+  for (const btn of soundBtns) {
+    btn.classList.toggle('active');
+  }
+
+  return isMuted = isMuted ? false : true;
 }
 
 /**
