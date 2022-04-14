@@ -532,6 +532,7 @@ function invalidChangeHandler() {
  * @param {string} name
  */
 function openSection(name) {
+  const navBtns = qsa('.nav-btn');
 
   for (i = 0; i < sections.length; i++) {
     if (i === 1) {
@@ -540,14 +541,21 @@ function openSection(name) {
     sections[i].classList.remove('active');
   }
 
+  for (const navBtn of navBtns) {
+    navBtn.classList.remove('active');
+  }
+
   if (name === 'settings') {
     sections[0].classList.add('active');
+    navBtns[0].classList.add('active');
   } else if (name === 'game') {
     sections[1].classList.add('active');
   } else if (name === 'help') {
     sections[2].classList.add('active');
+    navBtns[1].classList.add('active');
   } else if (name === 'leaderboard') {
     sections[3].classList.add('active');
+    navBtns[2].classList.add('active');
   } else if (name === 'contact') {
     sections[4].classList.add('active');
   } else if (name === 'success') {
@@ -563,11 +571,17 @@ function openSection(name) {
  * Closes all the sections except the game section
  */
 function closeSection() {
+  const navBtns = qsa('.nav-btn');
+
   for (i = 0; i < sections.length; i++) {
     if (i === 1) {
       continue;
     }
     sections[i].classList.remove('active');
+  }
+
+  for (const navBtn of navBtns) {
+    navBtn.classList.remove('active');
   }
 }
 
