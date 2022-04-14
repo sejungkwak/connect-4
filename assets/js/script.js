@@ -87,8 +87,8 @@ settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   closeSection();
 });
-soundBtn.addEventListener('click', soundBtnHandler);
-muteBtn.addEventListener('click', soundBtnHandler);
+soundBtn.addEventListener('click', soundBtnToggler);
+muteBtn.addEventListener('click', soundBtnToggler);
 helpCloseBtn.addEventListener('click', closeSection);
 leaderboardDeleteBtn.addEventListener('click', deleteData);
 leaderboardCloseBtn.addEventListener('click', closeSection);
@@ -538,18 +538,7 @@ function invalidChangeHandler() {
  * @param {string} name
  */
 function openSection(name) {
-  const navBtns = qsa('.nav-btn');
-
-  for (i = 0; i < sections.length; i++) {
-    if (i === 1) {
-      continue;
-    }
-    sections[i].classList.remove('active');
-  }
-
-  for (const navBtn of navBtns) {
-    navBtn.classList.remove('active');
-  }
+  closeSection();
 
   if (name === 'settings') {
     sections[0].classList.add('active');
@@ -574,7 +563,8 @@ function openSection(name) {
 }
 
 /**
- * Closes all the sections except the game section
+ * Closes all the sections except the game section and
+ * resets the highlighted menu item.
  */
 function closeSection() {
   const navBtns = qsa('.nav-btn');
@@ -595,7 +585,7 @@ function closeSection() {
  * Toggles between the volume and mute icon, and
  * the isMuted variable value.
  */
-function soundBtnHandler() {
+function soundBtnToggler() {
   const soundBtns = qsa('.volume-btn');
 
   for (const btn of soundBtns) {
