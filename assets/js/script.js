@@ -556,6 +556,8 @@ function openSection(name) {
     sections[3].classList.add('active');
   } else if (name === 'contact') {
     sections[4].classList.add('active');
+  } else if (name === 'success') {
+    sections[5].classList.add('active');
   } else {
     throw `Invalid section name: ${name}. Aborting!`;
   }
@@ -675,8 +677,8 @@ function validateForm() {
     text = 'please fill in your email address!';
     return alertMessage(text);
   }
-  if (!messageEl) {
-    text = 'please write your message!';
+  if (!messageEl || messageEl.length < 10) {
+    text = 'please write your message at least 10 characters!';
     return alertMessage(text);
   }
 
@@ -724,9 +726,33 @@ function confirmAlert(type = 'null') {
   }
 }
 
-// Sends user message
+/**
+ * Sends the user's message
+ * @param {object} templateParams 
+ */
 function sendMessage(templateParams) {
+  const nameEl = elById('name').value;
+  const emailEl = elById('email').value;
+  const messageEl = elById('message').value;
 
+  emailjs
+    .send(
+      'service_sy89ugk',
+      'template_3440jzv',
+      templateParams,
+      'SkcIApcdBA67fNkU0'
+    )
+    .then(
+      function () {
+        openSection('success');
+        nameEl = '';
+        emailEl = '';
+        messageEl = '';
+      },
+      function () {
+        openSection('fail');
+      }
+    );
 }
 
 /* 
