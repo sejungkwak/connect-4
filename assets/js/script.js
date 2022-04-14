@@ -16,6 +16,7 @@ const leaderboardCloseBtn = elById('leaderboardCloseBtn');
 const contactSendBtn = elById('contactSendBtn');
 const contactCloseBtn = elById('contactCloseBtn');
 const successHomeBtn = elById('successHomeBtn');
+const failContactBtn = elById('failContactBtn');
 const footerContactBtn = elById('footerContactBtn');
 
 // Section elements
@@ -26,6 +27,7 @@ const helpSection = elById('help');
 const leaderboardSection = elById('leaderboard');
 const contactSection = elById('contact');
 const successSection = elById('success');
+const failSection = elById('fail');
 
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
@@ -110,7 +112,9 @@ contactCloseBtn.addEventListener('click', (e) => {
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
 });
-
+failContactBtn.addEventListener('click', () => {
+  openSection('contact');
+})
 footerContactBtn.addEventListener('click', () => {
   openSection('contact');
 });
@@ -558,6 +562,8 @@ function openSection(name) {
     sections[4].classList.add('active');
   } else if (name === 'success') {
     sections[5].classList.add('active');
+  } else if (name === 'fail') {
+    sections[6].classList.add('active');
   } else {
     throw `Invalid section name: ${name}. Aborting!`;
   }
