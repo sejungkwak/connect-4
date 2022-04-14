@@ -236,9 +236,11 @@ function placeDisc(cell) {
   } else {
     const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
     if (connected) {
+      const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
+      const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
       gameOver = true;
-      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, freeCellCounter, 1);
-      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
+      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
     }
   }
 
@@ -421,7 +423,7 @@ function addToLocalstorage(name, point, win) {
  * @param {string} player
  * @param {array} cells
  */
-function displayResult(result, player, cells) {
+function displayResult(result, player, point, cells) {
   const overlay = document.createElement('div');
   let message;
   overlay.className = 'overlay';
@@ -433,7 +435,7 @@ function displayResult(result, player, cells) {
   if (result === 'winner') {
     message = `
       <h2>${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
-      <p>${freeCellCounter} points</p>
+      <p>${point} points</p>
     `
     cells.forEach(cell => cell.innerText = '★');
   }
