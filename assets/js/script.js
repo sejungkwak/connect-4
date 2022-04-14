@@ -515,36 +515,23 @@ function clearGrid() {
 
 }
 
+
 /**
  * Checkes invalid game settings:
  * at least one player must be a human and
  * each player must have a different colour.
+ * @returns function
  */
 function invalidChangeHandler() {
+  let text;
 
   if (!elById('player1Type').checked && !elById('player2Type').checked) {
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.innerHTML = `
-    <div class="alert-container">
-      <p class="alert-text">Please select at least one human player.</p>
-      <button class="btn" onclick="confirmSetting('player')">OK</button>
-    </div>
-    `
-    settingsSection.appendChild(overlay);
+    text = 'Please select at least one human player.';
   }
-
   if (elById('player1Colour').checked === elById('player2Colour').checked) {
-    const overlay = document.createElement('div');
-    overlay.className = 'overlay';
-    overlay.innerHTML = `
-    <div class="alert-container">
-      <p class="alert-text">Please select a unique colour for each player.</p>
-      <button class="btn" onclick="confirmSetting('colour')">OK</button>
-    </div>
-    `
-    settingsSection.appendChild(overlay);
+    text = 'Please select a unique colour for each player.';
   }
+  return alertMessage(text);
 }
 
 /**
