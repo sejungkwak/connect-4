@@ -449,10 +449,12 @@ function displayResult(result, player, cells) {
   overlay.innerHTML = `
     <div class="modal">
       ${message}
-      <button class="btn" onclick="runGame()">play again</button>
+      <button class="btn" id="playAgainBtn">play again</button>
     </div>
   `
   gameSection.appendChild(overlay);
+
+  elById('playAgainBtn').addEventListener('click', runGame);
 }
 
 /**
@@ -511,11 +513,6 @@ function createGrid() {
   }
 }
 
-function clearGrid() {
-
-}
-
-
 /**
  * Checkes invalid game settings:
  * at least one player must be a human and
@@ -527,29 +524,11 @@ function invalidChangeHandler() {
 
   if (!elById('player1Type').checked && !elById('player2Type').checked) {
     text = 'Please select at least one human player.';
+    return alertMessage(text, 'player');
   }
   if (elById('player1Colour').checked === elById('player2Colour').checked) {
     text = 'Please select a unique colour for each player.';
-  }
-  return alertMessage(text);
-}
-
-/**
- * Removes alert modal overlay and
- * change the checkbox value to default.
- * @param {string} type 
- */
-function confirmSetting(type) {
-  const overlays = qsa('.overlay');
-  overlays.forEach(overlay => overlay.remove());
-
-  if (type === 'player') {
-    checkboxes[0].checked = false;
-    checkboxes[2].checked = true;
-  }
-  if (type === 'colour') {
-    checkboxes[1].checked = false;
-    checkboxes[3].checked = true;
+    return alertMessage(text, 'colour');
   }
 }
 
@@ -705,25 +684,44 @@ function validateForm() {
 }
 
 /**
- * Displays an alert modal
- * @param {string} message 
+ * Displays an alert modal and a button
+ * @param {string} message
+ * @param {string} type
  */
-function alertMessage(message) {
+function alertMessage(message, type = 'null') {
   const mainEl = elById('mainEl')
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container">
       <p class="alert-text">${message}</p>
-      <button class="btn" onclick="confirmAlert()">OK</button>
+      <button class="btn" id="confirmBtn">OK</button>
     </div>
   `
   mainEl.appendChild(overlay);
+
+  elById('confirmBtn').addEventListener('click', () => {
+    confirmAlert(type)
+  })
 }
 
-// Removes the alert modal overlay
-function confirmAlert() {
+/**
+ * Removes alert modal overlay and
+ * change the checkbox value to default.
+ * @param {string} type
+ */
+function confirmAlert(type = 'null') {
+  const overlays = qsa('.overlay');
+  overlays.forEach((overlay) => overlay.remove());
 
+  if (type === 'player') {
+    checkboxes[0].checked = false;
+    checkboxes[2].checked = true;
+  }
+  if (type === 'colour') {
+    checkboxes[1].checked = false;
+    checkboxes[3].checked = true;
+  }
 }
 
 // Sends user message
