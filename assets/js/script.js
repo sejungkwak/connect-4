@@ -198,7 +198,8 @@ function runGame() {
 
 /**
  * Runs when it's a computer's turn:
- * picks a cell and places a disc into the cell.
+ * picks a cell and
+ * places a disc into the cell.
  */
 function computerMove() {
   if (gameOver) return;
@@ -211,31 +212,44 @@ function computerMove() {
   }
 
   setTimeout(() => {
-    freeCell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-    freeCell.textContent = `
-      ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
-    `
-
-    freeCellCounter--;
-
-    if (freeCellCounter === 0) {
-      gameOver = true;
-      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
-      return displayResult('draw');
-    } else {
-      const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-      if (connected) {
-        gameOver = true;
-        addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
-        return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
-      }
-    }
-
-    player1Turn = player1Turn = true ? !player1Turn : player1Turn;
-
-    updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
-    updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    placeDisc(freeCell);
   }, 500);
+}
+
+/**
+ * Places a disc into the cell.
+ * @param {object} cell 
+ */
+function placeDisc(cell) {
+
+  cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  cell.textContent = `
+    ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
+  `
+
+  freeCellCounter--;
+
+  if (freeCellCounter === 0) {
+    gameOver = true;
+    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
+    return displayResult('draw');
+  } else {
+    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    if (connected) {
+      gameOver = true;
+      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, freeCellCounter, 1);
+      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
+    }
+  }
+
+  player1Turn = player1Turn = true ? !player1Turn : player1Turn;
+
+  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
+  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+
+  if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
+    computerMove();
+  }
 }
 
 /**
@@ -248,7 +262,7 @@ function playerMove() {
   for (let cell of cells) {
     cell.addEventListener('mouseover', cellMouseoverHandler);
     cell.addEventListener('mouseout', cellMouseoutHandler);
-    cell.addEventListener('click', placeDisc);
+    cell.addEventListener('click', cellClickHandler);
   }
 }
 
@@ -278,11 +292,12 @@ function cellMouseoutHandler(event) {
 }
 
 /**
- * Places the disc in the lowest available cell 
- * of the column the player clicks on.
+ * Checks if there is an available cell
+ * in the column the player clicks on and
+ * places the disc into the cell.
  * @param {object} event 
  */
-function placeDisc(event) {
+function cellClickHandler(event) {
   if (gameOver) return;
 
   const cells = qsa('.cell');
@@ -290,34 +305,7 @@ function placeDisc(event) {
   const freeCell = findFreeCell(colIndex);
 
   if (!freeCell) return;
-
-  freeCellCounter--;
-  freeCell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-  freeCell.textContent = `
-    ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
-  `
-
-  if (freeCellCounter === 0) {
-    gameOver = true;
-    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
-    return displayResult('draw');
-  } else {
-    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-    if (connected) {
-      gameOver = true;
-      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, freeCellCounter, 1);
-      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, connected);
-    }
-  }
-
-  player1Turn = player1Turn = true ? !player1Turn : player1Turn;
-
-  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
-  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-
-  if (playerData.player1Type === 'computer' || playerData.player2Type === 'computer') {
-    computerMove();
-  }
+  placeDisc(freeCell);
 }
 
 /**
