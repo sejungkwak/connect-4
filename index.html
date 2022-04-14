@@ -196,7 +196,7 @@
         <label class="contact-label" for="email">email</label>
         <input class="contact-input" id="email" type="email" required>
         <label class="contact-label" for="message">message</label>
-        <textarea class="contact-message" id="message" name="message" rows="5" minlength="10"></textarea>
+        <textarea class="contact-message" id="message" name="message" rows="5" minlength="10" required></textarea>
         <ul class="btns">
           <li><button class="btn btn-primary" id="contactSendBtn">send</button>
           </li>
@@ -206,14 +206,25 @@
     </section>
     <!-- Success section -->
     <section class="section" id="success">
-      <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-        <path class="success-icon-path"
+      <svg class="feedback-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path class="feedback-icon-path"
           d="M243.8 339.8C232.9 350.7 215.1 350.7 204.2 339.8L140.2 275.8C129.3 264.9 129.3 247.1 140.2 236.2C151.1 225.3 168.9 225.3 179.8 236.2L224 280.4L332.2 172.2C343.1 161.3 360.9 161.3 371.8 172.2C382.7 183.1 382.7 200.9 371.8 211.8L243.8 339.8zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" />
       </svg>
       <h2 class="heading">thank you!</h2>
-      <p class="success-text">Your message has been sent successfully.</p>
-      <p class="success-text">I will get back to you as soon as possible!</p>
+      <p class="feedback-text">Your message has been sent successfully.</p>
+      <p class="feedback-text">I will get back to you as soon as possible!</p>
       <button class="btn btn-primary" id="successHomeBtn">go home</button>
+    </section>
+    <!-- Fail section -->
+    <section class="section" id="fail">
+      <svg class="feedback-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path class="feedback-icon-path"
+          d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" />
+      </svg>
+      <h2 class="heading">message not delivered</h2>
+      <p class="feedback-text">I'm sorry, but there was a problem delivering your message to the developer.</p>
+      <p class="feedback-text">Please try again!</p>
+      <button class="btn btn-primary" id="failContactBtn">go back</button>
     </section>
   </main>
   <footer class="footer">
