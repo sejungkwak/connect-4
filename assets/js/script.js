@@ -99,8 +99,7 @@ leaderboardCloseBtn.addEventListener('click', closeSection);
 // contactSendBtn => sends message, opens successSection, closes contact section
 contactSendBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  sendMessage();
-  openSection('success');
+  validateForm();
 });
 
 contactCloseBtn.addEventListener('click', (e) => {
@@ -685,8 +684,46 @@ function deleteData() {
   noDataText.style.display = 'block';
 }
 
+/**
+ * Validate contact form input:
+ * if empty, calls a function that displays an alert modal, 
+ * if filled, calls a function that sends the message.
+ * @returns function
+ */
+function validateForm() {
+  const nameEl = elById('name').value.trim();
+  const emailEl = elById('email').value.trim();
+  const messageEl = elById('message').value.trim();
+  const templateParams = {
+    nameEl,
+    emailEl,
+    messageEl,
+  };
+  let text;
+
+  if (!nameEl) {
+    text = 'please fill in your name!';
+    return alertMessage(text);
+  }
+  if (!emailEl) {
+    text = 'please fill in your email address!';
+    return alertMessage(text);
+  }
+  if (!messageEl) {
+    text = 'please write your message!';
+    return alertMessage(text);
+  }
+
+  return sendMessage(templateParams);
+}
+
+// Displays an alert modal
+function alertMessage(message) {
+
+}
+
 // Sends user message
-function sendMessage() {
+function sendMessage(templateParams) {
 
 }
 
