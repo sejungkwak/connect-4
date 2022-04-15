@@ -335,7 +335,7 @@ input[type="email"] {
 .board-header {
   display: flex;
   justify-content: center;
-  width: min(90vw, 50em);
+  width: min(90vw, 40rem);
 }
 
 .board-header .heading {
@@ -396,7 +396,7 @@ input[type="email"] {
   gap: min(.5em, 1vw) min(1em, 2vw);
   margin-top: 2em;
   border-radius: 10px;
-  width: min(90vw, 40em);
+  width: min(90vw, 40rem);
   padding: .5em;
   background-color: var(--main-dark-color);
 }
@@ -446,6 +446,19 @@ input[type="email"] {
   width: min(90vw, 25em);
   padding: 1em 2em;
   background-color: var(--main-light-color);
+}
+
+.landscape-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--overay-color);
 }
 
 /*--------------- Help section ---------------*/
@@ -589,7 +602,7 @@ input[type="email"] {
 ************************* Media queries *************************
 *****************************************************************/
 
-/* remove hover effect on touchscreen devices */
+/* Remove hover effect on touchscreen devices */
 
 @media (hover: none) {
 
@@ -600,6 +613,17 @@ input[type="email"] {
   .volume-btn:hover .volume-icon-path {
     transform: unset;
   }
+
+}
+
+/* Display portrait mode recommendation message */
+
+@media screen and (max-height: 53rem) and (orientation: landscape) {
+
+  .landscape-overlay {
+    display: flex;
+  }
+
 }
 
 /*=============== Large screen size devices from 64rem/1024px width  ===============*/
