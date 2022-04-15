@@ -277,6 +277,17 @@ function playerMove() {
     cell.addEventListener('mouseout', cellMouseoutHandler);
     cell.addEventListener('click', cellClickHandler);
   }
+
+  document.addEventListener('keydown', e => {
+    switch (e.key) {
+      case 'ArrowLeft':
+      case 'ArrowRight':
+      case 'ArrowDown':
+        keydownHandler(e.key);
+      default:
+        break;
+    }
+  })
 }
 
 /**
