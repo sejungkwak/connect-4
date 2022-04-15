@@ -538,6 +538,7 @@ function invalidChangeHandler() {
  * @param {string} name
  */
 function openSection(name) {
+  const navBtns = qsa('.nav-btn');
   closeSection();
 
   if (name === 'settings') {
