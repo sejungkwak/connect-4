@@ -571,10 +571,8 @@ function createGrid() {
       cell.className = 'cell';
 
       if (i === 0) {
-        cell.setAttribute('tabindex', 0);
         cell.className += ' invisible';
       } else {
-        cell.dataset.coordsRow = i - 1;
         cell.dataset.coordsCol = j;
       }
       boardEl.appendChild(cell);
