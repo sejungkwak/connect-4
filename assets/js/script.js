@@ -495,7 +495,7 @@ function addToLocalstorage(name, point, win) {
  * @param {array} cells
  */
 function displayResult(result, player, point, cells) {
-  const overlay = document.createElement('div');
+  const overlay = document.createElement('aside');
   let message;
   overlay.className = 'overlay';
 
@@ -785,7 +785,7 @@ function validateForm() {
  * @param {string} type
  */
 function alertMessage(message, type = null) {
-  const overlay = document.createElement('div');
+  const overlay = document.createElement('aside');
   overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container">
