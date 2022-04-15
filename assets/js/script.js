@@ -275,7 +275,10 @@ function playerMove() {
   for (let cell of cells) {
     cell.addEventListener('mouseover', cellMouseoverHandler);
     cell.addEventListener('mouseout', cellMouseoutHandler);
-    cell.addEventListener('click', cellClickHandler);
+    cell.addEventListener('click', (e) => {
+      const colIndex = cells.indexOf(e.target) % 7;
+      cellClickHandler(colIndex);
+    });
   }
 
   document.addEventListener('keydown', e => {
@@ -326,6 +329,14 @@ function keydownHandler(pressedKey) {
     }
   }
 
+  if (pressedKey === 'ArrowDown') {
+    if (invisibleCells.length === NUM_OF_COLUMN) {
+      return;
+    } else {
+      return cellClickHandler(visibleCellIndex);
+    }
+  }
+
 }
 
 /**
@@ -356,16 +367,14 @@ function cellMouseoutHandler(event) {
 
 /**
  * Checks if there is an available cell
- * in the column the player clicks on and
+ * in the target column and
  * places the disc into the cell.
- * @param {object} event 
+ * @param {number} colIndex
  */
-function cellClickHandler(event) {
+function cellClickHandler(colIndex) {
   if (gameOver) return;
   if (computerTurn) return;
 
-  const cells = qsa('.cell');
-  const colIndex = cells.indexOf(event.target) % 7;
   const freeCell = findFreeCell(colIndex);
 
   if (!freeCell) return;
