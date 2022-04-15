@@ -241,8 +241,9 @@ input[type="email"] {
 }
 
 .setting-legend {
-  font-weight: 700;
+  width: fit-content;
   padding: 0 .5em;
+  font-weight: 700;
 }
 
 .setting-label {
