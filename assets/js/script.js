@@ -292,6 +292,36 @@ function playerMove() {
 
 /**
  * Displays the current player's coloured disc
+ * in the first row on keydown.
+ * @param {string} pressedKey 
+ */
+function keydownHandler(pressedKey) {
+  if (gameOver) return;
+  if (computerTurn) return;
+
+  const cells = qsa('.cell');
+  const invisibleCells = qsa('.cell.invisible');
+  let visibleCellIndex;
+
+  for (let i = 0; i < NUM_OF_COLUMN; i++) {
+    if (!cells[i].classList.contains('invisible')) {
+      cells[i].classList.add('invisible');
+      visibleCellIndex = i;
+    }
+  }
+
+  if (pressedKey === 'ArrowLeft') {
+    if (invisibleCells.length === NUM_OF_COLUMN - 1 && visibleCellIndex !== 0) {
+      return cells[visibleCellIndex - 1].classList.remove('invisible');
+    } else {
+      return cells[NUM_OF_COLUMN - 1].classList.remove('invisible');
+    }
+  }
+
+}
+
+/**
+ * Displays the current player's coloured disc
  * in the first row on mouseover.
  * @param {object} event 
  */
