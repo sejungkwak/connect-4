@@ -160,6 +160,7 @@ function startBtnHandler() {
     player2Name
   }
 
+  gamePlayed = 0;
   openSection('game');
   runGame();
 }
