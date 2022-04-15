@@ -318,6 +318,14 @@ function keydownHandler(pressedKey) {
     }
   }
 
+  if (pressedKey === 'ArrowRight') {
+    if (invisibleCells.length === NUM_OF_COLUMN - 1 && visibleCellIndex !== NUM_OF_COLUMN - 1) {
+      return cells[visibleCellIndex + 1].classList.remove('invisible');
+    } else {
+      return cells[0].classList.remove('invisible');
+    }
+  }
+
 }
 
 /**
