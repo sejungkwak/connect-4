@@ -719,7 +719,7 @@ function validateForm() {
  * @param {string} message
  * @param {string} type
  */
-function alertMessage(message, type = 'null') {
+function alertMessage(message, type = null) {
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
   overlay.innerHTML = `
@@ -728,7 +728,14 @@ function alertMessage(message, type = 'null') {
       <button class="btn" id="confirmBtn">OK</button>
     </div>
   `
-  mainEl.appendChild(overlay);
+
+  if (type === null) {
+    contactSection.appendChild(overlay);
+  } else if (type === 'inputName' || type === 'player' || type === 'colour') {
+    settingsSection.appendChild(overlay);
+  } else {
+    throw `Invalid type: ${type}. Aborting!`;
+  }
 
   elById('confirmBtn').addEventListener('click', () => {
     confirmAlert(type)
@@ -740,7 +747,7 @@ function alertMessage(message, type = 'null') {
  * change the checkbox value to default.
  * @param {string} type
  */
-function confirmAlert(type = 'null') {
+function confirmAlert(type = null) {
   const overlays = qsa('.overlay');
   overlays.forEach((overlay) => overlay.remove());
 
