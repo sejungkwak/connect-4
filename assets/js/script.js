@@ -770,7 +770,7 @@ function validateForm() {
     return alertMessage(text);
   }
   if (!messageEl || messageEl.length < 10) {
-    text = 'please write your message at least 10 characters!';
+    text = 'please ensure your message is at least 10 characters!';
     return alertMessage(text);
   }
 
