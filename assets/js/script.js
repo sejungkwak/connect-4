@@ -29,6 +29,8 @@ const contactSection = elById('contact');
 const successSection = elById('success');
 const failSection = elById('fail');
 
+const mainEl = elById('mainEl');
+
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
 
@@ -113,6 +115,8 @@ footerContactBtn.addEventListener('click', () => {
 // Checkbox change EventListener
 checkboxes.forEach(checkbox =>
   checkbox.addEventListener('change', invalidChangeHandler));
+
+mainEl.style.minHeight = `${sections[0].offsetHeight}px`
 
 /**
  * Checks input values from the settings section form,
@@ -544,20 +548,27 @@ function openSection(name) {
   if (name === 'settings') {
     sections[0].classList.add('active');
     navBtns[0].classList.add('active');
+    mainEl.style.minHeight = `${sections[0].offsetHeight}px`
   } else if (name === 'game') {
     sections[1].classList.add('active');
+    mainEl.style.minHeight = `${sections[1].offsetHeight}px`
   } else if (name === 'help') {
     sections[2].classList.add('active');
     navBtns[1].classList.add('active');
+    mainEl.style.minHeight = `${sections[2].offsetHeight}px`
   } else if (name === 'leaderboard') {
     sections[3].classList.add('active');
     navBtns[2].classList.add('active');
+    mainEl.style.minHeight = `${sections[3].offsetHeight}px`
   } else if (name === 'contact') {
     sections[4].classList.add('active');
+    mainEl.style.minHeight = `${sections[4].offsetHeight}px`
   } else if (name === 'success') {
     sections[5].classList.add('active');
+    mainEl.style.minHeight = `${sections[5].offsetHeight}px`
   } else if (name === 'fail') {
     sections[6].classList.add('active');
+    mainEl.style.minHeight = `${sections[6].offsetHeight}px`
   } else {
     throw `Invalid section name: ${name}. Aborting!`;
   }
@@ -580,6 +591,8 @@ function closeSection() {
   for (const navBtn of navBtns) {
     navBtn.classList.remove('active');
   }
+
+  mainEl.style.minHeight = 'unset';
 }
 
 /**
@@ -707,7 +720,6 @@ function validateForm() {
  * @param {string} type
  */
 function alertMessage(message, type = 'null') {
-  const mainEl = elById('mainEl')
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
   overlay.innerHTML = `
