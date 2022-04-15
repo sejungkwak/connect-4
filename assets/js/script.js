@@ -53,6 +53,8 @@ let player1Turn;
 // Stores input values from the settings section form
 let playerData;
 
+let computerTurn;
+
 let isMuted = true;
 const dropSound = new Audio('assets/sounds/drop.mp3');
 const endGameSound = new Audio('assets/sounds/end.mp3');
@@ -171,6 +173,7 @@ function runGame() {
 
   freeCellCounter = 42;
   gameOver = false;
+  computerTurn = false;
   gamePlayed++;
 
   if (gamePlayed % 2 === 0) {
@@ -207,6 +210,7 @@ function computerMove() {
 
   const randomNumber = Math.floor(Math.random() * NUM_OF_COLUMN);
   const freeCell = findFreeCell(randomNumber);
+  computerTurn = true;
 
   if (!freeCell) {
     return computerMove();
@@ -254,6 +258,7 @@ function placeDisc(cell) {
 
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
   updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  computerTurn = false;
 
   if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
     computerMove();
@@ -281,6 +286,7 @@ function playerMove() {
  */
 function cellMouseoverHandler(event) {
   if (gameOver) return;
+  if (computerTurn) return;
 
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
@@ -307,6 +313,7 @@ function cellMouseoutHandler(event) {
  */
 function cellClickHandler(event) {
   if (gameOver) return;
+  if (computerTurn) return;
 
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
