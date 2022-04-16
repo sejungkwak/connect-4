@@ -99,6 +99,7 @@ input[type="text"],
 input[type="email"] {
   border: none;
   border-bottom: 2px solid var(--main-dark-color);
+  width: 100%;
   background-color: inherit;
   font-size: 1rem;
   color: var(--main-dark-color);
@@ -232,6 +233,7 @@ input[type="email"] {
 .setting-fieldset {
   display: flex;
   flex-direction: column;
+  gap: .5em;
   margin: 1em auto;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--main-dark-color);
@@ -246,12 +248,11 @@ input[type="email"] {
   font-weight: 700;
 }
 
-.setting-label {
+.setting-label:nth-of-type(-n+2) {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: .5em;
-  margin: .3em;
 }
 
 .setting-checkbox {
@@ -291,10 +292,6 @@ input[type="email"] {
 
 .setting-checkbox:checked~.setting-slider.colour {
   background-color: var(--red-disc-color);
-}
-
-.setting-input {
-  grid-column: span 3;
 }
 
 .overlay {
