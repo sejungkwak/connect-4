@@ -114,6 +114,8 @@ input[type="email"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 1px 2px var(--overay-color);
+  border-bottom: 1px solid var(--main-dark-color);
   width: 100%;
   background-color: var(--main-light-color);
 }
@@ -594,6 +596,26 @@ input[type="email"] {
 
 .footer-icon-path {
   fill: var(--main-light-color);
+}
+
+/*=============== 404 page ===============*/
+
+.error-main {
+  gap: 1.5em;
+}
+
+.error-board {
+  margin-top: 0;
+  width: min(90vw, 25rem);
+}
+
+.error-board>.cell {
+  cursor: auto;
+  font-size: min(5vw, 1.5rem);
+}
+
+.error-text {
+  max-width: min(90vw, 25rem);
 }
 
 /****************************************************************
