@@ -637,7 +637,6 @@ input[type="email"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
-    max-width: 87.5rem;
   }
 
   /*--------------- Help section ---------------*/
@@ -648,6 +647,7 @@ input[type="email"] {
       "objective points"
       "rules leaderboard"
       "button button";
+    max-width: 87.5rem;
   }
 
   .help>.heading {
@@ -692,10 +692,13 @@ input[type="email"] {
 
   .contact>.contact-text {
     grid-area: intro;
+    justify-self: right;
+    max-width: 40rem;
   }
 
   .contact>.contact-form {
     grid-area: form;
+    max-width: 40rem;
   }
 
 }
