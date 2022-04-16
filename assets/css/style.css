@@ -701,12 +701,26 @@ input[type="email"] {
 
 }
 
-/* Display portrait mode recommendation message */
+/* Display mode recommendation message */
 
 @media screen and (max-height: 53rem) and (orientation: landscape) {
 
   .landscape-overlay {
     display: flex;
+  }
+
+}
+
+/* Remove animation on the 404 page for the user who has enabled reduced motion in their preferences  */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blink1,
+  .blink2,
+  .blink3,
+  .blink4,
+  .blink5 {
+    animation: none;
   }
 
 }
