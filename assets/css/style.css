@@ -618,6 +618,71 @@ input[type="email"] {
   max-width: min(90vw, 25rem);
 }
 
+.blink1 {
+  animation: blink linear 2s infinite;
+}
+
+.blink2 {
+  animation: blink linear 2s 1 1s;
+}
+
+.blink3 {
+  animation: blink linear 2s 1 4s;
+}
+
+.blink4 {
+  animation: blink linear 2s 1 3s;
+}
+
+.blink5 {
+  animation: blink linear 2s 1 2s;
+}
+
+/* Blinking effect */
+
+@keyframes blink {
+
+  0% {
+    background-color: var(--main-light-color);
+    color: var(--main-light-color);
+  }
+
+  20% {
+    background-color: var(--main-light-color);
+    color: var(--main-light-color);
+  }
+
+  21% {
+    background-color: var(--red-disc-color);
+    color: var(--main-light-color);
+  }
+
+  50% {
+    background-color: var(--red-disc-color);
+    color: var(--main-light-color);
+  }
+
+  51% {
+    background-color: var(--main-light-color);
+    color: var(--main-light-color);
+  }
+
+  70% {
+    background-color: var(--main-light-color);
+    color: var(--main-light-color);
+  }
+
+  71% {
+    background-color: var(--yellow-disc-color);
+    color: var(--main-dark-color);
+  }
+
+  100% {
+    background-color: var(--yellow-disc-color);
+    color: var(--main-dark-color);
+  }
+}
+
 /****************************************************************
 ************************* Media queries *************************
 *****************************************************************/
