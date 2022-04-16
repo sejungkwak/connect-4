@@ -471,7 +471,7 @@ input[type="email"] {
 }
 
 .help-rules {
-  list-style-position: inside;
+  padding-left: 1em;
 }
 
 /*--------------- Leaderboard section ---------------*/
