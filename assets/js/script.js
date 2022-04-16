@@ -699,6 +699,7 @@ function getFromLocalstorage() {
   }, []);
 
   table.innerHTML = '';
+  noDataText.style.display = 'none';
 
   // Source: MDN(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
   mergedData.sort((a, b) => {
@@ -706,26 +707,24 @@ function getFromLocalstorage() {
   })
 
   if (mergedData.length > 5) {
-    noDataText.style.display = 'none';
     for (let i = 0; i < 5; i++) {
       table.innerHTML += `
         <tr>
           <td class="leaderboard-table-name">${mergedData[i].name}</td>
           <td>${mergedData[i].point}</td>
           <td>${mergedData[i].win}</td>
-          <td>${parseFloat(mergedData[i].win / mergedData[i].games).toFixed(2) * 100}%</td>
+          <td>${parseFloat((+mergedData[i].win / +mergedData[i].games) * 100).toFixed(2)}%</td>
         </tr>
       `
     }
   } else {
-    noDataText.style.display = 'none';
     mergedData.forEach(item => {
       table.innerHTML += `
         <tr>
           <td class="leaderboard-table-name">${item.name}</td>
           <td>${item.point}</td>
           <td>${item.win}</td>
-          <td>${parseFloat(item.win / item.games).toFixed(2) * 100}%</td>
+          <td>${parseFloat((+item.win / +item.games) * 100).toFixed(2)}%</td>
         </tr>
       `
     })
