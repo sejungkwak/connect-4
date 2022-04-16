@@ -342,6 +342,10 @@ input[type="email"] {
   flex: 1;
 }
 
+.current-player {
+  font-family: 'Fredoka One', cursive;
+}
+
 .volume-btns {
   justify-self: right;
   list-style: none;
