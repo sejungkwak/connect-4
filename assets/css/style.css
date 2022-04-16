@@ -788,4 +788,40 @@ input[type="email"] {
     max-width: 40rem;
   }
 
+  /*--------------- 404 page ---------------*/
+
+  .error-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 3rem auto;
+    grid-template-areas:
+      "heading heading"
+      "board text"
+      "board button";
+    align-items: start;
+  }
+
+  .error-main>.heading {
+    grid-area: heading;
+    align-self: center;
+  }
+
+  .error-board {
+    grid-area: board;
+    justify-self: end;
+  }
+
+  .error-text,
+  .error-main>.btn {
+    justify-self: start;
+  }
+
+  .error-text {
+    grid-area: text;
+  }
+
+  .error-main>.btn {
+    grid-area: button;
+  }
+
 }
