@@ -222,7 +222,7 @@ input[type="email"] {
 .nav-btn {
   opacity: 0;
   border: none;
-  padding: .5em 0;
+  padding: .5em 1em;
   background-color: inherit;
   font-size: 1rem;
   text-transform: uppercase;
@@ -235,20 +235,19 @@ input[type="email"] {
   opacity: 1;
 }
 
-.nav-btn:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
 .nav-btn.active {
   border-radius: 35px;
-  padding: .4em;
   background-color: var(--main-light-color);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
   color: var(--main-dark-color);
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 /*=============== Main ===============*/
@@ -799,6 +798,34 @@ input[type="email"] {
   .blink2,
   .blink3 {
     animation: none;
+  }
+
+}
+
+/*=============== Medium screen size devices from 37.5rem/600px width  ===============*/
+
+@media screen and (min-width: 37.5rem) {
+
+  /*--------------- Header ---------------*/
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    position: unset;
+    transform: unset;
+    transition: unset;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    justify-content: space-between;
+    width: min(95vw, 50em);
+  }
+
+  .nav-btn {
+    opacity: 1;
   }
 
 }
