@@ -122,6 +122,13 @@ footerContactBtn.addEventListener('click', () => {
 checkboxes.forEach(checkbox =>
   checkbox.addEventListener('change', invalidChangeHandler));
 
+// Keyboard control in the game
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    return keydownHandler(e.key);
+  }
+});
+
 mainEl.style.minHeight = `${sections[0].offsetHeight}px`;
 
 /**
@@ -291,28 +298,16 @@ function playerMove() {
       cellClickHandler(colIndex);
     });
   }
-
-  document.addEventListener('keydown', e => {
-    switch (e.key) {
-      case 'ArrowLeft':
-      case 'ArrowRight':
-      case 'ArrowDown':
-        keydownHandler(e.key);
-        break;
-      default:
-        break;
-    }
-  });
 }
 
 /**
  * Displays the current player's coloured disc
  * in the first row on keydown.
- * @param {string} pressedKey 
+ * @param {string} pressedKey
  */
 function keydownHandler(pressedKey) {
-  if (gameOver) return;
-  if (computerTurn) return;
+  if (gameOver || gameOver === undefined) return;
+  if (computerTurn || computerTurn === undefined) return;
 
   const cells = qsa('.cell');
   const invisibleCells = qsa('.cell.invisible');
