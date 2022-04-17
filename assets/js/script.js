@@ -132,10 +132,16 @@ function startBtnHandler() {
   let player2Type = elById('player2Type').checked ? 'human' : 'computer';
   let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
   let player2Name = elById('player2Name').value.trim();
+  let text;
 
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    const text = 'Please make sure each player name is unique!'
+    text = 'Please make sure each player name is unique!'
     return showAlert(text, 'inputName');
+  }
+
+  if (player1Colour === player2Colour) {
+    text = 'Please select a unique colour for each player.'
+    return showAlert(text, 'colour');
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -818,10 +824,6 @@ function closeAlert(event, type = null) {
   if (type === 'player') {
     checkboxes[0].checked = false;
     checkboxes[2].checked = true;
-  }
-  if (type === 'colour') {
-    checkboxes[1].checked = false;
-    checkboxes[3].checked = true;
   }
 }
 
