@@ -1,5 +1,7 @@
 // Button elements
 const logoLink = elById('logoLink');
+const navOpenBtn = elById('navOpenBtn');
+const navCloseBtn = elById('navCloseBtn');
 const navNewGameBtn = elById('primarySettings');
 const navHelpBtn = elById('primaryHelp');
 const navLeaderboardBtn = elById('primaryLeaderboard');
@@ -63,6 +65,8 @@ const endGameSound = new Audio('assets/sounds/end.mp3');
 logoLink.addEventListener('click', () => {
   openSection('settings');
 });
+navOpenBtn.addEventListener('click', toggleNav);
+navCloseBtn.addEventListener('click', toggleNav);
 navNewGameBtn.addEventListener('click', () => {
   openSection('settings');
 });
@@ -614,10 +618,17 @@ function invalidChangeHandler() {
  */
 function openSection(name) {
   const targetSection = elById(`${name}`);
+  const nav = elById('nav');
+  const navBtns = qsa('.nav-btn');
   closeSection();
 
   targetSection.classList.add('active');
   mainEl.style.minHeight = `calc(${targetSection.offsetHeight}px + 2em)`;
+
+  nav.classList.remove('active');
+  for (const navBtn of navBtns) {
+    navBtn.classList.remove('visible');
+  }
 
   if (name === 'settings' || name === 'help' || name === 'leaderboard') {
     const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
@@ -835,6 +846,21 @@ function sendMessage(templateParams) {
         openSection('fail');
       }
     );
+}
+
+function toggleNav() {
+  const nav = elById('nav');
+  const toggleBtns = qsa('.nav-toggle-btn');
+  const navBtns = qsa('.nav-btn');
+
+  nav.classList.toggle('active');
+
+  for (const btn of toggleBtns) {
+    btn.classList.toggle('active');
+  }
+  for (const navBtn of navBtns) {
+    navBtn.classList.toggle('visible');
+  }
 }
 
 /* 
