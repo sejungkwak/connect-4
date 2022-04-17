@@ -135,7 +135,7 @@ function startBtnHandler() {
 
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
     const text = 'Please make sure each player name is unique!'
-    return alertMessage(text, 'inputName');
+    return showAlert(text, 'inputName');
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -592,11 +592,11 @@ function invalidChangeHandler() {
 
   if (!elById('player1Type').checked && !elById('player2Type').checked) {
     text = 'Please select at least one human player.';
-    return alertMessage(text, 'player');
+    return showAlert(text, 'player');
   }
   if (elById('player1Colour').checked === elById('player2Colour').checked) {
     text = 'Please select a unique colour for each player.';
-    return alertMessage(text, 'colour');
+    return showAlert(text, 'colour');
   }
 }
 
@@ -763,15 +763,15 @@ function validateForm() {
 
   if (!nameEl) {
     text = 'please fill in your name!';
-    return alertMessage(text);
+    return showAlert(text);
   }
   if (!emailEl) {
     text = 'please fill in your email address!';
-    return alertMessage(text);
+    return showAlert(text);
   }
   if (!messageEl || messageEl.length < 10) {
     text = 'please ensure your message is at least 10 characters!';
-    return alertMessage(text);
+    return showAlert(text);
   }
 
   return sendMessage(templateParams);
@@ -782,13 +782,13 @@ function validateForm() {
  * @param {string} message
  * @param {string} type
  */
-function alertMessage(message, type = null) {
+function showAlert(message, type = null) {
   const overlay = document.createElement('aside');
   overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container">
       <p class="alert-text">${message}</p>
-      <button class="btn" id="confirmBtn">OK</button>
+      <button class="btn alert-btn">OK</button>
     </div>
   `
 
@@ -800,9 +800,11 @@ function alertMessage(message, type = null) {
     throw `Invalid type: ${type}. Aborting!`;
   }
 
-  elById('confirmBtn').addEventListener('click', () => {
-    confirmAlert(type)
-  })
+  for (let btn of qsa('.alert-btn')) {
+    btn.addEventListener('click', () => {
+      closeAlert(type)
+    });
+  }
 }
 
 /**
@@ -810,7 +812,7 @@ function alertMessage(message, type = null) {
  * change the checkbox value to default.
  * @param {string} type
  */
-function confirmAlert(type = null) {
+function closeAlert(type = null) {
   const overlays = qsa('.overlay');
   overlays.forEach((overlay) => overlay.remove());
 
