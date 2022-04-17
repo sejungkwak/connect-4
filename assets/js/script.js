@@ -358,6 +358,10 @@ function cellMouseoverHandler(event) {
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
 
+  for (let i = 0; i < NUM_OF_COLUMN; i++) {
+    cells[i].classList.add('invisible');
+  }
+
   cells[colIndex].classList.remove('invisible');
 }
 
