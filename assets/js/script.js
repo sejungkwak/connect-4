@@ -832,9 +832,9 @@ function closeAlert(event, type = null) {
  * @param {object} templateParams 
  */
 function sendMessage(templateParams) {
-  const nameEl = elById('name').value;
-  const emailEl = elById('email').value;
-  const messageEl = elById('message').value;
+  let nameEl = elById('name').value;
+  let emailEl = elById('email').value;
+  let messageEl = elById('message').value;
 
   emailjs
     .send(
