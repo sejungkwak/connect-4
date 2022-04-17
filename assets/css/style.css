@@ -622,23 +622,29 @@ input[type="email"] {
   max-width: min(90vw, 25rem);
 }
 
-.blink1 {
-  animation: blink linear 2s infinite;
+.dim-yellow,
+.dim-red {
+  opacity: 0.4;
 }
 
-.blink2 {
+.dim-yellow {
+  background-color: var(--yellow-disc-color);
+}
+
+.dim-red {
+  background-color: var(--red-disc-color);
+  color: var(--main-light-color);
+}
+
+.blink1 {
   animation: blink linear 2s 1 1s;
 }
 
+.blink2 {
+  animation: blink linear 2s infinite;
+}
+
 .blink3 {
-  animation: blink linear 2s 1 4s;
-}
-
-.blink4 {
-  animation: blink linear 2s 1 3s;
-}
-
-.blink5 {
   animation: blink linear 2s 1 2s;
 }
 
@@ -721,9 +727,7 @@ input[type="email"] {
 
   .blink1,
   .blink2,
-  .blink3,
-  .blink4,
-  .blink5 {
+  .blink3 {
     animation: none;
   }
 
