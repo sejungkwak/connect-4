@@ -82,7 +82,7 @@ menuHelpBtn.addEventListener('click', () => {
 menuLeaderboardBtn.addEventListener('click', () => {
   getFromLocalstorage();
   openSection('leaderboard');
-})
+});
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
   startBtnHandler();
@@ -109,7 +109,7 @@ successHomeBtn.addEventListener('click', () => {
 });
 failContactBtn.addEventListener('click', () => {
   openSection('contact');
-})
+});
 footerContactBtn.addEventListener('click', () => {
   openSection('contact');
 });
@@ -118,7 +118,7 @@ footerContactBtn.addEventListener('click', () => {
 checkboxes.forEach(checkbox =>
   checkbox.addEventListener('change', invalidChangeHandler));
 
-mainEl.style.minHeight = `${sections[0].offsetHeight}px`
+mainEl.style.minHeight = `${sections[0].offsetHeight}px`;
 
 /**
  * Checks input values from the settings section form,
@@ -135,12 +135,12 @@ function startBtnHandler() {
   let text;
 
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    text = 'Please make sure each player name is unique!'
+    text = 'Please make sure each player name is unique!';
     return showAlert(text, 'inputName');
   }
 
   if (player1Colour === player2Colour) {
-    text = 'Please select a unique colour for each player.'
+    text = 'Please select a unique colour for each player.';
     return showAlert(text, 'colour');
   }
 
@@ -164,7 +164,7 @@ function startBtnHandler() {
     player2Type,
     player2Colour,
     player2Name
-  }
+  };
 
   gamePlayed = 0;
   openSection('game');
@@ -237,7 +237,7 @@ function placeDisc(cell) {
   cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
   cell.textContent = `
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
-  `
+  `;
   if (!isMuted) {
     // Source: Dani Amsalem's answer on Stack Overflow(https://stackoverflow.com/questions/54896134/sound-not-always-playing-with-javascript)
     dropSound.currentTime = 0;
@@ -297,7 +297,7 @@ function playerMove() {
       default:
         break;
     }
-  })
+  });
 }
 
 /**
@@ -482,7 +482,7 @@ function addToLocalstorage(name, point, win) {
     point: 0,
     win: 0,
     games: 1
-  }
+  };
 
   if (scores) {
     scores.push(player);
@@ -507,14 +507,14 @@ function displayResult(result, player, point, cells) {
   overlay.className = 'overlay';
 
   if (result === 'draw') {
-    message = `<h2>It's a draw!</h2>`
+    message = `<h2>It's a draw!</h2>`;
   }
 
   if (result === 'winner') {
     message = `
       <h2>${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
       <p>${point} points</p>
-    `
+    `;
     cells.forEach(cell => cell.innerText = '★');
   }
 
@@ -527,7 +527,7 @@ function displayResult(result, player, point, cells) {
       ${message}
       <button class="btn" id="playAgainBtn">play again</button>
     </div>
-  `
+  `;
   gameSection.appendChild(overlay);
 
   elById('playAgainBtn').addEventListener('click', runGame);
@@ -542,9 +542,9 @@ function updateName(currentPlayerName) {
   let text;
 
   if (currentPlayerName === 'You') {
-    text = 'Your'
+    text = 'Your';
   } else {
-    text = `${currentPlayerName}'s`
+    text = `${currentPlayerName}'s`;
   }
 
   currentPlayerEl.innerText = text;
@@ -618,27 +618,27 @@ function openSection(name) {
   if (name === 'settings') {
     sections[0].classList.add('active');
     navBtns[0].classList.add('active');
-    mainEl.style.minHeight = `${sections[0].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[0].offsetHeight}px`;
   } else if (name === 'game') {
     sections[1].classList.add('active');
-    mainEl.style.minHeight = `${sections[1].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[1].offsetHeight}px`;
   } else if (name === 'help') {
     sections[2].classList.add('active');
     navBtns[1].classList.add('active');
-    mainEl.style.minHeight = `${sections[2].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[2].offsetHeight}px`;
   } else if (name === 'leaderboard') {
     sections[3].classList.add('active');
     navBtns[2].classList.add('active');
-    mainEl.style.minHeight = `${sections[3].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[3].offsetHeight}px`;
   } else if (name === 'contact') {
     sections[4].classList.add('active');
-    mainEl.style.minHeight = `${sections[4].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[4].offsetHeight}px`;
   } else if (name === 'success') {
     sections[5].classList.add('active');
-    mainEl.style.minHeight = `${sections[5].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[5].offsetHeight}px`;
   } else if (name === 'fail') {
     sections[6].classList.add('active');
-    mainEl.style.minHeight = `${sections[6].offsetHeight}px`
+    mainEl.style.minHeight = `${sections[6].offsetHeight}px`;
   } else {
     throw `Invalid section name: ${name}. Aborting!`;
   }
@@ -701,7 +701,7 @@ function getFromLocalstorage() {
     } else {
       newArray.push(item);
     }
-    return newArray
+    return newArray;
   }, []);
 
   table.innerHTML = '';
@@ -710,7 +710,7 @@ function getFromLocalstorage() {
   // Source: MDN(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
   mergedData.sort((a, b) => {
     return b.point - a.point;
-  })
+  });
 
   if (mergedData.length > 5) {
     for (let i = 0; i < 5; i++) {
@@ -721,7 +721,7 @@ function getFromLocalstorage() {
           <td>${mergedData[i].win}</td>
           <td>${parseFloat((+mergedData[i].win / +mergedData[i].games) * 100).toFixed(2)}%</td>
         </tr>
-      `
+      `;
     }
   } else {
     mergedData.forEach(item => {
@@ -732,8 +732,8 @@ function getFromLocalstorage() {
           <td>${item.win}</td>
           <td>${parseFloat((+item.win / +item.games) * 100).toFixed(2)}%</td>
         </tr>
-      `
-    })
+      `;
+    });
   }
 }
 
@@ -796,7 +796,7 @@ function showAlert(message, type = null) {
       <p class="alert-text">${message}</p>
       <button class="btn alert-btn">OK</button>
     </div>
-  `
+  `;
 
   if (type === null) {
     contactSection.appendChild(overlay);
@@ -808,7 +808,7 @@ function showAlert(message, type = null) {
 
   for (let btn of qsa('.alert-btn')) {
     btn.addEventListener('click', (e) => {
-      closeAlert(e, type)
+      closeAlert(e, type);
     });
   }
 }
