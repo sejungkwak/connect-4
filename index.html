@@ -75,7 +75,7 @@
     </section>
     <!-- Settings section -->
     <section class="section settings active" id="settings">
-      <h2>settings</h2>
+      <h2>new game</h2>
       <form>
         <fieldset class="setting-fieldset">
           <legend class="setting-legend">Player 1</legend>
@@ -121,7 +121,7 @@
     </section>
     <!-- Game section -->
     <section class="section game" id="game">
-      <header class="board-header">
+      <header class="board-header" id="gameHeader">
         <h2 class="heading"><span class="current-player" id="currentPlayer"></span> Turn</h2>
         <ul class="volume-btns" id="volumeBtns">
           <li><button class="volume-btn active" id="soundBtn" aria-label="Turn on sound effects">
@@ -140,6 +140,8 @@
       </header>
       <!-- Game board will be injected using JS -->
       <div class="board-grid" id="boardGrid"></div>
+      <p class="alert-text" id="noGameText">Please start a game by opening the NEW GAME page and clicking the START
+        button.</p>
       <aside class="landscape-overlay">
         <div class="alert-container">
           <p class="alert-text">The whole board is not shown on the screen in landscape mode.</p>
