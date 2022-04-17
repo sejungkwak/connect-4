@@ -801,8 +801,8 @@ function showAlert(message, type = null) {
   }
 
   for (let btn of qsa('.alert-btn')) {
-    btn.addEventListener('click', () => {
-      closeAlert(type)
+    btn.addEventListener('click', (e) => {
+      closeAlert(e, type)
     });
   }
 }
@@ -812,9 +812,8 @@ function showAlert(message, type = null) {
  * change the checkbox value to default.
  * @param {string} type
  */
-function closeAlert(type = null) {
-  const overlays = qsa('.overlay');
-  overlays.forEach((overlay) => overlay.remove());
+function closeAlert(event, type = null) {
+  event.target.parentNode.parentNode.remove();
 
   if (type === 'player') {
     checkboxes[0].checked = false;
