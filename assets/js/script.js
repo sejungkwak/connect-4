@@ -3,6 +3,7 @@ const logoLink = elById('logoLink');
 const navOpenBtn = elById('navOpenBtn');
 const navCloseBtn = elById('navCloseBtn');
 const navNewGameBtn = elById('primarySettings');
+const navGameBtn = elById('primaryGame');
 const navHelpBtn = elById('primaryHelp');
 const navLeaderboardBtn = elById('primaryLeaderboard');
 const menuNewGameBtn = elById('newGameBtn');
@@ -69,6 +70,9 @@ navOpenBtn.addEventListener('click', toggleNav);
 navCloseBtn.addEventListener('click', toggleNav);
 navNewGameBtn.addEventListener('click', () => {
   openSection('settings');
+});
+navGameBtn.addEventListener('click', () => {
+  openSection('game');
 });
 navHelpBtn.addEventListener('click', () => {
   openSection('help');
@@ -632,6 +636,21 @@ function openSection(name) {
   if (name === 'settings' || name === 'help' || name === 'leaderboard') {
     const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
     sectionInNav.classList.add('active');
+  }
+
+  if (name === 'game') {
+    const gameSectionHeader = elById('gameHeader');
+    const boardGrid = elById('boardGrid');
+    const noGameText = elById('noGameText');
+    if (playerData === undefined) {
+      gameSectionHeader.style.display = 'none';
+      boardGrid.style.display = 'none';
+      noGameText.style.display = 'block';
+    } else {
+      gameSectionHeader.style.display = 'flex';
+      boardGrid.style.display = 'grid';
+      noGameText.style.display = 'none';
+    }
   }
 }
 
