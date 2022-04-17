@@ -134,27 +134,93 @@ input[type="email"] {
   width: 100%;
 }
 
-.nav {
+/* Responsive menu open/close icons */
+
+.nav-toggle {
+  position: absolute;
+  top: 50%;
+  right: min(2vw, 1em);
+  transform: translateY(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
+  list-style: none;
+}
+
+.nav-toggle-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-50%) scale(1, 0);
+  border: none;
+  background-color: inherit;
+  transition: .3s ease-in-out;
+  transition-property: opacity, transform;
+}
+
+.nav-toggle-btn.active {
+  opacity: 1;
+  transform: translateY(-50%) scale(1, 1);
+  transition: opacity .3s ease-in-out .3s;
+}
+
+.nav-toggle-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.nav-toggle-icon-path {
+  fill: var(--main-dark-color);
+}
+
+/* Navigation menu (hidden by default on mobile) */
+
+.nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1, 0);
+  transform-origin: top;
   width: 100%;
   background-color: var(--main-dark-color);
+  transition: transform .3s ease-in-out;
+}
+
+.nav.active {
+  transform: scale(1, 1);
 }
 
 .nav-list {
   display: flex;
-  justify-content: space-between;
-  width: min(95vw, 50em);
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 0;
   list-style: none;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
+  gap: 1em;
 }
 
 .nav-btn {
+  opacity: 0;
   border: none;
   padding: .5em 0;
   background-color: inherit;
@@ -162,7 +228,11 @@ input[type="email"] {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--main-light-color);
-  transition: transform .3s ease-in-out;
+  transition: opacity 1s ease-in-out, transform .3s ease-in-out;
+}
+
+.nav-btn.visible {
+  opacity: 1;
 }
 
 .nav-btn:hover {
