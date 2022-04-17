@@ -1,6 +1,6 @@
 // Button elements
 const logoLink = elById('logoLink');
-const navNewGameBtn = elById('primaryNewGame');
+const navNewGameBtn = elById('primarySettings');
 const navHelpBtn = elById('primaryHelp');
 const navLeaderboardBtn = elById('primaryLeaderboard');
 const menuNewGameBtn = elById('newGameBtn');
@@ -22,7 +22,7 @@ const footerContactBtn = elById('footerContactBtn');
 // Section elements
 const sections = qsa('.section');
 const settingsSection = elById('settings');
-const gameSection = elById('board');
+const gameSection = elById('game');
 const helpSection = elById('help');
 const leaderboardSection = elById('leaderboard');
 const contactSection = elById('contact');
@@ -613,35 +613,15 @@ function invalidChangeHandler() {
  * @param {string} name
  */
 function openSection(name) {
-  const navBtns = qsa('.nav-btn');
+  const targetSection = elById(`${name}`);
   closeSection();
 
-  if (name === 'settings') {
-    sections[0].classList.add('active');
-    navBtns[0].classList.add('active');
-    mainEl.style.minHeight = `${sections[0].offsetHeight}px`;
-  } else if (name === 'game') {
-    sections[1].classList.add('active');
-    mainEl.style.minHeight = `${sections[1].offsetHeight}px`;
-  } else if (name === 'help') {
-    sections[2].classList.add('active');
-    navBtns[1].classList.add('active');
-    mainEl.style.minHeight = `${sections[2].offsetHeight}px`;
-  } else if (name === 'leaderboard') {
-    sections[3].classList.add('active');
-    navBtns[2].classList.add('active');
-    mainEl.style.minHeight = `${sections[3].offsetHeight}px`;
-  } else if (name === 'contact') {
-    sections[4].classList.add('active');
-    mainEl.style.minHeight = `${sections[4].offsetHeight}px`;
-  } else if (name === 'success') {
-    sections[5].classList.add('active');
-    mainEl.style.minHeight = `${sections[5].offsetHeight}px`;
-  } else if (name === 'fail') {
-    sections[6].classList.add('active');
-    mainEl.style.minHeight = `${sections[6].offsetHeight}px`;
-  } else {
-    throw `Invalid section name: ${name}. Aborting!`;
+  targetSection.classList.add('active');
+  mainEl.style.minHeight = `calc(${targetSection.offsetHeight}px + 2em)`;
+
+  if (name === 'settings' || name === 'help' || name === 'leaderboard') {
+    const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
+    sectionInNav.classList.add('active');
   }
 }
 
