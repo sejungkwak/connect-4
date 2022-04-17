@@ -652,7 +652,7 @@ function openSection(name) {
 function closeSection() {
   const navBtns = qsa('.nav-btn');
 
-  for (i = 0; i < sections.length; i++) {
+  for (let i = 0; i < sections.length; i++) {
     if (i === 1) {
       continue;
     }
