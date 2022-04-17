@@ -294,6 +294,7 @@ function playerMove() {
       case 'ArrowRight':
       case 'ArrowDown':
         keydownHandler(e.key);
+        break;
       default:
         break;
     }
