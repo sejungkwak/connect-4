@@ -622,6 +622,7 @@ function invalidChangeHandler() {
 function openSection(name) {
   const targetSection = elById(`${name}`);
   const nav = elById('nav');
+  const toggleBtns = qsa('.nav-toggle-btn');
   const navBtns = qsa('.nav-btn');
   closeSection();
 
@@ -629,6 +630,9 @@ function openSection(name) {
   mainEl.style.minHeight = `calc(${targetSection.offsetHeight}px + 2em)`;
 
   nav.classList.remove('active');
+  for (const toggleBtn of toggleBtns) {
+    toggleBtn.classList.toggle('active');
+  }
   for (const navBtn of navBtns) {
     navBtn.classList.remove('visible');
   }
