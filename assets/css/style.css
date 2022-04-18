@@ -722,33 +722,35 @@ input[type="email"] {
 @keyframes blink {
 
   0% {
-    background-color: var(--main-light-color);
     color: var(--main-light-color);
+  }
+
+  1% {
+    background-color: var(--main-light-color);
   }
 
   20% {
     background-color: var(--main-light-color);
-    color: var(--main-light-color);
   }
 
   21% {
     background-color: var(--red-disc-color);
-    color: var(--main-light-color);
   }
 
   50% {
     background-color: var(--red-disc-color);
-    color: var(--main-light-color);
   }
 
   51% {
     background-color: var(--main-light-color);
+  }
+
+  69% {
     color: var(--main-light-color);
   }
 
   70% {
     background-color: var(--main-light-color);
-    color: var(--main-light-color);
   }
 
   71% {
