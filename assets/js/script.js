@@ -59,8 +59,6 @@ let playerData;
 let computerTurn;
 
 let isMuted = true;
-const dropSound = new Audio('assets/sounds/drop.mp3');
-const endGameSound = new Audio('assets/sounds/end.mp3');
 
 // Button Click EventListeners
 logoLink.addEventListener('click', () => {
@@ -254,8 +252,7 @@ function placeDisc(cell) {
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `;
   if (!isMuted) {
-    // Source: Dani Amsalem's answer on Stack Overflow(https://stackoverflow.com/questions/54896134/sound-not-always-playing-with-javascript)
-    dropSound.currentTime = 0;
+    const dropSound = new Audio('assets/sounds/drop.mp3');
     dropSound.play();
   }
 
@@ -527,6 +524,7 @@ function displayResult(result, player, point, cells) {
   }
 
   if (!isMuted) {
+    const endGameSound = new Audio('assets/sounds/end.mp3');
     endGameSound.play();
   }
 
