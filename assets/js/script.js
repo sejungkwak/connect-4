@@ -94,7 +94,20 @@ footerContactBtn.addEventListener('click', () => {
 
 // Checkbox change EventListener
 checkboxes.forEach(checkbox =>
-  checkbox.addEventListener('change', invalidChangeHandler));
+  checkbox.addEventListener('change', (e) => {
+    if (
+      (e.target === checkboxes[0] || e.target === checkboxes[2]) &&
+      !elById('player1Type').checked &&
+      !elById('player2Type').checked
+    ) {
+      invalidChangeHandler('player');
+    } else if (
+      (e.target === checkboxes[1] || e.target === checkboxes[3]) &&
+      elById('player1Colour').checked === elById('player2Colour').checked
+    ) {
+      invalidChangeHandler('colour');
+    }
+  }));
 
 // Keyboard control in the game
 document.addEventListener('keydown', e => {
@@ -115,16 +128,16 @@ function startBtnHandler() {
   let player2Type = elById('player2Type').checked ? 'human' : 'computer';
   let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
   let player2Name = elById('player2Name').value.trim();
-  let text;
 
-  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    text = 'Please make sure each player name is unique!';
-    return showAlert(text, 'inputName');
+  if (player1Type === 'computer' && player2Type === 'computer') {
+    return invalidChangeHandler('player');
   }
-
   if (player1Colour === player2Colour) {
-    text = 'Please select a unique colour for each player.';
-    return showAlert(text, 'colour');
+    return invalidChangeHandler('colour');
+  }
+  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
+    let text = 'Please make sure each player name is unique.';
+    return showAlert(text, 'inputName');
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -264,11 +277,14 @@ function playerMove() {
   for (let cell of cells) {
     cell.addEventListener('mouseover', cellMouseoverHandler);
     cell.addEventListener('mouseout', cellMouseoutHandler);
-    cell.addEventListener('click', (e) => {
-      const colIndex = cells.indexOf(e.target) % 7;
-      cellClickHandler(colIndex);
-    });
+    cell.addEventListener('click', calculateColIndex);
   }
+}
+
+function calculateColIndex(event) {
+  const cells = qsa('.cell');
+  const colIndex = cells.indexOf(event.target) % 7;
+  cellClickHandler(colIndex);
 }
 
 /**
@@ -569,16 +585,16 @@ function createGrid() {
  * each player must have a different colour.
  * @returns function
  */
-function invalidChangeHandler() {
+function invalidChangeHandler(type) {
   let text;
 
-  if (!elById('player1Type').checked && !elById('player2Type').checked) {
+  if (type === 'player') {
     text = 'Please select at least one human player.';
-    return showAlert(text, 'player');
+    return showAlert(text, type);
   }
-  if (elById('player1Colour').checked === elById('player2Colour').checked) {
+  if (type === 'colour') {
     text = 'Please select a unique colour for each player.';
-    return showAlert(text, 'colour');
+    return showAlert(text, type);
   }
 }
 
@@ -789,30 +805,21 @@ function showAlert(message, type = null) {
 
   if (type === null) {
     contactSection.appendChild(overlay);
-  } else if (type === 'inputName' || type === 'player' || type === 'colour') {
+  } else if (type === 'player' || type === 'colour' || type === 'inputName') {
     settingsSection.appendChild(overlay);
   } else {
     throw `Invalid type: ${type}. Aborting!`;
   }
 
-  for (let btn of qsa('.alert-btn')) {
-    btn.addEventListener('click', (e) => {
-      closeAlert(e, type);
-    });
-  }
+  closeAlert();
 }
 
-/**
- * Removes alert modal overlay and
- * change the checkbox value to default.
- * @param {string} type
- */
-function closeAlert(event, type = null) {
-  event.target.parentNode.parentNode.remove();
-
-  if (type === 'player') {
-    checkboxes[0].checked = false;
-    checkboxes[2].checked = true;
+function closeAlert() {
+  const okBtns = qsa('.alert-btn');
+  for (let btn of okBtns) {
+    btn.addEventListener('click', (e) => {
+      e.target.parentNode.parentNode.remove();
+    });
   }
 }
 
