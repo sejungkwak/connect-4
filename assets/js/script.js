@@ -607,15 +607,14 @@ function openSection(name) {
   targetSection.classList.add('active');
   nav.classList.remove('active');
 
-  for (const toggleBtn of toggleBtns) {
-    toggleBtn.classList.toggle('active');
-  }
   for (const navBtn of navBtns) {
     navBtn.classList.remove('visible');
   }
 
   if (name === 'settings' || name === 'game' || name === 'help' || name === 'leaderboard') {
     sectionInNav.classList.add('active');
+    toggleBtns[0].classList.add('active');
+    toggleBtns[1].classList.remove('active');
   }
 
   if (name === 'game') {
@@ -636,7 +635,7 @@ function openSection(name) {
 }
 
 /**
- * Closes all the sections except the game section and
+ * Closes all the sections and
  * resets the highlighted menu item.
  */
 function closeSection() {
