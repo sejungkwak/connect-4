@@ -648,6 +648,7 @@ input[type="email"] {
 
 .error-main {
   gap: 1.5em;
+  padding: 1em 0;
 }
 
 .error-board {
