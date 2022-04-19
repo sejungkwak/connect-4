@@ -11,7 +11,6 @@ const settingCloseBtn = elById('settingCloseBtn');
 const soundBtn = elById('soundBtn');
 const muteBtn = elById('muteBtn');
 const leaderboardDeleteBtn = elById('leaderboardDeleteBtn');
-const contactSendBtn = elById('contactSendBtn');
 const successHomeBtn = elById('successHomeBtn');
 const failContactBtn = elById('failContactBtn');
 const footerContactBtn = elById('footerContactBtn');
@@ -24,6 +23,12 @@ const contactSection = elById('contact');
 
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
+
+// Contact form elements
+const contactForm = elById('contactForm');
+let nameEl = elById('name');
+let emailEl = elById('email');
+let messageEl = elById('message');
 
 // Constant values for the game board grid
 const NUM_OF_COLUMN = 7;
@@ -78,10 +83,6 @@ settingCloseBtn.addEventListener('click', (e) => {
 soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
 leaderboardDeleteBtn.addEventListener('click', deleteData);
-contactSendBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  validateForm();
-});
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
 });
@@ -114,6 +115,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
     return keydownHandler(e.key);
   }
+});
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  sendMessage();
 });
 
 /**
@@ -276,7 +282,6 @@ function playerMove() {
 
   for (let cell of cells) {
     cell.addEventListener('mouseover', cellMouseoverHandler);
-    cell.addEventListener('mouseout', cellMouseoutHandler);
     cell.addEventListener('click', calculateColIndex);
   }
 }
@@ -314,7 +319,6 @@ function keydownHandler(pressedKey) {
       return cells[NUM_OF_COLUMN - 1].classList.remove('invisible');
     }
   }
-
   if (pressedKey === 'ArrowRight') {
     if (invisibleCells.length === NUM_OF_COLUMN - 1 && visibleCellIndex !== NUM_OF_COLUMN - 1) {
       return cells[visibleCellIndex + 1].classList.remove('invisible');
@@ -322,7 +326,6 @@ function keydownHandler(pressedKey) {
       return cells[0].classList.remove('invisible');
     }
   }
-
   if (pressedKey === 'ArrowDown') {
     if (invisibleCells.length === NUM_OF_COLUMN) {
       return;
@@ -330,7 +333,6 @@ function keydownHandler(pressedKey) {
       return cellClickHandler(visibleCellIndex);
     }
   }
-
 }
 
 /**
@@ -350,17 +352,6 @@ function cellMouseoverHandler(event) {
   }
 
   cells[colIndex].classList.remove('invisible');
-}
-
-/**
- * Hides the current player's coloured disc on mouseout.
- * @param {object} event
- */
-function cellMouseoutHandler(event) {
-  const cells = qsa('.cell');
-  const colIndex = cells.indexOf(event.target) % 7;
-
-  cells[colIndex].classList.add('invisible');
 }
 
 /**
@@ -756,39 +747,6 @@ function deleteData() {
 }
 
 /**
- * Validate contact form input:
- * if empty, calls a function that displays an alert modal, 
- * if filled, calls a function that sends the message.
- * @returns function
- */
-function validateForm() {
-  const nameEl = elById('name').value.trim();
-  const emailEl = elById('email').value.trim();
-  const messageEl = elById('message').value.trim();
-  const templateParams = {
-    nameEl,
-    emailEl,
-    messageEl,
-  };
-  let text;
-
-  if (!nameEl) {
-    text = 'please fill in your name!';
-    return showAlert(text);
-  }
-  if (!emailEl) {
-    text = 'please fill in your email address!';
-    return showAlert(text);
-  }
-  if (!messageEl || messageEl.length < 10) {
-    text = 'please ensure your message is at least 10 characters!';
-    return showAlert(text);
-  }
-
-  return sendMessage(templateParams);
-}
-
-/**
  * Displays an alert modal and a button
  * @param {string} message
  * @param {string} type
@@ -823,33 +781,43 @@ function closeAlert() {
   }
 }
 
-/**
- * Sends the user's message
- * @param {object} templateParams 
- */
-function sendMessage(templateParams) {
-  let nameEl = elById('name').value;
-  let emailEl = elById('email').value;
-  let messageEl = elById('message').value;
+function sendMessage() {
+  const contactSendBtn = elById('contactSendBtn');
+  const templateParams = {
+    contactName: nameEl.value,
+    contactEmail: emailEl.value,
+    contactMsg: messageEl.value
+  };
 
-  emailjs
-    .send(
-      'service_sy89ugk',
-      'template_3440jzv',
-      templateParams,
-      'SkcIApcdBA67fNkU0'
-    )
-    .then(
-      function () {
-        openSection('success');
-        nameEl = '';
-        emailEl = '';
-        messageEl = '';
-      },
-      function () {
-        openSection('fail');
-      }
-    );
+  if (nameEl.value.trim() === '') {
+    return nameEl.setCustomValidity('Please fill in your name.');
+  } else if (messageEl.value.trim() === '') {
+    return messageEl.setCustomValidity('Please ensure your message is at least 10 characters.');
+  } else {
+    contactSendBtn.innerText = 'sending...';
+
+    // Email API library Emailjs(https://www.emailjs.com/)
+    emailjs
+      .send(
+        'service_sy89ugk',
+        'template_3440jzv',
+        templateParams,
+        'SkcIApcdBA67fNkU0'
+      )
+      .then(
+        function () {
+          contactSendBtn.innerText = 'send';
+          openSection('success');
+          nameEl.value = '';
+          emailEl.value = '';
+          messageEl.value = '';
+        },
+        function () {
+          contactSendBtn.innerText = 'send';
+          openSection('fail');
+        }
+      );
+  }
 }
 
 function toggleNav() {
