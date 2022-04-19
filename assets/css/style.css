@@ -31,15 +31,12 @@ body {
 }
 
 main {
-  position: relative;
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: auto;
   width: 100%;
-  padding: 2em 0;
 }
 
 footer {
@@ -252,16 +249,12 @@ input[type="email"] {
 
 /*=============== Main ===============*/
 
-/*--------------- Settings section ---------------*/
+/*--------------- Section Element ---------------*/
 
 .section {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   display: none;
-  overflow-y: auto;
   width: 100%;
-  min-height: 100%;
   padding: 1em 0;
   background-color: var(--main-light-color);
 }
@@ -271,6 +264,18 @@ input[type="email"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/*--------------- Welcome message ---------------*/
+
+.main-heading {
+  padding-top: 1em;
+}
+
+/*--------------- Settings section ---------------*/
+
+.setting-heading {
+  display: none;
 }
 
 .setting-fieldset {
@@ -368,10 +373,6 @@ input[type="email"] {
 }
 
 /*--------------- Game section ---------------*/
-
-.section.game {
-  z-index: 0;
-}
 
 .board-header {
   display: flex;
