@@ -20,11 +20,7 @@ const footerContactBtn = elById('footerContactBtn');
 const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('game');
-const helpSection = elById('help');
-const leaderboardSection = elById('leaderboard');
 const contactSection = elById('contact');
-const successSection = elById('success');
-const failSection = elById('fail');
 
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
