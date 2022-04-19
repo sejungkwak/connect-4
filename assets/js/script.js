@@ -663,7 +663,8 @@ function soundBtnToggler() {
     btn.classList.toggle('active');
   }
 
-  return isMuted = isMuted ? false : true;
+  isMuted = isMuted ? false : true;
+  return isMuted;
 }
 
 /**
@@ -675,7 +676,8 @@ function getFromLocalstorage() {
   const data = JSON.parse(localStorage.getItem('scores'));
 
   if (!data) {
-    return noDataText.style.display = 'block';
+    noDataText.style.display = 'block';
+    return;
   }
 
   // Source: CRice's answer on Stack Overflow(https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
