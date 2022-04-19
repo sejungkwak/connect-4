@@ -517,7 +517,7 @@ function displayResult(result, player, point, cells) {
   overlay.innerHTML = `
     <div class="modal">
       ${message}
-      <button class="btn" id="playAgainBtn">play again</button>
+      <button class="btn btn-primary" id="playAgainBtn">play again</button>
     </div>
   `;
   gameSection.appendChild(overlay);
@@ -625,7 +625,7 @@ function openSection(name) {
   targetSection.classList.add('active');
   nav.classList.remove('active');
 
-  for (const navBtn of navBtns) {
+  for (let navBtn of navBtns) {
     navBtn.classList.remove('visible');
   }
 
@@ -659,11 +659,11 @@ function openSection(name) {
 function closeSection() {
   const navBtns = qsa('.nav-btn');
 
-  for (const section of sections) {
+  for (let section of sections) {
     section.classList.remove('active');
   }
 
-  for (const navBtn of navBtns) {
+  for (let navBtn of navBtns) {
     navBtn.classList.remove('active');
   }
 }
@@ -675,7 +675,7 @@ function closeSection() {
 function soundBtnToggler() {
   const soundBtns = qsa('.volume-btn');
 
-  for (const btn of soundBtns) {
+  for (let btn of soundBtns) {
     btn.classList.toggle('active');
   }
 
@@ -859,10 +859,10 @@ function toggleNav() {
 
   nav.classList.toggle('active');
 
-  for (const btn of toggleBtns) {
+  for (let btn of toggleBtns) {
     btn.classList.toggle('active');
   }
-  for (const navBtn of navBtns) {
+  for (let navBtn of navBtns) {
     navBtn.classList.toggle('visible');
   }
 }
