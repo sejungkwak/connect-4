@@ -575,6 +575,10 @@ input[type="email"] {
   color: var(--main-dark-color);
 }
 
+.contact-form>.btn {
+  align-self: center;
+}
+
 /*--------------- Contact feedback(Success, Fail) section ---------------*/
 
 .feedback-icon {
