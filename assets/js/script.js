@@ -10,11 +10,8 @@ const settingStartBtn = elById('settingStartBtn');
 const settingCloseBtn = elById('settingCloseBtn');
 const soundBtn = elById('soundBtn');
 const muteBtn = elById('muteBtn');
-const helpCloseBtn = elById('helpCloseBtn');
 const leaderboardDeleteBtn = elById('leaderboardDeleteBtn');
-const leaderboardCloseBtn = elById('leaderboardCloseBtn');
 const contactSendBtn = elById('contactSendBtn');
-const contactCloseBtn = elById('contactCloseBtn');
 const successHomeBtn = elById('successHomeBtn');
 const failContactBtn = elById('failContactBtn');
 const footerContactBtn = elById('footerContactBtn');
@@ -28,8 +25,6 @@ const leaderboardSection = elById('leaderboard');
 const contactSection = elById('contact');
 const successSection = elById('success');
 const failSection = elById('fail');
-
-const mainEl = elById('mainEl');
 
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
@@ -86,16 +81,10 @@ settingCloseBtn.addEventListener('click', (e) => {
 });
 soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
-helpCloseBtn.addEventListener('click', closeSection);
 leaderboardDeleteBtn.addEventListener('click', deleteData);
-leaderboardCloseBtn.addEventListener('click', closeSection);
 contactSendBtn.addEventListener('click', (e) => {
   e.preventDefault();
   validateForm();
-});
-contactCloseBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  closeSection();
 });
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
