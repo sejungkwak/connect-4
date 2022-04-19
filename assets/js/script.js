@@ -600,6 +600,12 @@ function openSection(name) {
   const settingHeading = elById('settingHeading');
   const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
 
+  // Source: Ganesh Ghalame's answer on Stack Overflow(https://stackoverflow.com/questions/1144805/scroll-to-the-top-of-the-page-using-javascript)
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
   mainHeading.style.display = 'none';
   settingHeading.style.display = 'block';
 
