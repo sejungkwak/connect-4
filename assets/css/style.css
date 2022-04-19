@@ -252,30 +252,6 @@ input[type="email"] {
 
 /*=============== Main ===============*/
 
-/*--------------- Menu section ---------------*/
-
-.menu-heading {
-  margin: 1em auto;
-}
-
-.menu-btns {
-  flex-direction: column;
-}
-
-.menu-item {
-  width: 12rem;
-}
-
-.menu-btn {
-  flex-direction: column;
-  width: 100%;
-  text-transform: capitalize;
-}
-
-.str-text {
-  text-transform: uppercase;
-}
-
 /*--------------- Settings section ---------------*/
 
 .section {
@@ -295,10 +271,6 @@ input[type="email"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.section.settings {
-  z-index: 1;
 }
 
 .setting-fieldset {
