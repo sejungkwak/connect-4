@@ -6,9 +6,6 @@ const navNewGameBtn = elById('primarySettings');
 const navGameBtn = elById('primaryGame');
 const navHelpBtn = elById('primaryHelp');
 const navLeaderboardBtn = elById('primaryLeaderboard');
-const menuNewGameBtn = elById('newGameBtn');
-const menuHelpBtn = elById('helpBtn');
-const menuLeaderboardBtn = elById('leaderboardBtn');
 const settingStartBtn = elById('settingStartBtn');
 const settingCloseBtn = elById('settingCloseBtn');
 const soundBtn = elById('soundBtn');
@@ -79,23 +76,13 @@ navLeaderboardBtn.addEventListener('click', () => {
   getFromLocalstorage();
   openSection('leaderboard');
 });
-menuNewGameBtn.addEventListener('click', () => {
-  openSection('settings');
-});
-menuHelpBtn.addEventListener('click', () => {
-  openSection('help');
-});
-menuLeaderboardBtn.addEventListener('click', () => {
-  getFromLocalstorage();
-  openSection('leaderboard');
-});
 settingStartBtn.addEventListener('click', (e) => {
   e.preventDefault();
   startBtnHandler();
 });
 settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  closeSection();
+  openSection('game');
 });
 soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
@@ -130,8 +117,6 @@ document.addEventListener('keydown', e => {
     return keydownHandler(e.key);
   }
 });
-
-mainEl.style.minHeight = `${sections[0].offsetHeight}px`;
 
 /**
  * Checks input values from the settings section form,
@@ -622,12 +607,17 @@ function openSection(name) {
   const nav = elById('nav');
   const toggleBtns = qsa('.nav-toggle-btn');
   const navBtns = qsa('.nav-btn');
+  const mainHeading = elById('mainHeading');
+  const settingHeading = elById('settingHeading');
+  const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
+
+  mainHeading.style.display = 'none';
+  settingHeading.style.display = 'block';
+
   closeSection();
-
   targetSection.classList.add('active');
-  mainEl.style.minHeight = `calc(${targetSection.offsetHeight}px + 2em)`;
-
   nav.classList.remove('active');
+
   for (const toggleBtn of toggleBtns) {
     toggleBtn.classList.toggle('active');
   }
@@ -635,8 +625,7 @@ function openSection(name) {
     navBtn.classList.remove('visible');
   }
 
-  if (name === 'settings' || name === 'help' || name === 'leaderboard') {
-    const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
+  if (name === 'settings' || name === 'game' || name === 'help' || name === 'leaderboard') {
     sectionInNav.classList.add('active');
   }
 
@@ -644,6 +633,7 @@ function openSection(name) {
     const gameSectionHeader = elById('gameHeader');
     const boardGrid = elById('boardGrid');
     const noGameText = elById('noGameText');
+
     if (playerData === undefined) {
       gameSectionHeader.style.display = 'none';
       boardGrid.style.display = 'none';
@@ -663,18 +653,13 @@ function openSection(name) {
 function closeSection() {
   const navBtns = qsa('.nav-btn');
 
-  for (let i = 0; i < sections.length; i++) {
-    if (i === 1) {
-      continue;
-    }
-    sections[i].classList.remove('active');
+  for (const section of sections) {
+    section.classList.remove('active');
   }
 
   for (const navBtn of navBtns) {
     navBtn.classList.remove('active');
   }
-
-  mainEl.style.minHeight = 'unset';
 }
 
 /**
