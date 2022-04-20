@@ -305,7 +305,16 @@ input[type="email"] {
 
 .setting-checkbox {
   position: absolute;
-  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.5rem;
+  height: 1.5rem;
+}
+
+.setting-checkbox:focus-visible {
+  outline: 2px solid var(--main-dark-color);
+  outline-offset: .4rem;
 }
 
 .setting-slider {
