@@ -686,11 +686,14 @@ function soundBtnToggler() {
  */
 function getFromLocalstorage() {
   const noDataText = elById('noDataText');
-  const table = elById('leaderboardTableBody');
+  const table = elById('leaderboardTable');
+  const tbody = elById('leaderboardTableBody');
   const data = JSON.parse(localStorage.getItem('scores'));
 
   if (!data) {
     noDataText.style.display = 'block';
+    table.style.opacity = '0';
+    leaderboardDeleteBtn.style.display = 'none';
     return;
   }
 
@@ -707,7 +710,9 @@ function getFromLocalstorage() {
     return newArray;
   }, []);
 
-  table.innerHTML = '';
+  table.style.opacity = '1';
+  tbody.innerHTML = '';
+  leaderboardDeleteBtn.style.display = 'flex';
   noDataText.style.display = 'none';
 
   // Source: MDN(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
@@ -717,7 +722,7 @@ function getFromLocalstorage() {
 
   if (mergedData.length > 5) {
     for (let i = 0; i < 5; i++) {
-      table.innerHTML += `
+      tbody.innerHTML += `
         <tr>
           <td class="leaderboard-table-name">${mergedData[i].name}</td>
           <td>${mergedData[i].point}</td>
@@ -728,7 +733,7 @@ function getFromLocalstorage() {
     }
   } else {
     mergedData.forEach(item => {
-      table.innerHTML += `
+      tbody.innerHTML += `
         <tr>
           <td class="leaderboard-table-name">${item.name}</td>
           <td>${item.point}</td>
@@ -745,11 +750,14 @@ function getFromLocalstorage() {
  * delete it in the leaderboard section
  */
 function deleteData() {
-  const table = elById('leaderboardTableBody');
+  const table = elById('leaderboardTable');
+  const tbody = elById('leaderboardTableBody');
   const noDataText = elById('noDataText');
 
   localStorage.clear();
-  table.innerHTML = '';
+  table.style.opacity = '0';
+  tbody.innerHTML = '';
+  leaderboardDeleteBtn.style.display = 'none';
   noDataText.style.display = 'block';
 }
 
