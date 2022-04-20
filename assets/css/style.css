@@ -814,12 +814,10 @@ input[type="email"] {
 
 @media screen and (min-width: 64rem) {
 
-  /* Grid template for Help section and contact form */
+  /* Grid template for the Help section and Contact section */
 
   .section.help.active,
   .section.contact.active {
-    left: 50%;
-    transform: translateX(-50%);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
