@@ -100,6 +100,10 @@ footerContactBtn.addEventListener('click', () => {
 // Checkbox change EventListener
 checkboxes.forEach(checkbox =>
   checkbox.addEventListener('change', (e) => {
+    if (settingsSection.lastChild.className === 'overlay') {
+      settingsSection.lastChild.remove();
+    }
+
     if (
       (e.target === checkboxes[0] || e.target === checkboxes[2]) &&
       !elById('player1Type').checked &&
@@ -766,7 +770,7 @@ function deleteData() {
  * @param {string} message
  * @param {string} type
  */
-function showAlert(message, type = null) {
+function showAlert(message, type) {
   const overlay = document.createElement('aside');
   overlay.className = 'overlay';
   overlay.innerHTML = `
@@ -776,9 +780,11 @@ function showAlert(message, type = null) {
     </div>
   `;
 
-  if (type === null) {
-    contactSection.appendChild(overlay);
-  } else if (type === 'player' || type === 'colour' || type === 'inputName') {
+  if (settingsSection.lastChild.className === 'overlay') {
+    settingsSection.lastChild.remove();
+  }
+
+  if (type === 'player' || type === 'colour' || type === 'inputName') {
     settingsSection.appendChild(overlay);
   } else {
     throw `Invalid type: ${type}. Aborting!`;
@@ -806,7 +812,7 @@ function sendMessage() {
 
   if (nameEl.value.trim() === '') {
     return nameEl.setCustomValidity('Please fill in your name.');
-  } else if (messageEl.value.trim() === '') {
+  } else if (messageEl.value.trim().length < 10) {
     return messageEl.setCustomValidity('Please ensure your message is at least 10 characters.');
   } else {
     contactSendBtn.innerText = 'sending...';
