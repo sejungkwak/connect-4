@@ -531,12 +531,10 @@ input[type="email"] {
 }
 
 .leaderboard-table-head {
-  font-size: 1.2rem;
   text-transform: uppercase;
 }
 
 .leaderboard-table-body {
-  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -808,6 +806,13 @@ input[type="email"] {
     opacity: 1;
   }
 
+  /*--------------- Leaderboard section ---------------*/
+
+  .leaderboard-table-head,
+  .leaderboard-table-body {
+    font-size: 1.2rem;
+  }
+
 }
 
 /*=============== Large screen size devices from 64rem/1024px width  ===============*/
@@ -861,7 +866,7 @@ input[type="email"] {
     width: fit-content;
   }
 
-  /*--------------- Contact form ---------------*/
+  /*--------------- Contact section ---------------*/
 
   .section.contact {
     grid-template-areas:
