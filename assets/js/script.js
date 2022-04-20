@@ -112,6 +112,9 @@ checkboxes.forEach(checkbox =>
 
 // Keyboard control in the game
 document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
+    e.preventDefault();
+  }
   if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
     return keydownHandler(e.key);
   }
