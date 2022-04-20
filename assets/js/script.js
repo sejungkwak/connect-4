@@ -10,6 +10,7 @@ const settingStartBtn = elById('settingStartBtn');
 const settingCloseBtn = elById('settingCloseBtn');
 const soundBtn = elById('soundBtn');
 const muteBtn = elById('muteBtn');
+const landscapeOkBtn = elById('landscapeOkBtn');
 const leaderboardDeleteBtn = elById('leaderboardDeleteBtn');
 const successHomeBtn = elById('successHomeBtn');
 const failContactBtn = elById('failContactBtn');
@@ -82,6 +83,9 @@ settingCloseBtn.addEventListener('click', (e) => {
 });
 soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
+landscapeOkBtn.addEventListener('click', (e) => {
+  e.target.parentNode.parentNode.remove();
+})
 leaderboardDeleteBtn.addEventListener('click', deleteData);
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
