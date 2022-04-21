@@ -295,9 +295,21 @@ function placeDisc(cell) {
 function playerMove() {
   const cells = qsa('.cell');
 
-  for (let cell of cells) {
-    cell.addEventListener('mouseover', cellMouseoverHandler);
-    cell.addEventListener('click', calculateColIndex);
+  /* 
+  Detect touch device
+  Source: KaMeHb's answer on Stack Overflow(https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
+  */
+  const isMobile = window.matchMedia('(hover: none)').matches;
+
+  if (isMobile) {
+    for (let cell of cells) {
+      cell.addEventListener('click', calculateColIndex);
+    }
+  } else {
+    for (let cell of cells) {
+      cell.addEventListener('mouseover', cellMouseoverHandler);
+      cell.addEventListener('click', calculateColIndex);
+    }
   }
 }
 
