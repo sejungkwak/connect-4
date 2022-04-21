@@ -132,6 +132,8 @@ contactForm.addEventListener('submit', (e) => {
   sendMessage();
 });
 
+window.addEventListener('resize', setCellHeight);
+
 /**
  * Checks input values from the settings section form,
  * sets player's name if empty and
@@ -577,6 +579,15 @@ function createGrid() {
       }
       boardEl.appendChild(cell);
     }
+  }
+  setCellHeight();
+}
+
+function setCellHeight() {
+  const cellWidth = document.querySelector('.cell').clientWidth;
+  const cells = qsa('.cell');
+  for (let cell of cells) {
+    cell.style.height = `${cellWidth}px`;
   }
 }
 
