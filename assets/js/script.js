@@ -20,7 +20,6 @@ const footerContactBtn = elById('footerContactBtn');
 const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('game');
-const contactSection = elById('contact');
 
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
@@ -85,7 +84,7 @@ soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
 landscapeOkBtn.addEventListener('click', (e) => {
   e.target.parentNode.parentNode.remove();
-})
+});
 leaderboardDeleteBtn.addEventListener('click', deleteData);
 successHomeBtn.addEventListener('click', () => {
   openSection('settings');
@@ -647,7 +646,7 @@ function openSection(name) {
       boardGrid.style.display = 'none';
       noGameText.style.display = 'block';
     } else {
-      gameSectionHeader.style.display = 'flex';
+      gameSectionHeader.style.display = 'grid';
       boardGrid.style.display = 'grid';
       noGameText.style.display = 'none';
     }
