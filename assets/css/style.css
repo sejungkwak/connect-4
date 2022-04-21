@@ -384,16 +384,13 @@ input[type="email"] {
 /*--------------- Game section ---------------*/
 
 .board-header {
-  display: flex;
+  grid-template-columns: 1fr min(11vw, 3rem);
   justify-content: center;
   width: min(90vw, 40rem);
 }
 
-.board-header .heading {
-  flex: 1;
-}
-
 .current-player {
+  font-size: min(8vw, 2rem);
   font-family: 'Fredoka One', cursive;
 }
 
@@ -406,8 +403,8 @@ input[type="email"] {
   display: none;
   border: none;
   border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: min(11vw, 3rem);
+  height: min(11vw, 3rem);
   padding: .6em;
   background-color: inherit;
   cursor: pointer;
@@ -441,6 +438,11 @@ input[type="email"] {
   fill: var(--main-light-color);
 }
 
+.game-tip {
+  grid-column: span 2;
+  text-align: center;
+}
+
 .board-grid {
   display: grid;
   justify-items: center;
@@ -449,7 +451,6 @@ input[type="email"] {
   align-content: center;
   grid-template-columns: repeat(7, 1fr);
   gap: min(.5em, 1vw) min(1em, 2vw);
-  margin-top: 2em;
   border-radius: 10px;
   width: min(90vw, 40rem);
   padding: .5em;
@@ -520,6 +521,7 @@ input[type="email"] {
 
 .help-article {
   margin: min(2.5vw, 1em);
+  width: 95%;
   max-width: 48rem;
 }
 
@@ -529,6 +531,28 @@ input[type="email"] {
 
 .help-rules {
   padding-left: 1em;
+}
+
+.help-keys {
+  list-style-type: none;
+}
+
+.help-key-item {
+  display: flex;
+  gap: .5rem;
+}
+
+.key-icon {
+  flex: 1;
+  max-width: 1.5rem;
+}
+
+.key-icon-path {
+  fill: var(--main-dark-color);
+}
+
+.help-key-text {
+  flex: 10;
 }
 
 /*--------------- Leaderboard section ---------------*/
@@ -843,9 +867,9 @@ input[type="email"] {
   .section.help {
     grid-template-areas:
       "heading heading"
-      "objective points"
-      "rules leaderboard"
-      "button button";
+      "objective keyboard"
+      "rules points"
+      "rules leaderboard";
     max-width: 87.5rem;
   }
 
@@ -854,26 +878,24 @@ input[type="email"] {
     align-self: center;
   }
 
-  .help>.help-article:nth-child(2) {
+  .help>.help-article:nth-of-type(1) {
     grid-area: objective;
   }
 
-  .help>.help-article:nth-child(3) {
+  .help>.help-article:nth-of-type(2) {
     grid-area: rules;
   }
 
-  .help>.help-article:nth-child(4) {
+  .help>.help-article:nth-of-type(3) {
+    grid-area: keyboard;
+  }
+
+  .help>.help-article:nth-of-type(4) {
     grid-area: points;
   }
 
-  .help>.help-article:nth-child(5) {
+  .help>.help-article:nth-of-type(5) {
     grid-area: leaderboard;
-  }
-
-  .help>.btn {
-    grid-area: button;
-    justify-self: center;
-    width: fit-content;
   }
 
   /*--------------- Contact section ---------------*/
