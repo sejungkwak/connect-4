@@ -464,7 +464,6 @@ input[type="email"] {
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   width: 100%;
-  aspect-ratio: 1/1;
   background-color: var(--main-light-color);
   cursor: pointer;
   font-size: min(5vw, 2.5rem);
