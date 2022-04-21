@@ -132,7 +132,10 @@ contactForm.addEventListener('submit', (e) => {
   sendMessage();
 });
 
-window.addEventListener('resize', setCellHeight);
+window.addEventListener('resize', () => {
+  if (playerData === undefined) return;
+  setCellHeight();
+});
 
 /**
  * Checks input values from the settings section form,
@@ -660,6 +663,9 @@ function openSection(name) {
       gameSectionHeader.style.display = 'grid';
       boardGrid.style.display = 'grid';
       noGameText.style.display = 'none';
+      setTimeout(() => {
+        setCellHeight();
+      }, 100);
     }
   }
 }
