@@ -121,6 +121,7 @@
               </svg>
             </button></li>
         </ul>
+        <small class="game-tip">Tip: You can play with arrow keys.</small>
       </header>
       <!-- Game board will be injected using JS -->
       <div class="board-grid" id="boardGrid"></div>
@@ -145,15 +146,46 @@
       <article class="help-article">
         <h3 class="help-heading">how to play</h3>
         <ol class="help-rules">
-          <li>The player who plays yellow discs starts the first game.</li>
+          <li>
+            Player1 plays first in the first game.
+            <br>Note: The player starting the current game will play second in the next game.
+          </li>
           <li>Players will alternate turns after playing a disc.</li>
           <li>On your turn, click the mouse on any of the columns which you want to place your disc into.</li>
           <li>The disc will be dropped into the available lowest cell of your chosen column.</li>
           <li>Play alternates until one player gets 4 discs of their colour in a line which can be horizontal, vertical
             or diagonal.</li>
           <li>The game can also end without a winner if there is a stalemate.</li>
-          <li>The player starting the previous game will play second in the new game.</li>
         </ol>
+      </article>
+      <article class="help-article">
+        <h3 class="help-heading">keyboard controls</h3>
+        <ul class="help-keys">
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowleft" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowleft">Left arrow key</title>
+              <path class="key-icon-path"
+                d="M384 32H64C28.66 32 0 60.66 0 96v320c0 35.34 28.66 64 64 64h320c35.34 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.18 16-16 16H64c-8.82 0-16-7.18-16-16V96c0-8.82 7.18-16 16-16h320c8.82 0 16 7.18 16 16V416zM273.6 138c-8.719-3.812-18.91-2.094-25.91 4.375l-104 96C138.8 242.9 136 249.3 136 256s2.812 13.09 7.719 17.62l104 96c7 6.469 17.19 8.188 25.91 4.375C282.3 370.2 288 361.5 288 352V160C288 150.5 282.3 141.8 273.6 138z" />
+            </svg>
+            <p class="help-key-text">Move your coloured disc on top of the game board to the left.</p>
+          </li>
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowright" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowright">Right arrow key</title>
+              <path class="key-icon-path"
+                d="M200.3 142.4C193.3 135.9 183.1 134.2 174.4 138C165.7 141.8 160 150.5 160 159.1v192C160 361.5 165.7 370.2 174.4 374c8.719 3.812 18.91 2.094 25.91-4.375l104-96C309.2 269.1 312 262.7 312 256s-2.812-13.09-7.719-17.62L200.3 142.4zM384 32H64C28.66 32 0 60.66 0 96v320c0 35.34 28.66 64 64 64h320c35.34 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.18 16-16 16H64c-8.82 0-16-7.18-16-16V96c0-8.82 7.18-16 16-16h320c8.82 0 16 7.18 16 16V416z" />
+            </svg>
+            <p class="help-key-text">Move your coloured disc on top of the game board to the right.</p>
+          </li>
+          <li class="help-key-item">
+            <svg class="key-icon" aria-labelledby="arrowdown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <title id="arrowdown">Down arrow key</title>
+              <path class="key-icon-path"
+                d="M320 192H128C118.5 192 109.8 197.7 105.1 206.4C102.2 215.1 103.9 225.3 110.4 232.3l96 104C210.9 341.2 217.3 344 224 344s13.09-2.812 17.62-7.719l96-104c6.469-7 8.188-17.19 4.375-25.91C338.2 197.7 329.5 192 320 192zM384 32H64C28.65 32 0 60.66 0 96v320c0 35.34 28.65 64 64 64h320c35.35 0 64-28.66 64-64V96C448 60.66 419.3 32 384 32zM400 416c0 8.82-7.178 16-16 16H64c-8.822 0-16-7.18-16-16V96c0-8.82 7.178-16 16-16h320c8.822 0 16 7.18 16 16V416z" />
+            </svg>
+            <p class="help-key-text">Drop your coloured disc in the targeted column.</p>
+          </li>
+        </ul>
       </article>
       <article class="help-article">
         <h3 class="help-heading">points system</h3>
