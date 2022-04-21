@@ -24,6 +24,8 @@ const gameSection = elById('game');
 // Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
 
+const boardEl = elById('boardGrid');
+
 // Contact form elements
 const contactForm = elById('contactForm');
 let nameEl = elById('name');
@@ -539,6 +541,7 @@ function displayResult(result, player, point, cells) {
     </div>
   `;
   gameSection.appendChild(overlay);
+  boardEl.style.marginTop = '4rem';
 
   elById('playAgainBtn').addEventListener('click', runGame);
 }
@@ -579,8 +582,8 @@ function updateColour(currentPlayerColour) {
  * with 1 extra row for showing the mouse-over state.
  */
 function createGrid() {
-  const boardEl = elById('boardGrid');
   boardEl.innerHTML = '';
+  boardEl.style.marginTop = 'unset';
 
   for (let i = 0; i < NUM_OF_ROW + 1; i++) {
     for (let j = 0; j < NUM_OF_COLUMN; j++) {
@@ -664,16 +667,15 @@ function openSection(name) {
 
   if (name === 'game') {
     const gameSectionHeader = elById('gameHeader');
-    const boardGrid = elById('boardGrid');
     const noGameText = elById('noGameText');
 
     if (playerData === undefined) {
       gameSectionHeader.style.display = 'none';
-      boardGrid.style.display = 'none';
+      boardEl.style.display = 'none';
       noGameText.style.display = 'block';
     } else {
       gameSectionHeader.style.display = 'grid';
-      boardGrid.style.display = 'grid';
+      boardEl.style.display = 'grid';
       noGameText.style.display = 'none';
       setTimeout(() => {
         setCellHeight();
