@@ -247,7 +247,7 @@ h2 {
 }
 
 .alert-text {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   font-weight: 700;
   text-align: center;
 }
@@ -302,10 +302,15 @@ input[type="email"] {
   color: var(--main-dark-color);
 }
 
-/*--------------- New Game section ---------------*/
+/*--------------- Home page (New Game page) ---------------*/
 
 .main-heading {
-  padding-top: 1em;
+  padding: 1em 1em 0;
+}
+
+.main-heading-title {
+  font-family: 'Fredoka One', cursive;
+  white-space: nowrap;
 }
 
 .setting-heading {
@@ -386,10 +391,10 @@ input[type="email"] {
   background-color: var(--red-disc-color);
 }
 
-/*--------------- Play section ---------------*/
+/*--------------- Play page ---------------*/
 
 .board-header {
-  grid-template-columns: 1fr 1rem;
+  grid-template-columns: 1fr 2rem;
   justify-content: center;
   width: 90vw;
   max-width: 40rem;
@@ -448,6 +453,7 @@ input[type="email"] {
 
 .game-tip {
   grid-column: span 2;
+  margin: .5em auto;
   text-align: center;
 }
 
@@ -507,6 +513,13 @@ input[type="email"] {
   transform: translateX(-50%);
 }
 
+.notification {
+  margin: 1em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .landscape-overlay {
   position: absolute;
   z-index: 2;
@@ -520,7 +533,7 @@ input[type="email"] {
   background-color: var(--overay-color);
 }
 
-/*--------------- Help section ---------------*/
+/*--------------- Help page ---------------*/
 
 .help-article {
   margin: 1em;
@@ -546,6 +559,7 @@ input[type="email"] {
 
 .key-icon {
   flex: 1;
+  align-self: start;
   margin-right: .5em;
   max-width: 1.5rem;
 }
@@ -558,7 +572,7 @@ input[type="email"] {
   flex: 10;
 }
 
-/*--------------- Leaderboard section ---------------*/
+/*--------------- Leaderboard page ---------------*/
 
 .leaderboard-table {
   margin: 1em auto;
@@ -574,16 +588,20 @@ input[type="email"] {
   text-align: center;
 }
 
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: .5em 0;
+}
+
 .leaderboard-table-name {
   text-transform: capitalize;
 }
 
-.no-data-text {
-  margin: 1em auto;
-  font-size: 1.2rem;
-}
+/*--------------- Contact page ---------------*/
 
-/*--------------- Contact form ---------------*/
+.contact>.heading {
+  margin-bottom: 1em;
+}
 
 .contact-text {
   margin-bottom: 1em;
@@ -615,7 +633,7 @@ input[type="email"] {
   align-self: center;
 }
 
-/*--------------- Contact feedback(Success, Fail) section ---------------*/
+/*--------------- Contact feedback(Success, Fail) page ---------------*/
 
 .feedback-icon {
   margin-bottom: 1em;
@@ -627,6 +645,8 @@ input[type="email"] {
 }
 
 .feedback-text {
+  padding: 0 1em;
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -847,7 +867,7 @@ input[type="email"] {
     opacity: 1;
   }
 
-  /*--------------- Play section ---------------*/
+  /*--------------- Play page ---------------*/
 
   .current-player {
     font-size: 2.5rem;
@@ -857,7 +877,7 @@ input[type="email"] {
     font-size: 2.5rem;
   }
 
-  /*--------------- Leaderboard section ---------------*/
+  /*--------------- Leaderboard page ---------------*/
 
   .leaderboard-table-head,
   .leaderboard-table-body {
@@ -876,9 +896,13 @@ input[type="email"] {
 
 @media screen and (min-width: 46rem) {
 
+  /*--------------- Play page ---------------*/
+
   .board-grid {
     gap: .5em 1em;
   }
+
+  /*--------------- 404 page ---------------*/
 
   .error-board {
     gap: .3em .6em;
@@ -890,7 +914,7 @@ input[type="email"] {
 
 @media screen and (min-width: 64rem) {
 
-  /* Grid template for the Help section and Contact section */
+  /* Grid template for the Help and Contact page */
 
   .section.help.active,
   .section.contact.active {
@@ -900,12 +924,13 @@ input[type="email"] {
     gap: 1em;
   }
 
-  /*--------------- Help section ---------------*/
+  /*--------------- Help page ---------------*/
 
   .section.help {
     grid-template-areas:
       "heading heading"
       "objective keyboard"
+      "rules keyboard"
       "rules points"
       "rules leaderboard";
     max-width: 87.5rem;
@@ -916,12 +941,18 @@ input[type="email"] {
     align-self: center;
   }
 
+  .help>.help-article {
+    max-width: 30rem;
+  }
+
   .help>.help-article:nth-of-type(1) {
     grid-area: objective;
+    justify-self: end;
   }
 
   .help>.help-article:nth-of-type(2) {
     grid-area: rules;
+    justify-self: end;
   }
 
   .help>.help-article:nth-of-type(3) {
@@ -936,7 +967,7 @@ input[type="email"] {
     grid-area: leaderboard;
   }
 
-  /*--------------- Contact section ---------------*/
+  /*--------------- Contact page ---------------*/
 
   .section.contact {
     grid-template-areas:
@@ -952,12 +983,12 @@ input[type="email"] {
   .contact>.contact-text {
     grid-area: intro;
     justify-self: right;
-    max-width: 40rem;
+    max-width: 30rem;
   }
 
   .contact>.contact-form {
     grid-area: form;
-    max-width: 40rem;
+    max-width: 30rem;
   }
 
   /*--------------- 404 page ---------------*/
