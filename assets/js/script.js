@@ -1,4 +1,4 @@
-// Button elements
+// DOM elements
 const logoLink = elById('logoLink');
 const navOpenBtn = elById('navOpenBtn');
 const navCloseBtn = elById('navCloseBtn');
@@ -15,18 +15,11 @@ const leaderboardDeleteBtn = elById('leaderboardDeleteBtn');
 const successHomeBtn = elById('successHomeBtn');
 const failContactBtn = elById('failContactBtn');
 const footerContactBtn = elById('footerContactBtn');
-
-// Section elements
 const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('game');
-
-// Checkbox input elements in the settings section
 const checkboxes = qsa('.setting-checkbox');
-
 const boardEl = elById('boardGrid');
-
-// Contact form elements
 const contactForm = elById('contactForm');
 let nameEl = elById('name');
 let emailEl = elById('email');
@@ -36,23 +29,13 @@ let messageEl = elById('message');
 const NUM_OF_COLUMN = 7;
 const NUM_OF_ROW = 6;
 
-// Total available cell. The number decreases after a player places a disc.
+// Variables for the game
 let freeCellCounter;
-
-// The game status. The game loop is running while the value is false.
 let gameOver;
-
-// The number of games the user played without resetting.
-let gamePlayed = 0;
-
-// Current player. The value changes after a player makes a move.
-let player1Turn;
-
-// Stores input values from the settings section form
 let playerData;
-
+let player1Turn;
 let computerTurn;
-
+let gamePlayed = 0;
 let isMuted = true;
 
 // Button Click EventListeners
@@ -134,11 +117,6 @@ contactForm.addEventListener('submit', (e) => {
   sendMessage();
 });
 
-window.addEventListener('resize', () => {
-  if (playerData === undefined) return;
-  setCellHeight();
-});
-
 /**
  * Checks input values from the settings section form,
  * sets player's name if empty and
@@ -195,8 +173,6 @@ function startBtnHandler() {
  */
 function runGame() {
   const overlays = qsa('.overlay');
-  overlays.forEach(overlay => overlay.remove());
-
   freeCellCounter = 42;
   gameOver = false;
   computerTurn = false;
@@ -208,8 +184,8 @@ function runGame() {
     player1Turn = true;
   }
 
+  overlays.forEach(overlay => overlay.remove());
   createGrid();
-
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
   updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
 
@@ -232,12 +208,11 @@ function runGame() {
  * places a disc into the cell.
  */
 function computerMove() {
-  if (gameOver) return;
-
   const randomNumber = Math.floor(Math.random() * NUM_OF_COLUMN);
   const freeCell = findFreeCell(randomNumber);
   computerTurn = true;
 
+  if (gameOver) return;
   if (!freeCell) {
     return computerMove();
   }
@@ -252,7 +227,6 @@ function computerMove() {
  * @param {object} cell 
  */
 function placeDisc(cell) {
-
   cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
   cell.textContent = `
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
@@ -279,8 +253,7 @@ function placeDisc(cell) {
     }
   }
 
-  player1Turn = player1Turn = true ? !player1Turn : player1Turn;
-
+  player1Turn = player1Turn ? false : true;
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
   updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
   computerTurn = false;
@@ -327,12 +300,12 @@ function calculateColIndex(event) {
  * @param {string} pressedKey
  */
 function keydownHandler(pressedKey) {
-  if (gameOver || gameOver === undefined) return;
-  if (computerTurn || computerTurn === undefined) return;
-
   const cells = qsa('.cell');
   const invisibleCells = qsa('.cell.invisible');
   let visibleCellIndex;
+
+  if (gameOver || gameOver === undefined) return;
+  if (computerTurn || computerTurn === undefined) return;
 
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
     if (!cells[i].classList.contains('invisible')) {
@@ -370,16 +343,14 @@ function keydownHandler(pressedKey) {
  * @param {object} event 
  */
 function cellMouseoverHandler(event) {
-  if (gameOver) return;
-  if (computerTurn) return;
-
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
+
+  if (gameOver || computerTurn) return;
 
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
     cells[i].classList.add('invisible');
   }
-
   cells[colIndex].classList.remove('invisible');
 }
 
@@ -390,12 +361,10 @@ function cellMouseoverHandler(event) {
  * @param {number} colIndex
  */
 function cellClickHandler(colIndex) {
-  if (gameOver) return;
-  if (computerTurn) return;
-
   const freeCell = findFreeCell(colIndex);
 
-  if (!freeCell) return;
+  if (gameOver || computerTurn || !freeCell) return;
+
   placeDisc(freeCell);
 }
 
@@ -520,11 +489,10 @@ function displayResult(result, player, point, cells) {
   if (result === 'draw') {
     message = `<h2>It's a draw!</h2>`;
   }
-
   if (result === 'winner') {
     message = `
-      <h2>${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
-      <p>${point} points</p>
+      <h2 class="alert-text">${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
+      <p class="alert-text">${point} points</p>
     `;
     cells.forEach(cell => cell.innerText = '★');
   }
@@ -535,7 +503,7 @@ function displayResult(result, player, point, cells) {
   }
 
   overlay.innerHTML = `
-    <div class="modal">
+    <div class="alert-container result">
       ${message}
       <button class="btn btn-primary" id="playAgainBtn">play again</button>
     </div>
@@ -597,15 +565,6 @@ function createGrid() {
       }
       boardEl.appendChild(cell);
     }
-  }
-  setCellHeight();
-}
-
-function setCellHeight() {
-  const cellWidth = document.querySelector('.cell').clientWidth;
-  const cells = qsa('.cell');
-  for (let cell of cells) {
-    cell.style.height = `${cellWidth}px`;
   }
 }
 
@@ -677,9 +636,6 @@ function openSection(name) {
       gameSectionHeader.style.display = 'grid';
       boardEl.style.display = 'grid';
       noGameText.style.display = 'none';
-      setTimeout(() => {
-        setCellHeight();
-      }, 100);
     }
   }
 }
