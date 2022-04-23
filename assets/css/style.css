@@ -55,53 +55,6 @@ h2 {
   text-align: center;
 }
 
-/* Button */
-
-.btns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  list-style: none;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--main-dark-color);
-  border-radius: 10px;
-  padding: .5em 1em;
-  background-color: inherit;
-  cursor: pointer;
-  font-size: 1rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: transform .3s ease-in-out;
-}
-
-.btn-primary {
-  background-color: var(--main-dark-color);
-  color: var(--main-light-color);
-}
-
-.btn:hover {
-  transform: scale(1.1);
-}
-
-/* Text and email input */
-
-input[type="text"],
-input[type="email"] {
-  border: none;
-  border-bottom: 2px solid var(--main-dark-color);
-  width: 100%;
-  background-color: inherit;
-  font-size: 1rem;
-  color: var(--main-dark-color);
-}
-
 /*=============== Header ===============*/
 
 .header {
@@ -121,7 +74,8 @@ input[type="email"] {
   display: flex;
   align-items: center;
   border: none;
-  width: min(60vw, 18em);
+  width: 60vw;
+  max-width: 16rem;
   padding: .8em 0;
   background-color: inherit;
   cursor: pointer;
@@ -136,7 +90,7 @@ input[type="email"] {
 .nav-toggle {
   position: absolute;
   top: 50%;
-  right: min(2vw, 1em);
+  right: 2vw;
   transform: translateY(-50%);
   display: flex;
   justify-content: center;
@@ -213,7 +167,6 @@ input[type="email"] {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 1em;
 }
 
 .nav-btn {
@@ -249,7 +202,7 @@ input[type="email"] {
 
 /*=============== Main ===============*/
 
-/*--------------- Section Element ---------------*/
+/* Section Element */
 
 .section {
   position: relative;
@@ -266,13 +219,94 @@ input[type="email"] {
   align-items: center;
 }
 
-/*--------------- Welcome message ---------------*/
+/* Modal overlay */
+
+.overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--overay-color);
+}
+
+.alert-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 95vw;
+  max-width: 20rem;
+  padding: 1em 2em;
+  background-color: var(--main-light-color);
+}
+
+.alert-text {
+  margin-bottom: 1em;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Button */
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.btns .btn:first-of-type {
+  margin-right: 1em;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--main-dark-color);
+  border-radius: 10px;
+  padding: .5em 1em;
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform .3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Text and email input */
+
+input[type="text"],
+input[type="email"] {
+  border: none;
+  border-bottom: 2px solid var(--main-dark-color);
+  width: 100%;
+  background-color: inherit;
+  font-size: 1rem;
+  color: var(--main-dark-color);
+}
+
+/*--------------- New Game section ---------------*/
 
 .main-heading {
   padding-top: 1em;
 }
-
-/*--------------- Settings section ---------------*/
 
 .setting-heading {
   display: none;
@@ -281,12 +315,12 @@ input[type="email"] {
 .setting-fieldset {
   display: flex;
   flex-direction: column;
-  gap: .5em;
   margin: 1em auto;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--main-dark-color);
   border-radius: 10px;
-  width: min(90vw, 25em);
+  width: 90vw;
+  max-width: 25rem;
   padding: 1em;
 }
 
@@ -301,6 +335,7 @@ input[type="email"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: .5em;
+  margin-bottom: .5em;
 }
 
 .setting-checkbox {
@@ -351,46 +386,17 @@ input[type="email"] {
   background-color: var(--red-disc-color);
 }
 
-.overlay {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--overay-color);
-}
-
-.alert-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  border-radius: 10px;
-  width: min(95vw, 20em);
-  padding: 1em 2em;
-  background-color: var(--main-light-color);
-}
-
-.alert-text {
-  font-weight: 700;
-  text-align: center;
-}
-
-/*--------------- Game section ---------------*/
+/*--------------- Play section ---------------*/
 
 .board-header {
-  grid-template-columns: 1fr min(11vw, 3rem);
+  grid-template-columns: 1fr 1rem;
   justify-content: center;
-  width: min(90vw, 40rem);
+  width: 90vw;
+  max-width: 40rem;
 }
 
 .current-player {
-  font-size: min(8vw, 2rem);
+  font-size: 8vw;
   font-family: 'Fredoka One', cursive;
 }
 
@@ -403,8 +409,10 @@ input[type="email"] {
   display: none;
   border: none;
   border-radius: 50%;
-  width: min(11vw, 3rem);
-  height: min(11vw, 3rem);
+  width: 11vw;
+  max-width: 3rem;
+  height: 11vw;
+  max-height: 3rem;
   padding: .6em;
   background-color: inherit;
   cursor: pointer;
@@ -450,9 +458,13 @@ input[type="email"] {
   justify-content: center;
   align-content: center;
   grid-template-columns: repeat(7, 1fr);
-  gap: min(.5em, 1vw) min(1em, 2vw);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 1vw 2vw;
   border-radius: 10px;
-  width: min(90vw, 40rem);
+  width: 90vw;
+  max-width: 40rem;
+  height: 84vw;
+  max-height: calc(40rem - 3em);
   padding: .5em;
   background-color: var(--main-dark-color);
 }
@@ -464,9 +476,10 @@ input[type="email"] {
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   width: 100%;
+  height: 100%;
   background-color: var(--main-light-color);
   cursor: pointer;
-  font-size: min(5vw, 2.5rem);
+  font-size: 5vw;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -487,20 +500,11 @@ input[type="email"] {
   color: var(--main-light-color);
 }
 
-.modal {
+.result {
   position: absolute;
-  top: 1em;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  border-radius: 10px;
-  width: min(90vw, 25em);
-  padding: 1em 2em;
-  background-color: var(--main-light-color);
 }
 
 .landscape-overlay {
@@ -519,7 +523,7 @@ input[type="email"] {
 /*--------------- Help section ---------------*/
 
 .help-article {
-  margin: min(2.5vw, 1em);
+  margin: 1em;
   width: 95%;
   max-width: 48rem;
 }
@@ -538,11 +542,11 @@ input[type="email"] {
 
 .help-key-item {
   display: flex;
-  gap: .5rem;
 }
 
 .key-icon {
   flex: 1;
+  margin-right: .5em;
   max-width: 1.5rem;
 }
 
@@ -582,24 +586,25 @@ input[type="email"] {
 /*--------------- Contact form ---------------*/
 
 .contact-text {
+  margin-bottom: 1em;
+  width: 95%;
   max-width: 48rem;
-  padding: min(2.5vw, 1em);
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: .5em;
-  width: 100%;
+  width: 95%;
   max-width: 48rem;
-  padding: min(2.5vw, 1em);
 }
 
 .contact-label {
+  margin-top: .5em;
   text-transform: uppercase;
 }
 
 .contact-message {
+  margin-bottom: 1em;
   border: 2px solid var(--main-dark-color);
   background-color: inherit;
   font-size: 1rem;
@@ -614,7 +619,7 @@ input[type="email"] {
 
 .feedback-icon {
   margin-bottom: 1em;
-  width: 5em;
+  width: 5rem;
 }
 
 .feedback-icon-path {
@@ -639,7 +644,6 @@ input[type="email"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5em;
   width: 100%;
   padding: 1em 0;
   background-color: var(--main-dark-color);
@@ -649,6 +653,7 @@ input[type="email"] {
 .footer-list {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: .5em;
   width: 100%;
   list-style: none;
 }
@@ -658,14 +663,14 @@ input[type="email"] {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.5em;
   padding: 0 .5em;
   text-align: center;
 }
 
 .footer-link {
+  margin-top: .5em;
   border: none;
-  width: 2em;
+  width: 2rem;
   background-color: inherit;
   cursor: pointer;
   transition: transform .3s ease-in-out;
@@ -682,22 +687,24 @@ input[type="email"] {
 /*=============== 404 page ===============*/
 
 .error-main {
-  gap: 1.5em;
+  max-width: 60rem;
   padding: 1em 0;
 }
 
 .error-board {
-  margin-top: 0;
-  width: min(90vw, 25rem);
+  margin: 1.5em auto;
+  max-width: 25rem;
+  max-height: calc(25rem - 1.8em);
 }
 
 .error-board>.cell {
   cursor: auto;
-  font-size: min(5vw, 1.5rem);
 }
 
 .error-text {
-  max-width: min(90vw, 25rem);
+  margin-bottom: 1em;
+  width: 90vw;
+  max-width: 25rem;
 }
 
 .dim-yellow,
@@ -832,11 +839,22 @@ input[type="email"] {
   .nav-list {
     flex-direction: row;
     justify-content: space-between;
-    width: min(95vw, 50em);
+    width: 95vw;
+    max-width: 50em;
   }
 
   .nav-btn {
     opacity: 1;
+  }
+
+  /*--------------- Play section ---------------*/
+
+  .current-player {
+    font-size: 2.5rem;
+  }
+
+  .cell {
+    font-size: 2.5rem;
   }
 
   /*--------------- Leaderboard section ---------------*/
@@ -844,6 +862,26 @@ input[type="email"] {
   .leaderboard-table-head,
   .leaderboard-table-body {
     font-size: 1.2rem;
+  }
+
+  /*--------------- 404 page ---------------*/
+
+  .error-board>.cell {
+    font-size: 1.5rem;
+  }
+
+}
+
+/*=============== Medium screen size devices from 46rem/736px width  ===============*/
+
+@media screen and (min-width: 46rem) {
+
+  .board-grid {
+    gap: .5em 1em;
+  }
+
+  .error-board {
+    gap: .3em .6em;
   }
 
 }
@@ -859,6 +897,7 @@ input[type="email"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: start;
+    gap: 1em;
   }
 
   /*--------------- Help section ---------------*/
@@ -926,7 +965,7 @@ input[type="email"] {
   .error-main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto 3rem auto;
+    grid-template-rows: auto 4rem auto;
     grid-template-areas:
       "heading heading"
       "board text"
@@ -941,7 +980,7 @@ input[type="email"] {
 
   .error-board {
     grid-area: board;
-    justify-self: end;
+    margin-top: 0;
   }
 
   .error-text,
