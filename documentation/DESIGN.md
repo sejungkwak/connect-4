@@ -11,9 +11,25 @@
 
 ### Mobile Wireframes
 
-- Home page
+- Home page / New Game page
 
   ![Home Page Wireframe](wireframes/mobile/home.png)
+
+- Play page
+
+  ![Play Page Wireframe](wireframes/mobile/play.png)
+
+- Help page
+
+  ![Help Page Wireframe](wireframes/mobile/help.png)
+
+- Leaderboard page
+
+  ![Leaderboard Page Wireframe](wireframes/mobile/leaderboard.png)
+
+- Contact page
+
+  ![Contact Page Wireframe](wireframes/mobile/contact.png)
 
 - 404 page
 
@@ -23,37 +39,45 @@
 
 ### Mobile Mockups
 
-- Settings section
+- Home page / New Game page
 
-  ![Settings Section Mockup](mockups/mobile/landing.png)
+  ![Home page Mockup](mockups/mobile/home.png)
 
-- Menu section
+- Play page
 
-  ![Menu Section Mockup](mockups/mobile/menu.png)
+  ![Play page Mockup](mockups/mobile/play.png)
 
-- Game section
+- Play page(Result)
 
-  ![Game Section Mockup](mockups/mobile/game.png)
+  ![Play page result Mockup](mockups/mobile/play-result.png)
 
-- Game result section
+- Play page(No game)
 
-  ![Game Result Section Mockup](mockups/mobile/result.png)
+  ![Play page without a game Mockup](mockups/mobile/play-nogame.png)
 
-- Help section
+- Help page
 
-  ![Help Section Mockup](mockups/mobile/help.png)
+  ![Help page Mockup](mockups/mobile/help.png)
 
-- Leaderboard section
+- Leaderboard page
 
-  ![Leaderboard Section Mockup](mockups/mobile/leaderboard.png)
+  ![Leaderboard page Mockup](mockups/mobile/leaderboard.png)
 
-- Contact section
+- Leaderboard page(No data)
 
-  ![Contact Section Mockup](mockups/mobile/contact.png)
+  ![Leaderboard page without data Mockup](mockups/mobile/leaderboard-nodata.png)
 
-- Success section
+- Contact page
 
-  ![Success Section Mockup](mockups/mobile/success.png)
+  ![Contact page Mockup](mockups/mobile/contact.png)
+
+- Success page
+
+  ![Success page Mockup](mockups/mobile/contact-success.png)
+
+- Fail page
+
+  ![Fail page Mockup](mockups/mobile/contact-fail.png)
 
 - 404 page
 
@@ -63,9 +87,25 @@
 
 ### Desktop Wireframes
 
-- Home page
+- Home page / New Game page
 
   ![Home Page Wireframe](wireframes/desktop/home.png)
+
+- Play page
+
+  ![Play Page Wireframe](wireframes/desktop/play.png)
+
+- Help page
+
+  ![Help Page Wireframe](wireframes/desktop/help.png)
+
+- Leaderboard page
+
+  ![Leaderboard Page Wireframe](wireframes/desktop/leaderboard.png)
+
+- Contact page
+
+  ![Contact Page Wireframe](wireframes/desktop/contact.png)
 
 - 404 page
 
@@ -75,37 +115,45 @@
 
 ### Desktop Mockups
 
-- Settings section
+- Home page / New Game page
 
-  ![Settings Section Mockup](mockups/desktop/landing.png)
+  ![Home page Mockup](mockups/desktop/home.png)
 
-- Menu section
+- Play page
 
-  ![Menu Section Mockup](mockups/desktop/menu.png)
+  ![Play page Mockup](mockups/desktop/play.png)
 
-- Game section
+- Play page(Result)
 
-  ![Game Section Mockup](mockups/desktop/game.png)
+  ![Play page result Mockup](mockups/desktop/play-result.png)
 
-- Game result section
+- Play page(No game)
 
-  ![Game Result Section Mockup](mockups/desktop/result.png)
+  ![Play page without a game Mockup](mockups/desktop/play-nogame.png)
 
-- Help section
+- Help page
 
-  ![Help Section Mockup](mockups/desktop/help.png)
+  ![Help page Mockup](mockups/desktop/help.png)
 
-- Leaderboard section
+- Leaderboard page
 
-  ![Leaderboard Section Mockup](mockups/desktop/leaderboard.png)
+  ![Leaderboard page Mockup](mockups/desktop/leaderboard.png)
 
-- Contact section
+- Leaderboard page(No data)
 
-  ![Contact Section Mockup](mockups/desktop/contact.png)
+  ![Leaderboard page without data Mockup](mockups/desktop/leaderboard-nodata.png)
 
-- Success section
+- Contact page
 
-  ![Success Section Mockup](mockups/desktop/success.png)
+  ![Contact page Mockup](mockups/desktop/contact.png)
+
+- Success page
+
+  ![Success page Mockup](mockups/desktop/contact-success.png)
+
+- Fail page
+
+  ![Fail page Mockup](mockups/desktop/contact-fail.png)
 
 - 404 page
 
