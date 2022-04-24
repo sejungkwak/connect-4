@@ -4,10 +4,13 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 
 *Connect Four is a classic two-player strategy game, in which players take turns to drop their coloured disc into a 6-row by 7-column grid until one of the players forms a line of 4 discs horizontally, vertically or diagonally.
 
+![Responsive Design](documentation/responsive.png)
+
+### View the live project [here](https://sejungkwak.github.io/connect-4/)
+
 <br>
 
 # Table of Contents
-This project has just begun, the content of this document will be added as the project is progressing.
 
 ### [User Experience (UX)](#user-experience-ux)
 - [User Stories](#user-stories)
