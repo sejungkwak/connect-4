@@ -38,6 +38,15 @@ let computerTurn;
 let gamePlayed = 0;
 let isMuted = true;
 
+/* 
+Fix for iOS audio issue
+Source: user2415116 and AndrewL's answer on Stack Overflow(https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
+*/
+const dropSound = new Audio();
+dropSound.autoplay = true;
+dropSound.src =
+  'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+
 // Button Click Event listeners
 logoLink.addEventListener('click', () => {
   openSection('settings');
@@ -218,7 +227,7 @@ function computerMove() {
 
   setTimeout(() => {
     placeDisc(freeCell);
-  }, 500);
+  }, 1000);
 }
 
 /**
@@ -355,7 +364,7 @@ function placeDisc(cell) {
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `;
   if (!isMuted) {
-    const dropSound = new Audio('assets/sounds/drop.mp3');
+    dropSound.src = 'assets/sounds/drop.mp3';
     dropSound.play();
   }
 
