@@ -38,7 +38,7 @@ let computerTurn;
 let gamePlayed = 0;
 let isMuted = true;
 
-// Button Click EventListeners
+// Button Click Event listeners
 logoLink.addEventListener('click', () => {
   openSection('settings');
 });
@@ -81,7 +81,7 @@ footerContactBtn.addEventListener('click', () => {
   openSection('contact');
 });
 
-// Checkbox change EventListener
+// Checkbox change Event listener
 checkboxes.forEach(checkbox =>
   checkbox.addEventListener('change', (e) => {
     if (settingsSection.lastChild.className === 'overlay') {
@@ -103,7 +103,7 @@ checkboxes.forEach(checkbox =>
   }));
 
 // Keyboard control in the game
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
     e.preventDefault();
   }
@@ -118,9 +118,9 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 /**
- * Checks input values from the settings section form,
- * sets player's name if empty and
- * assigns the values to the playerData object.
+ * Runs when the user pressed
+ * the start button on the New Game page.
+ * Validates the form input values.
  */
 function startBtnHandler() {
   let player1Type = elById('player1Type').checked ? 'human' : 'computer';
@@ -138,7 +138,7 @@ function startBtnHandler() {
   }
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
     let text = 'Please make sure each player name is unique.';
-    return showAlert(text, 'inputName');
+    return showAlert(text);
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -169,6 +169,7 @@ function startBtnHandler() {
 }
 
 /**
+ * Runs when the New Game form input values are valid.
  * Creates and configures a new game.
  */
 function runGame() {
@@ -203,9 +204,7 @@ function runGame() {
 }
 
 /**
- * Runs when it's a computer's turn:
- * picks a cell and
- * places a disc into the cell.
+ * Runs when it's the computer's turn.
  */
 function computerMove() {
   const randomNumber = Math.floor(Math.random() * NUM_OF_COLUMN);
@@ -223,49 +222,8 @@ function computerMove() {
 }
 
 /**
- * Places a disc into the cell.
- * @param {object} cell 
- */
-function placeDisc(cell) {
-  cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-  cell.textContent = `
-    ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
-  `;
-  if (!isMuted) {
-    const dropSound = new Audio('assets/sounds/drop.mp3');
-    dropSound.play();
-  }
-
-  freeCellCounter--;
-
-  if (freeCellCounter === 0) {
-    gameOver = true;
-    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
-    return displayResult('draw');
-  } else {
-    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-    if (connected) {
-      const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
-      const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
-      gameOver = true;
-      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
-      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
-    }
-  }
-
-  player1Turn = player1Turn ? false : true;
-  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
-  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-  computerTurn = false;
-
-  if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
-    computerMove();
-  }
-}
-
-/**
- * Runs when it's a human player's turn:
- * handles mouse events on each cell.
+ * Runs when it's a human player's turn.
+ * Adds mouse event listeners.
  */
 function playerMove() {
   const cells = qsa('.cell');
@@ -288,15 +246,9 @@ function playerMove() {
   }
 }
 
-function calculateColIndex(event) {
-  const cells = qsa('.cell');
-  const colIndex = cells.indexOf(event.target) % 7;
-  cellClickHandler(colIndex);
-}
-
 /**
- * Displays the current player's coloured disc
- * in the first row on keydown.
+ * Runs when a human player presses
+ * one of the arrow keys.
  * @param {string} pressedKey
  */
 function keydownHandler(pressedKey) {
@@ -338,9 +290,8 @@ function keydownHandler(pressedKey) {
 }
 
 /**
- * Displays the current player's coloured disc
- * in the first row on mouseover.
- * @param {object} event 
+ * Runs when a human player moves the mouse on the board.
+ * @param {object} event
  */
 function cellMouseoverHandler(event) {
   const cells = qsa('.cell');
@@ -355,9 +306,18 @@ function cellMouseoverHandler(event) {
 }
 
 /**
- * Checks if there is an available cell
- * in the target column and
- * places the disc into the cell.
+ * Runs when a human player clicks on the board.
+ * @param {object} event Mouse click event
+ */
+function calculateColIndex(event) {
+  const cells = qsa('.cell');
+  const colIndex = cells.indexOf(event.target) % 7;
+  cellClickHandler(colIndex);
+}
+
+/**
+ * Runs when a human player clicks on the board or
+ * presses the down arrow key.
  * @param {number} colIndex
  */
 function cellClickHandler(colIndex) {
@@ -369,9 +329,10 @@ function cellClickHandler(colIndex) {
 }
 
 /**
- * Checks if there is an available cell in the column the player clicks on.
- * @param {number} colIndex 
- * @returns 
+ * Runs after the computer picks a column or
+ * a human player's target column is calculated.
+ * @param {number} colIndex The index of the column
+ * @returns {object} cell An empty cell
  */
 function findFreeCell(colIndex) {
   const cells = qsa(`[data-coords-col="${colIndex}"]`);
@@ -383,11 +344,53 @@ function findFreeCell(colIndex) {
   }
 }
 
+/**
+ * Runs when there's an empty cell in the column.
+ * Places a disc into the target cell.
+ * @param {object} cell
+ */
+function placeDisc(cell) {
+  cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  cell.textContent = `
+    ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
+  `;
+  if (!isMuted) {
+    const dropSound = new Audio('assets/sounds/drop.mp3');
+    dropSound.play();
+  }
+
+  freeCellCounter--;
+
+  if (freeCellCounter === 0) {
+    gameOver = true;
+    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
+    return displayResult('draw');
+  } else {
+    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    if (connected) {
+      const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
+      const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
+      gameOver = true;
+      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
+      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
+    }
+  }
+
+  player1Turn = player1Turn ? false : true;
+  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
+  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  computerTurn = false;
+
+  if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
+    computerMove();
+  }
+}
+
 // Source: Tom Campbell's "Coding Connect 4 with JavaScript"(https://www.youtube.com/watch?v=kA9OOeUXXSU)
 /**
- * Checks if there's 4 in a line horizonally, vertically and diagonally.
+ * Runs after the computer or human player places a disc.
  * @param {string} playerColour 
- * @returns array
+ * @returns {array} The 4 cells that are in a line
  */
 function checkWinner(playerColour) {
   const cells = qsa('.cell').splice(NUM_OF_COLUMN);
@@ -442,10 +445,251 @@ function checkWinner(playerColour) {
 }
 
 /**
+ * Runs when the game is over.
+ * Displays the result of the game and the "play again" button.
+ * @param {string} result
+ * @param {string} player The winner if there is a winner
+ * @param {number} point The point if there is a winner
+ * @param {array} cells The 4 cells in a line
+ */
+function displayResult(result, player = null, point = null, cells = null) {
+  const overlay = document.createElement('aside');
+  let message;
+  overlay.className = 'overlay';
+
+  if (result === 'draw') {
+    message = `<h2 class="alert-text">It's a draw!</h2>`;
+  }
+  if (result === 'winner') {
+    message = `
+      <h2 class="alert-text">${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
+      <p class="alert-text">${point} points</p>
+    `;
+    cells.forEach(cell => cell.innerText = '★');
+  }
+
+  if (!isMuted) {
+    const endGameSound = new Audio('assets/sounds/end.mp3');
+    endGameSound.play();
+  }
+
+  overlay.innerHTML = `
+    <div class="alert-container result">
+      ${message}
+      <button class="btn btn-primary" id="playAgainBtn">play again</button>
+    </div>
+  `;
+  gameSection.appendChild(overlay);
+  boardEl.style.marginTop = '4rem';
+
+  elById('playAgainBtn').addEventListener('click', runGame);
+}
+
+/**
+ * Runs at the beginning of each player's turn.
+ * Displays the player's name on the screen.
+ * @param {string} currentPlayerName
+ */
+function updateName(currentPlayerName) {
+  const currentPlayerEl = elById('currentPlayer');
+  let text;
+
+  if (currentPlayerName === 'You') {
+    text = 'Your';
+  } else {
+    text = `${currentPlayerName}'s`;
+  }
+
+  currentPlayerEl.innerText = text;
+}
+
+/**
+ * Runs at the beginning of each player's turn.
+ * Update the class name of the first row cells.
+ * @param {string} currentPlayerColour
+ */
+function updateColour(currentPlayerColour) {
+  const topCells = qsa('.cell');
+  for (let i = 0; i < NUM_OF_COLUMN; i++) {
+    topCells[i].classList.remove('yellow');
+    topCells[i].classList.remove('red');
+    topCells[i].classList.add(currentPlayerColour);
+  }
+}
+
+/**
+ * Runs when the user clicks
+ * the sound/mute icon.
+ */
+function soundBtnToggler() {
+  const soundBtns = qsa('.volume-btn');
+  isMuted = isMuted ? false : true;
+
+  for (let btn of soundBtns) {
+    btn.classList.toggle('active');
+  }
+
+  return isMuted;
+}
+
+/**
+ * Runs when input values are invalid
+ * on the New Game page.
+ * @returns function
+ */
+function invalidChangeHandler(type) {
+  let text;
+
+  if (type === 'player') {
+    text = 'Please select at least one human player.';
+    return showAlert(text);
+  }
+  if (type === 'colour') {
+    text = 'Please select a unique colour for each player.';
+    return showAlert(text);
+  }
+}
+
+/**
+ * Runs when the user inputs invalid value
+ * or clicks the "start" button with invalid value
+ * on the New Game page.
+ * @param {string} message
+ */
+function showAlert(message) {
+  const overlay = document.createElement('aside');
+  overlay.className = 'overlay';
+  overlay.innerHTML = `
+    <div class="alert-container">
+      <p class="alert-text">${message}</p>
+      <button class="btn alert-btn">OK</button>
+    </div>
+  `;
+
+  if (settingsSection.lastChild.className === 'overlay') {
+    settingsSection.lastChild.remove();
+  }
+
+  settingsSection.appendChild(overlay);
+  closeAlert();
+}
+
+/**
+ * Runs when the user clicks
+ * the "ok" button in the modal.
+ */
+function closeAlert() {
+  const okBtns = qsa('.alert-btn');
+  for (let btn of okBtns) {
+    btn.addEventListener('click', (e) => {
+      e.target.parentNode.parentNode.remove();
+    });
+  }
+}
+
+/**
+ * Runs at the beginning of each game.
+ */
+function createGrid() {
+  boardEl.innerHTML = '';
+  boardEl.style.marginTop = 'unset';
+
+  for (let i = 0; i < NUM_OF_ROW + 1; i++) {
+    for (let j = 0; j < NUM_OF_COLUMN; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      if (i === 0) {
+        cell.className += ' invisible';
+      } else {
+        cell.dataset.coordsCol = j;
+      }
+      boardEl.appendChild(cell);
+    }
+  }
+}
+
+/**
+ * Runs when the user clicks one of the toggle icons
+ * in the header on mobile.
+ */
+function toggleNav() {
+  const nav = elById('nav');
+  const toggleBtns = qsa('.nav-toggle-btn');
+  const navBtns = qsa('.nav-btn');
+
+  nav.classList.toggle('active');
+
+  for (let btn of toggleBtns) {
+    btn.classList.toggle('active');
+  }
+  for (let navBtn of navBtns) {
+    navBtn.classList.toggle('visible');
+  }
+}
+
+/**
+ * Runs when the user clicks a button to open a page.
+ * @param {string} name
+ */
+function openSection(name) {
+  const targetSection = elById(`${name}`);
+  const nav = elById('nav');
+  const toggleBtns = qsa('.nav-toggle-btn');
+  const navBtns = qsa('.nav-btn');
+  const mainHeading = elById('mainHeading');
+  const settingHeading = elById('settingHeading');
+  const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
+
+  // Source: Ganesh Ghalame's answer on Stack Overflow(https://stackoverflow.com/questions/1144805/scroll-to-the-top-of-the-page-using-javascript)
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+  mainHeading.style.display = 'none';
+  settingHeading.style.display = 'block';
+
+  for (let section of sections) {
+    section.classList.remove('active');
+  }
+
+  targetSection.classList.add('active');
+  nav.classList.remove('active');
+
+  for (let navBtn of navBtns) {
+    navBtn.classList.remove('visible');
+    navBtn.classList.remove('active');
+  }
+
+  if (name === 'settings' || name === 'game' || name === 'help' || name === 'leaderboard') {
+    sectionInNav.classList.add('active');
+    toggleBtns[0].classList.add('active');
+    toggleBtns[1].classList.remove('active');
+  }
+
+  if (name === 'game') {
+    const gameSectionHeader = elById('gameHeader');
+    const noGameText = elById('noGameText');
+
+    if (playerData === undefined) {
+      gameSectionHeader.style.display = 'none';
+      boardEl.style.display = 'none';
+      noGameText.style.display = 'block';
+    } else {
+      gameSectionHeader.style.display = 'grid';
+      boardEl.style.display = 'grid';
+      noGameText.style.display = 'none';
+    }
+  }
+}
+
+/**
+ * Runs when the game is over.
  * Stores the result of the game in local storage.
- * @param {string} name 
- * @param {number} point 
- * @param {number} win 
+ * @param {string} name The current player's name
+ * @param {number} point The current player's points or 0 if it's a draw
+ * @param {number} win 1 if there's a winner otherwise 0
  */
 function addToLocalstorage(name, point, win) {
   let opponentName = name === playerData.player1Name ? playerData.player2Name : playerData.player1Name;
@@ -476,203 +720,7 @@ function addToLocalstorage(name, point, win) {
 }
 
 /**
- * Displays the result of the game and the "play again" button
- * @param {string} result
- * @param {string} player
- * @param {array} cells
- */
-function displayResult(result, player, point, cells) {
-  const overlay = document.createElement('aside');
-  let message;
-  overlay.className = 'overlay';
-
-  if (result === 'draw') {
-    message = `<h2>It's a draw!</h2>`;
-  }
-  if (result === 'winner') {
-    message = `
-      <h2 class="alert-text">${player} ${player === 'You' ? 'win!' : 'wins!'}</h2>
-      <p class="alert-text">${point} points</p>
-    `;
-    cells.forEach(cell => cell.innerText = '★');
-  }
-
-  if (!isMuted) {
-    const endGameSound = new Audio('assets/sounds/end.mp3');
-    endGameSound.play();
-  }
-
-  overlay.innerHTML = `
-    <div class="alert-container result">
-      ${message}
-      <button class="btn btn-primary" id="playAgainBtn">play again</button>
-    </div>
-  `;
-  gameSection.appendChild(overlay);
-  boardEl.style.marginTop = '4rem';
-
-  elById('playAgainBtn').addEventListener('click', runGame);
-}
-
-/**
- * Displays the current player's name on the screen
- * @param {string} currentPlayerName
- */
-function updateName(currentPlayerName) {
-  const currentPlayerEl = elById('currentPlayer');
-  let text;
-
-  if (currentPlayerName === 'You') {
-    text = 'Your';
-  } else {
-    text = `${currentPlayerName}'s`;
-  }
-
-  currentPlayerEl.innerText = text;
-}
-
-/**
- * Displays the current player's colour
- * in the first row of the grid on mouseover
- * @param {string} currentPlayerColour 
- */
-function updateColour(currentPlayerColour) {
-  const topCells = qsa('.cell');
-  for (let i = 0; i < NUM_OF_COLUMN; i++) {
-    topCells[i].classList.remove('yellow');
-    topCells[i].classList.remove('red');
-    topCells[i].classList.add(currentPlayerColour);
-  }
-}
-
-/**
- * Creates a 6-row by 7-column game board grid
- * with 1 extra row for showing the mouse-over state.
- */
-function createGrid() {
-  boardEl.innerHTML = '';
-  boardEl.style.marginTop = 'unset';
-
-  for (let i = 0; i < NUM_OF_ROW + 1; i++) {
-    for (let j = 0; j < NUM_OF_COLUMN; j++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-
-      if (i === 0) {
-        cell.className += ' invisible';
-      } else {
-        cell.dataset.coordsCol = j;
-      }
-      boardEl.appendChild(cell);
-    }
-  }
-}
-
-/**
- * Checkes invalid game settings:
- * at least one player must be a human and
- * each player must have a different colour.
- * @returns function
- */
-function invalidChangeHandler(type) {
-  let text;
-
-  if (type === 'player') {
-    text = 'Please select at least one human player.';
-    return showAlert(text, type);
-  }
-  if (type === 'colour') {
-    text = 'Please select a unique colour for each player.';
-    return showAlert(text, type);
-  }
-}
-
-/**
- * Opens the section specified by the argument and
- * closes other sections except the game section
- * @param {string} name
- */
-function openSection(name) {
-  const targetSection = elById(`${name}`);
-  const nav = elById('nav');
-  const toggleBtns = qsa('.nav-toggle-btn');
-  const navBtns = qsa('.nav-btn');
-  const mainHeading = elById('mainHeading');
-  const settingHeading = elById('settingHeading');
-  const sectionInNav = elById(`primary${name.charAt(0).toUpperCase()}${name.slice(1)}`);
-
-  // Source: Ganesh Ghalame's answer on Stack Overflow(https://stackoverflow.com/questions/1144805/scroll-to-the-top-of-the-page-using-javascript)
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-
-  mainHeading.style.display = 'none';
-  settingHeading.style.display = 'block';
-
-  closeSection();
-  targetSection.classList.add('active');
-  nav.classList.remove('active');
-
-  for (let navBtn of navBtns) {
-    navBtn.classList.remove('visible');
-  }
-
-  if (name === 'settings' || name === 'game' || name === 'help' || name === 'leaderboard') {
-    sectionInNav.classList.add('active');
-    toggleBtns[0].classList.add('active');
-    toggleBtns[1].classList.remove('active');
-  }
-
-  if (name === 'game') {
-    const gameSectionHeader = elById('gameHeader');
-    const noGameText = elById('noGameText');
-
-    if (playerData === undefined) {
-      gameSectionHeader.style.display = 'none';
-      boardEl.style.display = 'none';
-      noGameText.style.display = 'block';
-    } else {
-      gameSectionHeader.style.display = 'grid';
-      boardEl.style.display = 'grid';
-      noGameText.style.display = 'none';
-    }
-  }
-}
-
-/**
- * Closes all the sections and
- * resets the highlighted menu item.
- */
-function closeSection() {
-  const navBtns = qsa('.nav-btn');
-
-  for (let section of sections) {
-    section.classList.remove('active');
-  }
-
-  for (let navBtn of navBtns) {
-    navBtn.classList.remove('active');
-  }
-}
-
-/**
- * Toggles between the volume and mute icon, and
- * the isMuted variable value.
- */
-function soundBtnToggler() {
-  const soundBtns = qsa('.volume-btn');
-
-  for (let btn of soundBtns) {
-    btn.classList.toggle('active');
-  }
-
-  isMuted = isMuted ? false : true;
-  return isMuted;
-}
-
-/**
- * Gets data from local storage
+ * Runs when the Leaderboard page opens.
  */
 function getFromLocalstorage() {
   const noDataText = elById('noDataText');
@@ -736,8 +784,9 @@ function getFromLocalstorage() {
 }
 
 /**
- * clear local storage data and 
- * delete it in the leaderboard section
+ * Runs when the user clicks
+ * the "delete data" button
+ * on the leaderboard page.
  */
 function deleteData() {
   const table = elById('leaderboardTable');
@@ -752,42 +801,9 @@ function deleteData() {
 }
 
 /**
- * Displays an alert modal and a button
- * @param {string} message
- * @param {string} type
+ * Runs when the user clicks the "send" button
+ * on the contact page.
  */
-function showAlert(message, type) {
-  const overlay = document.createElement('aside');
-  overlay.className = 'overlay';
-  overlay.innerHTML = `
-    <div class="alert-container">
-      <p class="alert-text">${message}</p>
-      <button class="btn alert-btn">OK</button>
-    </div>
-  `;
-
-  if (settingsSection.lastChild.className === 'overlay') {
-    settingsSection.lastChild.remove();
-  }
-
-  if (type === 'player' || type === 'colour' || type === 'inputName') {
-    settingsSection.appendChild(overlay);
-  } else {
-    throw `Invalid type: ${type}. Aborting!`;
-  }
-
-  closeAlert();
-}
-
-function closeAlert() {
-  const okBtns = qsa('.alert-btn');
-  for (let btn of okBtns) {
-    btn.addEventListener('click', (e) => {
-      e.target.parentNode.parentNode.remove();
-    });
-  }
-}
-
 function sendMessage() {
   const contactSendBtn = elById('contactSendBtn');
   const templateParams = {
@@ -795,10 +811,12 @@ function sendMessage() {
     contactEmail: emailEl.value,
     contactMsg: messageEl.value
   };
+  const regexp = /\s{2,}/g;
+  const noWhitespace = messageEl.value.replace(regexp, ' ');
 
   if (nameEl.value.trim() === '') {
     return nameEl.setCustomValidity('Please fill in your name.');
-  } else if (messageEl.value.trim().length < 10) {
+  } else if (messageEl.value.trim().length < 10 || noWhitespace.length < 10) {
     return messageEl.setCustomValidity('Please ensure your message is at least 10 characters.');
   } else {
     contactSendBtn.innerText = 'sending...';
@@ -824,21 +842,6 @@ function sendMessage() {
           openSection('fail');
         }
       );
-  }
-}
-
-function toggleNav() {
-  const nav = elById('nav');
-  const toggleBtns = qsa('.nav-toggle-btn');
-  const navBtns = qsa('.nav-btn');
-
-  nav.classList.toggle('active');
-
-  for (let btn of toggleBtns) {
-    btn.classList.toggle('active');
-  }
-  for (let navBtn of navBtns) {
-    navBtn.classList.toggle('visible');
   }
 }
 
