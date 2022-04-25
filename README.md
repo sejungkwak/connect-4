@@ -32,6 +32,11 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Code Validation](#code-validation)
   - [Performance Testing](#performance-testing)
 
+[Deployment](#deployment)
+  - [Github Pages](#github-pages)
+  - [Making a Local Clone](#making-a-local-clone)
+  - [Forking this Repository](#forking-this-repository)
+
 <br>
 
 # User Experience (UX)
@@ -396,5 +401,83 @@ The site features a fully responsive design and contains 4 game related pages(__
     |   404         |     100     |      100      |      100       | 100 |
 
   - [View screenshots](documentation/PERFORMANCE.md)
+
+[Back To **Table of Contents**](#table-of-contents)
+
+<br>
+
+# Deployment
+
+## GitHub Pages
+
+The site was deployed to _GitHub Pages_ using the following steps:
+
+  1. Navigate to [my GitHub Repository](https://github.com/sejungkwak/connect-4).
+  2. Click the __Settings__ button on the menu.
+  3. Select __Pages__ from the left side vertical menu.
+  4. Under __Source__, click the dropdown called __None__ and select __main__.
+
+  ![Deployment Step 1 to 4](documentation/deployment/deployment-step1-4.png)
+
+  5. Click the __Save__ button.
+
+  ![Deployment Step 5](documentation/deployment/deployment-step5.png)
+
+  6. The page is automatically refreshed with a bar which shows the status and live link.
+
+  ![Deployment Step 6](documentation/deployment/deployment-step6.png)
+
+  7. Refresh the page. The bar turns green to indicate the successful deployment.
+
+  ![Deployment Step 7](documentation/deployment/deployment-step7.png)
+
+The live link can be found here - https://sejungkwak.github.io/connect-4/
+
+<br>
+
+## Making a Local Clone
+These steps demonstrate how I cloned my repository to create a local copy on my computer to run the code locally.
+
+  1. Navigate to [my GitHub Repository](https://github.com/sejungkwak/connect-4).
+  2. Click the __Code__ button above the list of files.
+
+  ![Clone Step 1 to 2](documentation/deployment/clone-step1-2.png)
+
+  3. Select __HTTPS__ under __Clone__. I have chosen this option as it is simpler than SSH.
+  4. Click the copy icon on the right side of the URL.
+
+  ![Clone Step 3 to 4](documentation/deployment/clone-step3-4.png)
+
+  5. Open the Terminal.
+  6. Change the current working directory to the location where I want the cloned directory.
+  7. Type `git clone ` and then paste the URL I copied in step 4.
+  
+  ```
+  $ git clone https://github.com/sejungkwak/connect-4.git
+  ```
+
+  ![Clone Step 6 to 7](documentation/deployment/clone-step6-7.png)
+
+  8. Press enter. Messages are displayed in the Terminal to indicate the local clone has been successfully created.
+
+  ![Clone Step 8](documentation/deployment/clone-step8.png)
+
+<br>
+
+## Forking this Repository
+These steps demonstrate how to make a copy of this repository on your _GitHub_ account to make changes without affecting this repository or to deploy the site yourself.
+
+  1. Log in to your _GitHub_ account.
+  2. Navigate to [this Connect 4 repository](https://github.com/sejungkwak/connect-4).
+  3. Click the __fork__ button* on the top right side of the repository.
+
+  *The button in the image is disabled since the repository belongs to me. It should be active if you logged on your account.
+
+  ![Fork step 2 to 3](documentation/deployment/fork.png)
+
+  3. You should now have a copy of the original repository in your _GitHub_ account.
+  4. You can make a local clone from the copied repository on your computer using the steps demonstrated in [Making a Local Clone](#making-a-local-clone) and/or deploy to _GitHub Pages_ using the steps demonstrated in [GitHub Pages](#github-pages).
+
+[Back To **Table of Contents**](#table-of-contents)
 
 <br>
