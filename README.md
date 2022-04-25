@@ -30,6 +30,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 [Testing](#testing)
   - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
   - [Code Validation](#code-validation)
+  - [Performance Testing](#performance-testing)
 
 <br>
 
@@ -352,7 +353,7 @@ The site features a fully responsive design and contains 4 game related pages(__
       | :-----------: | :-----------: |
       | ![Contact form](documentation/testing/user-story-test/contact-test.png) | ![Contact form received](documentation/testing/user-story-test/contact-test-receive.png) |
 
-  - [] I want to play the game against other players online, so that I can experience different play styles.
+  - [ ] I want to play the game against other players online, so that I can experience different play styles.
 
     : This feature has not been implemented as my back-end knowledge is not yet strong enough to build an online game platform.
 
@@ -372,5 +373,28 @@ The site features a fully responsive design and contains 4 game related pages(__
   - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. The remaining warning of `one undefined variable` is because I used a library called EmailJS. Please refer to the link below for more details.
 
 - [View details](documentation/VALIDATION.md)
+
+<br>
+
+## Performance Testing
+
+- I have measured the performance, accessibility, best practices, SEO using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome DevTools in incognito mode.
+- The pages(__New game__, __Play__, __Help__, __Leaderboard__) in the navigation bar are all written in the index.html file. Lighthouse does not generate a report for each section.
+
+  - Mobile
+
+    | Page\Category | Performance | Accessibility | Best practices | SEO |
+    | :-----------: | :---------: | :-----------: | :------------: | :-: |
+    |   New game / Play / Help / Leaderboard |     99      |      100      |      100       | 100 |
+    |   404         |     99      |      100      |      100       | 100 |
+  
+  - Desktop
+
+    | Page\Category | Performance | Accessibility | Best practices | SEO |
+    | :-----------: | :---------: | :-----------: | :------------: | :-: |
+    |   New game / Play / Help / Leaderboard   |     100     |      100      |      100       | 100 |
+    |   404         |     100     |      100      |      100       | 100 |
+
+  - [View screenshots](documentation/PERFORMANCE.md)
 
 <br>
