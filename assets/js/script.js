@@ -126,6 +126,14 @@ contactForm.addEventListener('submit', (e) => {
   sendMessage();
 });
 
+// Resets custom validation message
+nameEl.addEventListener('change', () => {
+  nameEl.setCustomValidity('');
+});
+messageEl.addEventListener('change', () => {
+  messageEl.setCustomValidity('');
+});
+
 /**
  * Runs when the user pressed
  * the start button on the New Game page.
