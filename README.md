@@ -27,6 +27,9 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Library](#library)
   - [Programs](#programs)
 
+[Testing](#testing)
+  - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
+
 <br>
 
 # User Experience (UX)
@@ -289,5 +292,67 @@ The site features a fully responsive design and contains 4 game related pages(__
 - [WAVE](https://wave.webaim.org/) was used to evaluate the accessibility.
 
 [Back To **Table of Contents**](#table-of-contents)
+
+<br>
+
+# Testing
+
+## Testing User Stories from User Experience (UX) Section
+
+- As a First Time Visitor,
+
+  - [x] I want to know how to play the game, so that I can enjoy it fully.
+
+    : The user can find the rules on the __Help__ page as well as other information to enhance their play experience.
+
+  - [x] I want to know clearly when it is my turn, so that I don't delay the game.
+
+    : The name on the turn indicator has a bigger font size and is hard to overlook.
+
+      ![Player turn](documentation/testing/user-story-test/turn-indicator.png)
+
+  - [x] I want to see the game board screen again when the game is over, so that I can figure out why I've won or lost.
+
+    : The whole game board is shown under the result modal overlay when the game is over.
+
+      ![Game result](documentation/testing/user-story-test/end-game.png)
+
+<br>
+
+- As a Returning Visitor,
+
+  - [x] I want to be able to play the game on my phone, so that I can play it on a break at work.
+
+    : The site is fully responsive, so the user can play on any device size.
+
+      ![Mobile view](documentation/testing/user-story-test/mobile.png)
+
+  - [x] I want to play the game with my kids, so that we can have fun together.
+
+    : The game can be played with two players by setting both of human/computer sliders to human on the __New Game__ page.
+
+  - [x] I want to play the game against a computer, so that I can play practice games.
+
+    : The game can be played against the computer by setting one of human/computer sliders to computer on the __New Game__ page.
+
+<br>
+
+- As a Frequent User,
+
+  - [x] I want to be able to check my rank, so that I can see how good I am.
+
+    : The user can check their points, the number of games they played and the win rate on the __Leaderboard__ page.
+
+  - [x] I want to be able to contact the developer, so that I can suggest my ideas.
+
+    : The user can send a message via the contact form without having to open their email client.
+
+      | Contact form | Received email |
+      | :-----------: | :-----------: |
+      | ![Contact form](documentation/testing/user-story-test/contact-test.png) | ![Contact form received](documentation/testing/user-story-test/contact-test-receive.png) |
+
+  - [] I want to play the game against other players online, so that I can experience different play styles.
+
+    : This feature has not been implemented as my back-end knowledge is not yet strong enough to build an online game platform.
 
 <br>
