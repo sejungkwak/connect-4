@@ -278,7 +278,9 @@ function keydownHandler(pressedKey) {
 
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
     if (!cells[i].classList.contains('invisible')) {
-      cells[i].classList.add('invisible');
+      if (pressedKey === 'ArrowLeft' || pressedKey === 'ArrowRight') {
+        cells[i].classList.add('invisible');
+      }
       visibleCellIndex = i;
     }
   }
@@ -338,10 +340,12 @@ function calculateColIndex(event) {
  * @param {number} colIndex
  */
 function cellClickHandler(colIndex) {
+  const cells = qsa('.cell');
   const freeCell = findFreeCell(colIndex);
 
   if (gameOver || computerTurn || !freeCell) return;
 
+  cells[colIndex].classList.add('invisible');
   placeDisc(freeCell);
 }
 
