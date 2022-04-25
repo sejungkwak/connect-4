@@ -22,6 +22,11 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Implemented Features](#implemented-features)
   - [Features Left to Implement](#features-left-to-implement)
 
+[Technologies Used](#technologies-used)
+  - [Languages](#languages)
+  - [Library](#library)
+  - [Programs](#programs)
+
 <br>
 
 # User Experience (UX)
@@ -84,7 +89,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 	- A user can start a game with as few clicks as possible.
 - To achieve these goals:
 	- It is written in a single HTML file.
-	- One page is shown at a time. Others are not displayed.
+  - Each section is shown one at a time. This provides the user with the experience of separate pages for each section while ensuring the browser does not need to reload the page.
 	- The __New game__ page is on the landing screen.
 - I created wireframes and mockups for mobile and desktop.
 - [View Wireframes and Mockups](documentation/DESIGN.md)
@@ -236,6 +241,52 @@ The site features a fully responsive design and contains 4 game related pages(__
 - Database
 
   When an online live game platform is available, it is more appropriate to use an online database to show all the players from the site in a single leaderboard.
+
+[Back To **Table of Contents**](#table-of-contents)
+
+<br>
+
+# Technologies Used
+
+## Languages
+
+- [HTML5](https://en.wikipedia.org/wiki/HTML5) was used to present and structure content.
+- [CSS3](https://en.wikipedia.org/wiki/CSS) was used to style content.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript) was used to create dynamic and interactive content.
+
+<br>
+
+## Library
+
+- [Emailjs](https://www.emailjs.com/) was used to receive the customised contact form directly from users.
+
+<br>
+
+## Programs
+
+- [Am I Responsive](http://ami.responsivedesign.is/) was used to create the image showing a responsive design for the README.
+- [Awesome Screenshot and Screen Recorder](https://chrome.google.com/webstore/detail/awesome-screenshot-and-sc/nlipoenfbbikpbjkfpfillcgkoblgpmj) was used to take the screenshots of the entire page for the README.
+- [Balsamiq](https://balsamiq.com/) was used to create the wireframes.
+- [BrowserStack](https://live.browserstack.com/dashboard#os=iOS&os_version=12.0&device_browser=safari&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2Fsejungkwak.github.io%2Fconnect-4%2F&speed=1) was used to test the site on different devices/browsers.
+- [Can I use](https://caniuse.com/) was used to check browser compatibility.
+- [Canva](https://www.canva.com/en_gb/) was used to create the logo and favicon.
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling and to debug during development and to check runtime performance.
+- [Diagrams.net](https://app.diagrams.net/) was used to create the flowchart.
+- [Eightshapes](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%231C304A%0D%0A%23DE0F3F%0D%0A%23FFC736%0D%0A%23FAFAFA&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18) was used to check the colour combination for the accessibility purpose.
+- [Favicon.io](https://favicon.io/) was used to create the favicon.
+- [Figma](https://www.figma.com/) was used to create the mockups.
+- [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icon in the footer. Each icon file was downloaded and converted to the svg path using VS Code.
+- [GIPHY](https://giphy.com/) was used to convert video files to gifs for the README.
+- [Git](https://git-scm.com/) was used for version control.
+- [GitHub](https://github.com/) was used to store and deploy the project's code.
+- [Gitpod](https://www.gitpod.io/) was used to develop and test my code.
+- [Google Fonts](https://fonts.google.com/) was used to import Fredoka One and Poppins into the style.css file.
+- [JSHint](https://jshint.com/) was used to check the JavaScript validity.
+- [Regex101](https://regex101.com/) was used to create a regular expression to remove whitespace inside a string for the contact form.
+- [Visual Studio Code](https://code.visualstudio.com/) was used to edit my code and create svg paths from svg image files.
+- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) was used to check the CSS validity.
+- [W3C Markup Validation Service](https://validator.w3.org/) was used to check the HTML markup validity.
+- [WAVE](https://wave.webaim.org/) was used to evaluate the accessibility.
 
 [Back To **Table of Contents**](#table-of-contents)
 
