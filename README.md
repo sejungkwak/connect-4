@@ -29,6 +29,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 
 [Testing](#testing)
   - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
+  - [Code Validation](#code-validation)
 
 <br>
 
@@ -354,5 +355,22 @@ The site features a fully responsive design and contains 4 game related pages(__
   - [] I want to play the game against other players online, so that I can experience different play styles.
 
     : This feature has not been implemented as my back-end knowledge is not yet strong enough to build an online game platform.
+
+<br>
+
+## Code Validation
+
+- HTML Validation
+  - No errors or warnings were found when passing through the [W3C Markup Validator](https://validator.w3.org/).
+
+- CSS Validation
+  - No errors or warnings were found when passing through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
+  - There were warnings when I first ran through the validator and I resolved them. Please refer to the link below for more details.
+
+- JS Validation
+  - 1 warning was found when passing through [JSHint](https://jshint.com/).
+  - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. The remaining warning of `one undefined variable` is because I used a library called EmailJS. Please refer to the link below for more details.
+
+- [View details](documentation/VALIDATION.md)
 
 <br>
