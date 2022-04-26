@@ -31,6 +31,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
   - [Code Validation](#code-validation)
   - [Performance Testing](#performance-testing)
+  - [Bugs](#bugs)
 
 [Deployment](#deployment)
   - [Github Pages](#github-pages)
@@ -189,7 +190,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
   ![Leaderboard page](documentation/features/leaderboard.png)
 
-  - This page displays the top 5 players who gained the highest points with the number of games they played and the winning rate to allow them to see their performance.
+  - This page displays the top 5 players who gained the highest points with the number of games they won and the win rate to allow them to see their performance.
   - The user can delete data from local storage with the convenient __Delete data__ button.
   - The message is shown when there is no data to display or unable to get the data from local storage.
 
@@ -209,7 +210,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
       - This form allows the user to send their message without having to open their email client.
       - All the fields are required and give feedback if empty(including whitespace) or invalid.
-      - Upon clicking the __Send__ button, the user is redirected to either the __Success__ page or the __Fail__ page.
+      - Upon clicking the __Send__ button, the user is redirected to either the __Success__ or __Fail__ page.
       - Less than 1024px width devices show each article in a single column to optimise the layout.
 
 - __Success__ page
@@ -242,7 +243,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 - Smarter AI Player
 
   The computer player picks a cell to place a disc randomly, so a game against the computer is too easy. I would like to build a smarter AI that prevents the player from winning so easily for a more enjoyable game.
-  There is Pascal Pons’s [tutorial blog](http://blog.gamesolver.org/) about the connect 4 solver using alpha-beta pruning algorithm. Unfortunately, I was not able to fully understand the algorithm in depth to implement it into this project.
+  There is Pascal Pons's [tutorial blog](http://blog.gamesolver.org/) about the connect 4 solver using alpha-beta pruning algorithm. Unfortunately, I was not able to fully understand the algorithm in depth to implement it into this project.
 
 - Online live game platform
 
@@ -375,7 +376,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - JS Validation
   - 1 warning was found when passing through [JSHint](https://jshint.com/).
-  - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. The remaining warning of `one undefined variable` is because I used a library called EmailJS. Please refer to the link below for more details.
+  - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. The remaining warning of `one undefined variable` is because I used a library called _EmailJS_. Please refer to the link below for more details.
 
 - [View details](documentation/VALIDATION.md)
 
@@ -401,6 +402,168 @@ The site features a fully responsive design and contains 4 game related pages(__
     |   404         |     100     |      100      |      100       | 100 |
 
   - [View screenshots](documentation/PERFORMANCE.md)
+
+## Bugs
+
+### Fixed Bugs
+
+- Second game board
+
+  - Error: A second board was created when clicking the __START__ button on the __New game__ page after playing a game.
+  - Reason: I did not add code that removes an existing board when creating a new one.
+  - Fix: I added the code to clear the content inside the board's parent element before creating a new board.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/5b12d55a5740555e9ab762079e0e01057cebb5b0)
+
+- Alert overlay staying on the screen even on an unrelated page
+
+  - Error: Overlays created on the __New game__ page remain visible when changing to a different page.
+  - Reason: The overlay was added to the `main` element, not the __New game__ page.
+  - Fix: I changed the code to add the overlay inside the __New game__ page instead of the `main` element.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/73f03cc6f8c56746e15062147864f5b78e63ba20)
+
+- Consecutive mouse clicks disrupting the turn order
+
+  - Error: The disc was not placed with the right colour when the mouse was clicked twice before the computer placed a disc in a single-player mode.
+  - Reason: The computer places a disc a second after a human player makes a move. If they click the mouse faster than the computer's move, the `mouseclick` event listener was called twice.
+  - Fix: I initialised a global variable called computerTurn and added/changed the boolean value at the beginning of a game, and the beginning and end of the computer's turn.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/5ae90aabc321edcfe04be774ba933cfc212a3f57)
+
+- Unexpected trailing zeros in the win rate
+
+  - Error: Insignificant trailing zeros were displayed in the win rate(the number of wins / total number of played games * 100) on the __Leaderboard__ page. The example in the below image is the result of 1/7 * 100.
+
+    ![Win rate error](documentation/bugs/bug-tofix.png)
+
+  - Reason: Adding another arithmetic operator of `* 100` after the `toFixed()` method caused the issue.
+  - Fix: I moved the `toFixed()` method to the end of the operators after all the calculations are done.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/c3baa2b66fee59460e8a7f4bf4279773f9ff9300)
+
+- `keydown` event triggering twice
+
+  - Error: Pressing the left arrow or right arrow key made a helper disc move twice after the second game.
+
+    ![Bug: Keydown](https://media.giphy.com/media/TW3dAH71dJfSOaeWbi/giphy.gif)
+
+  - Reason: I could not figure out the exact reason for this bug, but I saw the `keydown` event listener executed twice while debugging the issue.
+  - Fix: I changed the arrow keys' `keydown` event listener to a global function.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/b2677bae7450e36b54f738e7ecc57aaff3f35e7a)
+
+- Displaying 2 helper discs at the same time
+
+  - Error: A previous helper disc stayed visible when switching the keyboard control to the mouse.
+
+    ![Bug: 2 discs displaying](https://media.giphy.com/media/iGY8s3np7XRSm8OmGr/giphy.gif)
+
+  - Reason: The `mouseout` event handler was not called when switching the keyboard control to the mouse.
+  - Fix: I added code that makes the helper discs invisible in the `mouseover` event handle function.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/e108aaeef3595c3de1ec5238cd304e90e547d95a)
+
+- Multiple alert overlay
+
+  - Error: An alert overlay on the __New game__ page kept being created when pressing the space bar multiple times on the same checkbox.
+  - Reason: I did not consider keyboard controls, and there was no code to prevent the overlay from being created.
+  - Fix: I added a condition to check if there is already an overlay on the __New Game__ page, and if there is, delete it before creating another one.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b42419d3613ae65bc59db6f0ccb8056ff0b4477)
+
+- `aspect-ratio`
+
+  - Error: Daniel Callaghan in Code Institute spotted a bug which prevented the placing of a disc if the computer didn't place a disc first and the board was squashed.
+
+    ![Bug: aspect-ratio](documentation/bugs/bug-aspect-ratio.png)
+
+    (The image was provided by Daniel Callaghan through the [_Slack_](https://slack.com/intl/en-ie/) peer-code-review channel)
+  
+  - Reason:  According to [_Can I use_](https://caniuse.com/), the `aspect-ratio` property is only supported by newer browser versions that were released after 2021.
+  - Fix: I removed the `aspect-ratio` property in CSS and added code to set the height of each cell in JS.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/fed5b161ad1f43bbafc72601db26331cb7735b39)
+
+- Screen resizing
+  
+  - Error: Other bugs were detected from the above change.
+    
+    - The height of cells was not dynamically adjusted to the screen resizing.
+    - The layout of other pages was not changed by screen resizing if a game hadn't been started.
+
+  - Reason: `Uncaught TypeError: Cannot read properties of null (reading 'clientWidth')`. The property I was referring to is a cell in the game board, and there is no cell if the user hasn't pressed the __START__ button on the __New Game__ page.
+  - Fix: I added the code that sets the height when the __Play__ page opens. I also added a condition inside the `resize` event listener to check if a game has started, if so, it calls the function that sets the height.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/32edb5295e56a90bdf7a94f0afbf6f50cfacfd08)
+  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `clac(board width - block margin)` to the board container height instead.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
+
+- `min()` and `gap` for `flex`
+
+  - Error: The layout was not what I designed when viewing on an older browser.
+
+    ![Bug: Browser compatibility](documentation/bugs/bug-min.jpeg)
+
+  - Reason: According to [_Can I use_](https://caniuse.com/), `min()` and `gap` for the flexbox are supported by newer browser versions that were released after 2019 and 2020 respectively.
+  - Fix: I replaced the `min()` property with `width` and `max-width` where possible, and added a media query where not possible. For the `gap` property, I removed this property and added a margin to the child element.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
+
+- Sound delay in Safari
+
+  - Error: The disc drop sound was delayed or wasn't played in Safari when multiple discs were placed in a short time.
+  - Reason: The `Audio()` constructor was called globally.
+  - Fix: I moved the code that calls the `Audio()` constructor inside the function that plays the sound. However, this change caused a freeze issue on iOS. Please refer to the next bug fix for more details.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/82caddcc05e56dec61f56d117416b68d31877b19)
+
+- Freeze issue when the sound is on in Safari and Chrome on iOS
+
+  - Error: The __Play__ page froze occasionally when the sound was on in Safari and Chrome on iOS.
+  - Reason: The audio delay on iOS seems to be a known issue as _Apple_ have disabled automatic sound playing by default.
+  - Fix: I created a variable that stores the `Audio()` constructor, and added the `autoplay` property and set it to `true`. I then added the `src` property in the function that plays the sound.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/7c255968d9901c4dd6fafe4b2fbb5d10149edc7d)
+
+- Landscape mode alert display
+  
+  - Error: The landscape alert was displayed in the layer below the game result popup and the __OK__ button was not accessible.
+
+    ![Landscape mode alert](documentation/bugs/bug-landscape-alert.png)
+
+  - Reason: The landscape mode alert is before the game result popup in the DOM.
+  - Fix: I added the higher `z-index` value to the landscape mode alert.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/ceefa4fb4e915d9ce71f26b6463ee30457f9f887)
+
+- Contact form validation
+  - Error: The form was not submitted and kept showing the custom validation message even when the input value was valid if the name or message field was previously invalid.
+
+    ![Bug: Contact form custom validation](documentation/bugs/bug-validation.png)
+
+  - Reason: I used the `setCustomValidity()` method to check for a lot of whitespace from the user. This function needs to be reset after firing which I did not consider.
+  - Fix: I added a change event listener to the `input`(name) and `textarea`(message) elements and added `setCustomValidity('')` inside the code block.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/b62ec62958d74c971d97e7654fa26a9b4fea0d53)
+
+- Helper disc disappearing
+
+  - Error: Attempting to drop a disc with the down arrow key made the helper disc vanish even though the column was full and it was not a valid target.
+  - Reason: The code to make the helper disc invisible to simulate movement was always running when the user pressed the arrow keys.
+  - Fix: I changed the code to make the helper disc remain visible when pressing the down arrow key in a column that is already full.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/c90f4779675562ad1df9f0566c9b60b9028b611e)
+
+### Known Bugs
+
+- Federated Learning of Cohorts (FLoC)
+  
+  - There is an error message: `Error with Permissions-Policy header: Unrecognized feature: 'interest-cohort'.` in the console in Chrome and Opera. This appears because _GitHub Pages_ has disabled Federated Learning of Cohorts(FLoC) which is an API for gathering users' data.
+
+    ![Bug: FLoc](documentation/bugs/bug-floc.png)
+
+  - I have found more information about FLoC in the following documents: 
+    - WICG's [FLoC repository](https://github.com/WICG/floc)
+    - [Federated Learning of Cohorts (FLoC)](https://docs.gitlab.com/ee/user/admin_area/settings/floc.html) on [GitLab Docs](https://docs.gitlab.com/)
+    - [GitHub Pages: Permissions-Policy: interest-cohort=() Header added to all pages sites](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/) on [GitHub Changelog](https://github.blog/changelog/)
+  - According to _GitHub Pages_, FLoC has been disabled to avoid users being tracked and categorised. As the Chrome DevTools Lighthouse does not report any negative performance issues, I have decided not to pursue any further.
+
+- User-Agent reduction
+
+  - There is an issue: `Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform "emailjs"` in the console in Chrome and Opera. This appears because _Google_ has planned to reduce User-Agent for improving user privacy and this line `t.exports=n("navigator","userAgent")||""}` in [EmailJS code](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js) seems to be causing the issue.
+
+    ![Bug: User-Agent reduction](documentation/bugs/bug-user-agent.png)
+
+  - I have found more information about _Google_’s User-Agent reduction plan in this article [User-Agent reduction
+](https://developer.chrome.com/docs/privacy-sandbox/user-agent/#:~:text=%23%20What%20is%20User%2DAgent%20reduction,a%20reduced%20User%2DAgent%20header.) on [Chrome Developers](https://developer.chrome.com/)
+
+  - The User-Agent deprecation does not prevent me from using this external library and I was not able to find a better alternative to _EmailJS_, so I have decided to ignore this issue for now.
 
 [Back To **Table of Contents**](#table-of-contents)
 
