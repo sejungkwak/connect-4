@@ -43,9 +43,9 @@ let isMuted = true;
 Fix for iOS audio issue
 Source: user2415116 and AndrewL's answer on Stack Overflow(https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
 */
-const dropSound = new Audio();
-dropSound.autoplay = true;
-dropSound.src =
+const soundEffect = new Audio();
+soundEffect.autoplay = true;
+soundEffect.src =
   'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
 
 // Button Click Event listeners
@@ -380,8 +380,8 @@ function placeDisc(cell) {
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `;
   if (!isMuted) {
-    dropSound.src = 'assets/sounds/drop.mp3';
-    dropSound.play();
+    soundEffect.src = 'assets/sounds/drop.mp3';
+    soundEffect.play();
   }
 
   freeCellCounter--;
@@ -494,8 +494,8 @@ function displayResult(result, player = null, point = null, cells = null) {
   }
 
   if (!isMuted) {
-    const endGameSound = new Audio('assets/sounds/end.mp3');
-    endGameSound.play();
+    soundEffect.src = 'assets/sounds/end.mp3';
+    soundEffect.play();
   }
 
   overlay.innerHTML = `
