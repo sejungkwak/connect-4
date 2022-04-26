@@ -38,6 +38,9 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Making a Local Clone](#making-a-local-clone)
   - [Forking this Repository](#forking-this-repository)
 
+[Credits](#credits)
+  - [Code](#code)
+
 <br>
 
 # User Experience (UX)
@@ -52,7 +55,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 <br>
 
 - As a Returning Visitor,
-  - I want to be able to play the game on my phone, so that I can play it on a break at work.
+  - I want to be able to play the game on my phone, so that I can play it during a break at work.
   - I want to play the game with my kids, so that we can have fun together.
   - I want to play the game against a computer, so that I can play practice games.
 
@@ -81,13 +84,13 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 
 - Logo
 
-  The logo has the website name _CONNECT 4_ with the number 4 in a yellow colour on a red background circle which are the main colours of the game.
+  The logo has the website name _CONNECT 4_ with the number 4 in a yellow font on a red background circle which are the main colours of the game.
 
   ![Logo](assets/images/logo.png)
 
 - Favicon
 
-  The number 4 in a yellow colour on a red background circle in the same style as the logo.
+  The favicon has the number 4 in a yellow font on a red background circle in the same style as the logo.
 
   ![Favicon](assets/images/favicon/favicon.ico)
 
@@ -171,7 +174,7 @@ The site features a fully responsive design and contains 4 game related pages(__
   - The first character of the disc colour is inside all placed discs for the colour blind users.
   - The game board is being adjusted to the screen size.
   - The user can play the game with arrow keys to allow the user to control depending on their preference.
-  - If the user hasn't started a game and opens this page, the message displays instead of the game board to let the user know how to start a game.
+  - If the user hasn't started a game and opens this page, the message displays instead of the game board to let the user know how to start a game. The user can easily navigate to the __New Game__ page by clicking the button.
 
     ![Play page without a game](documentation/features/play-nogame.png)
 
@@ -192,7 +195,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
   - This page displays the top 5 players who gained the highest points with the number of games they won and the win rate to allow them to see their performance.
   - The user can delete data from local storage with the convenient __Delete data__ button.
-  - The message is shown when there is no data to display or unable to get the data from local storage.
+  - The message is shown when there is no data to display or it is unable to get the data from local storage.
 
     ![Leaderboard page without data](documentation/features/leaderboard-nodata.png)
 
@@ -251,7 +254,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - Database
 
-  When an online live game platform is available, it is more appropriate to use an online database to show all the players from the site in a single leaderboard.
+  When an online live game platform is available, it is more appropriate to use an online database to show all the players from the site on a single leaderboard.
 
 [Back To **Table of Contents**](#table-of-contents)
 
@@ -269,7 +272,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 ## Library
 
-- [Emailjs](https://www.emailjs.com/) was used to receive the customised contact form directly from users.
+- [EmailJS](https://www.emailjs.com/) was used to receive the customised contact form directly from users.
 
 <br>
 
@@ -283,7 +286,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 - [Canva](https://www.canva.com/en_gb/) was used to create the logo and favicon.
 - [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling and to debug during development and to check runtime performance.
 - [Diagrams.net](https://app.diagrams.net/) was used to create the flowchart.
-- [Eightshapes](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%231C304A%0D%0A%23DE0F3F%0D%0A%23FFC736%0D%0A%23FAFAFA&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18) was used to check the colour combination for the accessibility purpose.
+- [Eightshapes](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%231C304A%0D%0A%23DE0F3F%0D%0A%23FFC736%0D%0A%23FAFAFA&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18) was used to check the colour combination for accessibility purposes.
 - [Favicon.io](https://favicon.io/) was used to create the favicon.
 - [Figma](https://www.figma.com/) was used to create the mockups.
 - [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icon in the footer. Each icon file was downloaded and converted to the svg path using VS Code.
@@ -329,7 +332,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - As a Returning Visitor,
 
-  - [x] I want to be able to play the game on my phone, so that I can play it on a break at work.
+  - [x] I want to be able to play the game on my phone, so that I can play it during a break at work.
 
     : The site is fully responsive, so the user can play on any device size.
 
@@ -384,7 +387,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 ## Performance Testing
 
-- I have measured the performance, accessibility, best practices, SEO using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome DevTools in incognito mode.
+- I have measured the performance, accessibility, best practices and SEO using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome DevTools in incognito mode.
 - The pages(__New game__, __Play__, __Help__, __Leaderboard__) in the navigation bar are all written in the index.html file. Lighthouse does not generate a report for each section.
 
   - Mobile
@@ -487,7 +490,7 @@ The site features a fully responsive design and contains 4 game related pages(__
   - Reason: `Uncaught TypeError: Cannot read properties of null (reading 'clientWidth')`. The property I was referring to is a cell in the game board, and there is no cell if the user hasn't pressed the __START__ button on the __New Game__ page.
   - Fix: I added the code that sets the height when the __Play__ page opens. I also added a condition inside the `resize` event listener to check if a game has started, if so, it calls the function that sets the height.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/32edb5295e56a90bdf7a94f0afbf6f50cfacfd08)
-  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `clac(board width - block margin)` to the board container height instead.
+  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `calc(board width - block margin)` to the board container height instead.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
 - `min()` and `gap` for `flex`
@@ -497,7 +500,7 @@ The site features a fully responsive design and contains 4 game related pages(__
     ![Bug: Browser compatibility](documentation/bugs/bug-min.jpeg)
 
   - Reason: According to [_Can I use_](https://caniuse.com/), `min()` and `gap` for the flexbox are supported by newer browser versions that were released after 2019 and 2020 respectively.
-  - Fix: I replaced the `min()` property with `width` and `max-width` where possible, and added a media query where not possible. For the `gap` property, I removed this property and added a margin to the child element.
+  - Fix: I replaced the `min()` property with `width` and `max-width` where possible, and added a media query where impossible. For the `gap` property, I removed this property and added a margin to the child element.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
 - Sound delay in Safari
@@ -516,12 +519,12 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - Landscape mode alert display
   
-  - Error: The landscape alert was displayed in the layer below the game result popup and the __OK__ button was not accessible.
+  - Error: The landscape alert was displayed in the layer below the game result popup. When both were visible, the alert’s __OK__ button was not accessible.
 
     ![Landscape mode alert](documentation/bugs/bug-landscape-alert.png)
 
-  - Reason: The landscape mode alert is before the game result popup in the DOM.
-  - Fix: I added the higher `z-index` value to the landscape mode alert.
+  - Reason: The landscape mode alert is drawn before the game result popup in the DOM.
+  - Fix: I increased the `z-index` value for the landscape mode alert to ensure the alert’s __OK__ button is always accessible.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/ceefa4fb4e915d9ce71f26b6463ee30457f9f887)
 
 - Contact form validation
@@ -540,6 +543,14 @@ The site features a fully responsive design and contains 4 game related pages(__
   - Fix: I changed the code to make the helper disc remain visible when pressing the down arrow key in a column that is already full.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c90f4779675562ad1df9f0566c9b60b9028b611e)
 
+- End game sound bug in Safari on iOS
+
+  - Error: The end game sound was not playing when the computer wins in Safari on iOS.
+  - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
+  - Fix: I used a single global variable for the sound effects and set it to the sound effect source where I wanted to play.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
+
+
 ### Known Bugs
 
 - Federated Learning of Cohorts (FLoC)
@@ -556,7 +567,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - User-Agent reduction
 
-  - There is an issue: `Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform "emailjs"` in the console in Chrome and Opera. This appears because _Google_ has planned to reduce User-Agent for improving user privacy and this line `t.exports=n("navigator","userAgent")||""}` in [EmailJS code](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js) seems to be causing the issue.
+  - There is an issue: `Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform "emailjs"` in the console in Chrome and Opera. This appears because _Google_ has planned to reduce User-Agent for improving user privacy and this part `t.exports=n("navigator","userAgent")||""}` in [EmailJS code](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js) seems to be causing the issue.
 
     ![Bug: User-Agent reduction](documentation/bugs/bug-user-agent.png)
 
@@ -640,6 +651,51 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 
   3. You should now have a copy of the original repository in your _GitHub_ account.
   4. You can make a local clone from the copied repository on your computer using the steps demonstrated in [Making a Local Clone](#making-a-local-clone) and/or deploy to _GitHub Pages_ using the steps demonstrated in [GitHub Pages](#github-pages).
+
+[Back To **Table of Contents**](#table-of-contents)
+
+<br>
+
+# Credits
+
+## Code
+
+- I referenced the [MDN Web Docs](https://developer.mozilla.org/en-US/), [W3schools](https://www.w3schools.com/) and [Stack Overflow](https://stackoverflow.com/) for JavaScript concepts.
+
+- Checking winner
+  - Source: Tom Campbell's YouTube video [Coding Connect 4 with JavaScript](https://www.youtube.com/watch?v=kA9OOeUXXSU)
+    - Using the difference of the cells’ indices: On a 6-row by 7-column grid where the top leftmost position is 0 and the top rightmost position is 6, the 2 consecutive cells in a horizontal line have 1 index difference, in a vertical line have 7, in a main diagonal line(\\) have 8 and in an off-diagonal line(/) have 6.
+  - I adapted his algorithm to check for a winning move, but I created my own approach by retrieving the cell’s owner in the `div`(cell)’s `class` attribute.
+
+- Merging multiple objects into one
+  - Source: CRice's answer on [Stack Overflow](https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
+    - Checking if there are more than 2 objects in an array that have the same value and merging those objects using the `reduce()` and `find()` methods.
+  - I used this method to merge objects from local storage data to display on the __Leaderboard__ page.
+
+- Sorting data by the value inside objects
+  - Source: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+    - Comparing the values of objects using the subtraction operator to sort the objects.
+  - I used this method to sort the data by player’s points to display on the __Leaderboard__ page.
+
+- Jump to the top of the page
+  - Source: Ganesh Ghalame's answer on [Stack Overflow](https://stackoverflow.com/questions/1144805/scroll-to-the-top-of-the-page-using-javascript)
+    - Using the `scrollTo({ top: 0, behavior: 'smooth' })` method to jump to the top of the page smoothly.
+  - I found that using this technique, I could display a new page much more conveniently on a mobile device, by opening it at the very beginning.
+
+- Detect touch device
+  - Source: KaMeHb's answer on [Stack Overflow](https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
+    - The `matchMedia()` method and media feature with the `matches` property to detect touch devices.
+  - I used this method to detect touch devices and not add the `mouseover` event listener to the cell.
+
+- iPhone audio autoplay
+  - Source: user2415116 and AndrewL’s answer on [Stack Overflow](https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
+    - Storing the `Audio()` constructor in a variable, adding the `autoplay` property to it and changing the `src` enables it to play the sound once the user turns on the sound with an iPhone.
+  - I used this method to fix a bug that was causing freezes on the __Play__ page when the sound is on.
+
+- Helper functions
+  - Source: Web Dev Simplified's [Stop Wasting Your Time - Use These 16 JS Utility Functions Instead](https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
+    - Storing a repeated method in a function to reduce typing.
+  - I used this method to store `document.getElementById()` and `document.querySelectorAll()` which is then stored in an array using the spread operator.
 
 [Back To **Table of Contents**](#table-of-contents)
 
