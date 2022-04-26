@@ -8,6 +8,7 @@ const navHelpBtn = elById('primaryHelp');
 const navLeaderboardBtn = elById('primaryLeaderboard');
 const settingStartBtn = elById('settingStartBtn');
 const settingCloseBtn = elById('settingCloseBtn');
+const playToNewGameBtn = elById('noGameButton');
 const soundBtn = elById('soundBtn');
 const muteBtn = elById('muteBtn');
 const landscapeOkBtn = elById('landscapeOkBtn');
@@ -73,6 +74,9 @@ settingStartBtn.addEventListener('click', (e) => {
 settingCloseBtn.addEventListener('click', (e) => {
   e.preventDefault();
   openSection('game');
+});
+playToNewGameBtn.addEventListener('click', () => {
+  openSection('settings');
 });
 soundBtn.addEventListener('click', soundBtnToggler);
 muteBtn.addEventListener('click', soundBtnToggler);
@@ -697,10 +701,12 @@ function openSection(name) {
       gameSectionHeader.style.display = 'none';
       boardEl.style.display = 'none';
       noGameText.style.display = 'block';
+      playToNewGameBtn.style.display = 'flex';
     } else {
       gameSectionHeader.style.display = 'grid';
       boardEl.style.display = 'grid';
       noGameText.style.display = 'none';
+      playToNewGameBtn.style.display = 'none';
     }
   }
 }
