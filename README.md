@@ -40,6 +40,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 
 [Credits](#credits)
   - [Code](#code)
+  - [Content](#content)
 
 <br>
 
@@ -519,12 +520,12 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - Landscape mode alert display
   
-  - Error: The landscape alert was displayed in the layer below the game result popup. When both were visible, the alert’s __OK__ button was not accessible.
+  - Error: The landscape alert was displayed in the layer below the game result popup. When both were visible, the alert's __OK__ button was not accessible.
 
     ![Landscape mode alert](documentation/bugs/bug-landscape-alert.png)
 
   - Reason: The landscape mode alert is drawn before the game result popup in the DOM.
-  - Fix: I increased the `z-index` value for the landscape mode alert to ensure the alert’s __OK__ button is always accessible.
+  - Fix: I increased the `z-index` value for the landscape mode alert to ensure the alert's __OK__ button is always accessible.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/ceefa4fb4e915d9ce71f26b6463ee30457f9f887)
 
 - Contact form validation
@@ -571,7 +572,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
     ![Bug: User-Agent reduction](documentation/bugs/bug-user-agent.png)
 
-  - I have found more information about _Google_’s User-Agent reduction plan in this article [User-Agent reduction
+  - I have found more information about _Google_'s User-Agent reduction plan in this article [User-Agent reduction
 ](https://developer.chrome.com/docs/privacy-sandbox/user-agent/#:~:text=%23%20What%20is%20User%2DAgent%20reduction,a%20reduced%20User%2DAgent%20header.) on [Chrome Developers](https://developer.chrome.com/)
 
   - The User-Agent deprecation does not prevent me from using this external library and I was not able to find a better alternative to _EmailJS_, so I have decided to ignore this issue for now.
@@ -664,8 +665,8 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 
 - Checking winner
   - Source: Tom Campbell's YouTube video [Coding Connect 4 with JavaScript](https://www.youtube.com/watch?v=kA9OOeUXXSU)
-    - Using the difference of the cells’ indices: On a 6-row by 7-column grid where the top leftmost position is 0 and the top rightmost position is 6, the 2 consecutive cells in a horizontal line have 1 index difference, in a vertical line have 7, in a main diagonal line(\\) have 8 and in an off-diagonal line(/) have 6.
-  - I adapted his algorithm to check for a winning move, but I created my own approach by retrieving the cell’s owner in the `div`(cell)’s `class` attribute.
+    - Using the difference of the cells' indices: On a 6-row by 7-column grid where the top leftmost position is 0 and the top rightmost position is 6, the 2 consecutive cells in a horizontal line have 1 index difference, in a vertical line have 7, in a main diagonal line(\\) have 8 and in an off-diagonal line(/) have 6.
+  - I adapted his algorithm to check for a winning move, but I created my own approach by retrieving the cell's owner in the `div`(cell)'s `class` attribute.
 
 - Merging multiple objects into one
   - Source: CRice's answer on [Stack Overflow](https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
@@ -675,7 +676,7 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 - Sorting data by the value inside objects
   - Source: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
     - Comparing the values of objects using the subtraction operator to sort the objects.
-  - I used this method to sort the data by player’s points to display on the __Leaderboard__ page.
+  - I used this method to sort the data by player's points to display on the __Leaderboard__ page.
 
 - Jump to the top of the page
   - Source: Ganesh Ghalame's answer on [Stack Overflow](https://stackoverflow.com/questions/1144805/scroll-to-the-top-of-the-page-using-javascript)
@@ -688,7 +689,7 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
   - I used this method to detect touch devices and not add the `mouseover` event listener to the cell.
 
 - iPhone audio autoplay
-  - Source: user2415116 and AndrewL’s answer on [Stack Overflow](https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
+  - Source: user2415116 and AndrewL's answer on [Stack Overflow](https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
     - Storing the `Audio()` constructor in a variable, adding the `autoplay` property to it and changing the `src` enables it to play the sound once the user turns on the sound with an iPhone.
   - I used this method to fix a bug that was causing freezes on the __Play__ page when the sound is on.
 
@@ -696,6 +697,22 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
   - Source: Web Dev Simplified's [Stop Wasting Your Time - Use These 16 JS Utility Functions Instead](https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
     - Storing a repeated method in a function to reduce typing.
   - I used this method to store `document.getElementById()` and `document.querySelectorAll()` which is then stored in an array using the spread operator.
+
+## Content
+
+- Sounds
+
+  - I have downloaded 2 sounds from [Zapsplat](https://www.zapsplat.com/) and used them for the game sound effects.
+    - Disc dropping: [Bright ping or pluck, notification tone, generic use. Version 1](https://www.zapsplat.com/music/bright-ping-or-pluck-notification-tone-generic-use-version-1/)
+    - Game ending: [Alert, prompt, win, positive tone 005](https://www.zapsplat.com/music/alert-prompt-win-positive-tone-005/)
+
+- Rules
+
+  - I have found the information about the game rules on [Gamesver](https://www.gamesver.com/the-rules-of-connect-4-according-to-m-bradley-hasbro/) and [F.G. Bradley's](https://www.fgbradleys.com/rules/Connect%20Four.pdf) and used them for reference when creating the __Help__ page.
+
+- Flowchart
+
+  - I have found Ahmad M. Sarhan, Adnan Shaout and Michele Shock's study paper [Real-Time Connect 4 Game Using Artificial Intelligence](https://thescipub.com/pdf/jcssp.2009.283.289.pdf). The study itself did not influence this project because it was implementing AI using the influence mapping algorithm in C++. However, the flowcharts in the paper influenced me on how to create my own flowchart.
 
 [Back To **Table of Contents**](#table-of-contents)
 
