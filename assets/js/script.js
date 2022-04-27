@@ -48,96 +48,6 @@ soundEffect.autoplay = true;
 soundEffect.src =
   'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
 
-// Button Click Event listeners
-logoLink.addEventListener('click', () => {
-  openSection('settings');
-});
-navOpenBtn.addEventListener('click', toggleNav);
-navCloseBtn.addEventListener('click', toggleNav);
-navNewGameBtn.addEventListener('click', () => {
-  openSection('settings');
-});
-navGameBtn.addEventListener('click', () => {
-  openSection('game');
-});
-navHelpBtn.addEventListener('click', () => {
-  openSection('help');
-});
-navLeaderboardBtn.addEventListener('click', () => {
-  getFromLocalstorage();
-  openSection('leaderboard');
-});
-settingStartBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  startBtnHandler();
-});
-settingCloseBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  openSection('game');
-});
-playToNewGameBtn.addEventListener('click', () => {
-  openSection('settings');
-});
-soundBtn.addEventListener('click', soundBtnToggler);
-muteBtn.addEventListener('click', soundBtnToggler);
-landscapeOkBtn.addEventListener('click', (e) => {
-  e.target.parentNode.parentNode.remove();
-});
-leaderboardDeleteBtn.addEventListener('click', deleteData);
-successHomeBtn.addEventListener('click', () => {
-  openSection('settings');
-});
-failContactBtn.addEventListener('click', () => {
-  openSection('contact');
-});
-footerContactBtn.addEventListener('click', () => {
-  openSection('contact');
-});
-
-// Checkbox change Event listener
-checkboxes.forEach(checkbox =>
-  checkbox.addEventListener('change', (e) => {
-    if (settingsSection.lastChild.className === 'overlay') {
-      settingsSection.lastChild.remove();
-    }
-
-    if (
-      (e.target === checkboxes[0] || e.target === checkboxes[2]) &&
-      !elById('player1Type').checked &&
-      !elById('player2Type').checked
-    ) {
-      invalidChangeHandler('player');
-    } else if (
-      (e.target === checkboxes[1] || e.target === checkboxes[3]) &&
-      elById('player1Colour').checked === elById('player2Colour').checked
-    ) {
-      invalidChangeHandler('colour');
-    }
-  }));
-
-// Keyboard control in the game
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
-    e.preventDefault();
-  }
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-    return keydownHandler(e.key);
-  }
-});
-
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  sendMessage();
-});
-
-// Resets custom validation message
-nameEl.addEventListener('change', () => {
-  nameEl.setCustomValidity('');
-});
-messageEl.addEventListener('change', () => {
-  messageEl.setCustomValidity('');
-});
-
 /**
  * Runs when the user pressed
  * the start button on the New Game page.
@@ -872,6 +782,98 @@ function sendMessage() {
   }
 }
 
+function init() {
+  // Button Click Event listeners
+  logoLink.addEventListener('click', () => {
+    openSection('settings');
+  });
+  navOpenBtn.addEventListener('click', toggleNav);
+  navCloseBtn.addEventListener('click', toggleNav);
+  navNewGameBtn.addEventListener('click', () => {
+    openSection('settings');
+  });
+  navGameBtn.addEventListener('click', () => {
+    openSection('game');
+  });
+  navHelpBtn.addEventListener('click', () => {
+    openSection('help');
+  });
+  navLeaderboardBtn.addEventListener('click', () => {
+    getFromLocalstorage();
+    openSection('leaderboard');
+  });
+  settingStartBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    startBtnHandler();
+  });
+  settingCloseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openSection('game');
+  });
+  playToNewGameBtn.addEventListener('click', () => {
+    openSection('settings');
+  });
+  soundBtn.addEventListener('click', soundBtnToggler);
+  muteBtn.addEventListener('click', soundBtnToggler);
+  landscapeOkBtn.addEventListener('click', (e) => {
+    e.target.parentNode.parentNode.remove();
+  });
+  leaderboardDeleteBtn.addEventListener('click', deleteData);
+  successHomeBtn.addEventListener('click', () => {
+    openSection('settings');
+  });
+  failContactBtn.addEventListener('click', () => {
+    openSection('contact');
+  });
+  footerContactBtn.addEventListener('click', () => {
+    openSection('contact');
+  });
+
+  // Checkbox change Event listener
+  checkboxes.forEach(checkbox =>
+    checkbox.addEventListener('change', (e) => {
+      if (settingsSection.lastChild.className === 'overlay') {
+        settingsSection.lastChild.remove();
+      }
+
+      if (
+        (e.target === checkboxes[0] || e.target === checkboxes[2]) &&
+        !elById('player1Type').checked &&
+        !elById('player2Type').checked
+      ) {
+        invalidChangeHandler('player');
+      } else if (
+        (e.target === checkboxes[1] || e.target === checkboxes[3]) &&
+        elById('player1Colour').checked === elById('player2Colour').checked
+      ) {
+        invalidChangeHandler('colour');
+      }
+    }));
+
+  // Keyboard control in the game
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
+      e.preventDefault();
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      return keydownHandler(e.key);
+    }
+  });
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendMessage();
+  });
+
+  // Resets custom validation message
+  nameEl.addEventListener('change', () => {
+    nameEl.setCustomValidity('');
+  });
+  messageEl.addEventListener('change', () => {
+    messageEl.setCustomValidity('');
+  });
+}
+
 /* 
 Helper functions
 Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
@@ -894,3 +896,5 @@ function elById(id) {
 function qsa(selector) {
   return [...document.querySelectorAll(selector)];
 }
+
+document.addEventListener('DOMContentLoaded', init);
