@@ -289,13 +289,26 @@ function placeDisc(cell) {
   cell.textContent = `
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `;
-  if (!isMuted) {
-    soundEffect.src = 'assets/sounds/drop.mp3';
-    soundEffect.play();
-  }
-
   freeCellCounter--;
 
+  const isGameOver = checkGameOver();
+
+  if (isGameOver === false) {
+    if (!isMuted) {
+      soundEffect.src = 'assets/sounds/drop.mp3';
+      soundEffect.play();
+    }
+    updatePlayer();
+  }
+}
+
+/**
+ * Runs after a disc is placed.
+ * @returns {boolean | function}
+ * Returns false if the game is not over,
+ * otherwise calls displayResult().
+ */
+function checkGameOver() {
   if (freeCellCounter === 0) {
     gameOver = true;
     addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
@@ -308,16 +321,9 @@ function placeDisc(cell) {
       gameOver = true;
       addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
       return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
+    } else {
+      return false;
     }
-  }
-
-  player1Turn = player1Turn ? false : true;
-  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
-  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-  computerTurn = false;
-
-  if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
-    computerMove();
   }
 }
 
@@ -418,6 +424,21 @@ function displayResult(result, player = null, point = null, cells = null) {
   boardEl.style.marginTop = '4rem';
 
   elById('playAgainBtn').addEventListener('click', runGame);
+}
+
+/**
+ * Runs after dropping a disc and
+ * if the game is not over.
+ */
+function updatePlayer() {
+  player1Turn = player1Turn ? false : true;
+  updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
+  updateColour(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+  computerTurn = false;
+
+  if ((playerData.player1Type === 'computer' && player1Turn) || (playerData.player2Type === 'computer' && !player1Turn)) {
+    computerMove();
+  }
 }
 
 /**
