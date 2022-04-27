@@ -278,6 +278,7 @@ h2 {
   font-size: 1rem;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--main-dark-color);
   transition: transform .3s ease-in-out;
 }
 
