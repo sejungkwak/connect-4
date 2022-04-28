@@ -19,6 +19,7 @@ const footerContactBtn = elById('footerContactBtn');
 const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('game');
+const leaderboardSection = elById('leaderboard');
 const player1TypeCheckbox = elById('player1Type');
 const player1ColourCheckbox = elById('player1Colour');
 const player2TypeCheckbox = elById('player2Type');
@@ -65,7 +66,7 @@ function startBtnHandler() {
   let player2Name = elById('player2Name').value.trim();
 
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    return showAlert();
+    return showAlert('newGame');
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -594,35 +595,74 @@ function invalidChangeHandler(type) {
  * Runs when the user inputs the same name
  * for both players and clicks the start button
  * on the New Game page.
+ * Or when the user clicks the delete data button
+ * on the Leaderboard page.
  */
-function showAlert() {
+function showAlert(pageName) {
   const overlay = document.createElement('aside');
-  const message = `Please make sure each player's name is unique.`;
+  let message;
+  let btn;
+  if (pageName === 'newGame') {
+    message = `<p class="alert-text">Please make sure each player's name is unique.</p>`;
+    btn = `<button class="btn alert-btn" id="nameAlertCloseBtn">ok</button>`;
+  }
+  if (pageName === 'leaderboard') {
+    message = `
+      <p class="alert-text">Are you sure you want to delete your save data?</p>
+      <p class="alert-text">It cannot be restored once it's deleted.</p>
+    `;
+    btn = `
+      <ul class="btns">
+        <li><button class="btn alert-btn" id="deleteScoreBtn">ok</button></li>
+        <li><button class="btn btn-primary alert-btn" id="cancelDeleteBtn">cancel</button></li>
+      </ul>
+    `;
+  }
+
   overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container">
-      <p class="alert-text">${message}</p>
-      <button class="btn alert-btn">OK</button>
+      ${message}
+      ${btn}
     </div>
   `;
 
-  if (settingsSection.lastChild.className === 'overlay') {
-    settingsSection.lastChild.remove();
+  if (pageName === 'newGame') {
+    if (settingsSection.lastChild.className === 'overlay') {
+      settingsSection.lastChild.remove();
+    }
+    settingsSection.appendChild(overlay);
   }
-
-  settingsSection.appendChild(overlay);
-  closeAlert();
+  if (pageName === 'leaderboard') {
+    if (leaderboardSection.lastChild.className === 'overlay') {
+      leaderboardSection.lastChild.remove();
+    }
+    leaderboardSection.appendChild(overlay);
+  }
+  closeAlert(pageName);
 }
 
 /**
  * Runs when the user clicks
- * the "ok" button in the modal.
+ * a button on an alert popup.
  */
-function closeAlert() {
-  const okBtns = qsa('.alert-btn');
-  for (let btn of okBtns) {
-    btn.addEventListener('click', (e) => {
+function closeAlert(pageName) {
+  if (pageName === 'newGame') {
+    const nameAlertCloseBtn = elById('nameAlertCloseBtn');
+    nameAlertCloseBtn.addEventListener('click', (e) => {
       e.target.parentNode.parentNode.remove();
+    });
+  }
+  if (pageName === 'leaderboard') {
+    const deleteScoreBtn = elById('deleteScoreBtn');
+    const cancelDeleteBtn = elById('cancelDeleteBtn');
+
+    deleteScoreBtn.addEventListener('click', (e) => {
+      deleteData();
+      e.target.parentNode.parentNode.parentNode.parentNode.remove();
+    });
+    cancelDeleteBtn.addEventListener('click', (e) => {
+      e.target.parentNode.parentNode.parentNode.parentNode.remove();
     });
   }
 }
@@ -847,8 +887,8 @@ function renderLeaderboardScore(data) {
 
 /**
  * Runs when the user clicks
- * the "delete data" button
- * on the leaderboard page.
+ * the "ok" button
+ * on the leaderboard data deletion alert popup.
  */
 function deleteData() {
   const table = elById('leaderboardTable');
@@ -946,7 +986,9 @@ function init() {
   landscapeOkBtn.addEventListener('click', (e) => {
     e.target.parentNode.parentNode.remove();
   });
-  leaderboardDeleteBtn.addEventListener('click', deleteData);
+  leaderboardDeleteBtn.addEventListener('click', () => {
+    showAlert('leaderboard');
+  });
   successHomeBtn.addEventListener('click', () => {
     renderPage('settings');
   });
