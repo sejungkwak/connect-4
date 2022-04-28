@@ -19,7 +19,10 @@ const footerContactBtn = elById('footerContactBtn');
 const sections = qsa('.section');
 const settingsSection = elById('settings');
 const gameSection = elById('game');
-const checkboxes = qsa('.setting-checkbox');
+const player1TypeCheckbox = elById('player1Type');
+const player1ColourCheckbox = elById('player1Colour');
+const player2TypeCheckbox = elById('player2Type');
+const player2ColourCheckbox = elById('player2Colour');
 const boardEl = elById('boardGrid');
 const contactForm = elById('contactForm');
 let nameEl = elById('name');
@@ -61,15 +64,8 @@ function startBtnHandler() {
   let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
   let player2Name = elById('player2Name').value.trim();
 
-  if (player1Type === 'computer' && player2Type === 'computer') {
-    return invalidChangeHandler('player');
-  }
-  if (player1Colour === player2Colour) {
-    return invalidChangeHandler('colour');
-  }
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    let text = `Please make sure each player's name is unique.`;
-    return showAlert(text);
+    return showAlert();
   }
 
   if (player1Type === 'computer' && player2Type === 'human') {
@@ -95,7 +91,7 @@ function startBtnHandler() {
   };
 
   gamePlayed = 0;
-  openSection('game');
+  renderPage('game');
   runGame();
 }
 
@@ -564,29 +560,44 @@ function soundBtnToggler() {
 /**
  * Runs when input values are invalid
  * on the New Game page.
- * @returns function
+ * @param {string} type The settings the player changed.
+ * @returns {boolean} The other player's checkbox value.
  */
 function invalidChangeHandler(type) {
-  let text;
-
-  if (type === 'player') {
-    text = 'Please select at least one human player.';
-    return showAlert(text);
+  if (type === 'player1Computer') {
+    player2TypeCheckbox.checked = true;
+    return;
   }
-  if (type === 'colour') {
-    text = 'Please select a unique colour for each player.';
-    return showAlert(text);
+  if (type === 'player1Yellow') {
+    player2ColourCheckbox.checked = true;
+    return;
+  }
+  if (type === 'player1Red') {
+    player2ColourCheckbox.checked = false;
+    return;
+  }
+  if (type === 'player2Computer') {
+    player1TypeCheckbox.checked = true;
+    return;
+  }
+  if (type === 'player2Yellow') {
+    player1ColourCheckbox.checked = true;
+    return;
+  }
+  if (type === 'player2Red') {
+    player1ColourCheckbox.checked = false;
+    return;
   }
 }
 
 /**
- * Runs when the user inputs invalid value
- * or clicks the "start" button with invalid value
+ * Runs when the user inputs the same name
+ * for both players and clicks the start button
  * on the New Game page.
- * @param {string} message
  */
-function showAlert(message) {
+function showAlert() {
   const overlay = document.createElement('aside');
+  const message = `Please make sure each player's name is unique.`;
   overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container">
@@ -661,7 +672,7 @@ function toggleNav() {
  * Runs when the user clicks a button to open a page.
  * @param {string} name
  */
-function openSection(name) {
+function renderPage(name) {
   const targetSection = elById(`${name}`);
   const nav = elById('nav');
   const toggleBtns = qsa('.nav-toggle-btn');
@@ -863,38 +874,41 @@ function sendMessage() {
       .then(
         function () {
           contactSendBtn.innerText = 'send';
-          openSection('success');
+          renderPage('success');
           nameEl.value = '';
           emailEl.value = '';
           messageEl.value = '';
         },
         function () {
           contactSendBtn.innerText = 'send';
-          openSection('fail');
+          renderPage('fail');
         }
       );
   }
 }
 
+/**
+ * Runs after the DOM finishes loading.
+ */
 function init() {
   // Button Click Event listeners
   logoLink.addEventListener('click', () => {
-    openSection('settings');
+    renderPage('settings');
   });
   navOpenBtn.addEventListener('click', toggleNav);
   navCloseBtn.addEventListener('click', toggleNav);
   navNewGameBtn.addEventListener('click', () => {
-    openSection('settings');
+    renderPage('settings');
   });
   navGameBtn.addEventListener('click', () => {
-    openSection('game');
+    renderPage('game');
   });
   navHelpBtn.addEventListener('click', () => {
-    openSection('help');
+    renderPage('help');
   });
   navLeaderboardBtn.addEventListener('click', () => {
     getFromLocalstorage();
-    openSection('leaderboard');
+    renderPage('leaderboard');
   });
   settingStartBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -902,10 +916,10 @@ function init() {
   });
   settingCloseBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    openSection('game');
+    renderPage('game');
   });
   playToNewGameBtn.addEventListener('click', () => {
-    openSection('settings');
+    renderPage('settings');
   });
   soundBtn.addEventListener('click', soundBtnToggler);
   muteBtn.addEventListener('click', soundBtnToggler);
@@ -914,35 +928,42 @@ function init() {
   });
   leaderboardDeleteBtn.addEventListener('click', deleteData);
   successHomeBtn.addEventListener('click', () => {
-    openSection('settings');
+    renderPage('settings');
   });
   failContactBtn.addEventListener('click', () => {
-    openSection('contact');
+    renderPage('contact');
   });
   footerContactBtn.addEventListener('click', () => {
-    openSection('contact');
+    renderPage('contact');
   });
 
-  // Checkbox change Event listener
-  checkboxes.forEach(checkbox =>
-    checkbox.addEventListener('change', (e) => {
-      if (settingsSection.lastChild.className === 'overlay') {
-        settingsSection.lastChild.remove();
-      }
-
-      if (
-        (e.target === checkboxes[0] || e.target === checkboxes[2]) &&
-        !elById('player1Type').checked &&
-        !elById('player2Type').checked
-      ) {
-        invalidChangeHandler('player');
-      } else if (
-        (e.target === checkboxes[1] || e.target === checkboxes[3]) &&
-        elById('player1Colour').checked === elById('player2Colour').checked
-      ) {
-        invalidChangeHandler('colour');
-      }
-    }));
+  // New Game page checkboxes change Event listener
+  player1TypeCheckbox.addEventListener('change', () => {
+    if (!player1TypeCheckbox.checked && !player2TypeCheckbox.checked) {
+      invalidChangeHandler('player1Computer');
+    }
+  });
+  player1ColourCheckbox.addEventListener('change', () => {
+    if (!player1ColourCheckbox.checked && !player2ColourCheckbox.checked) {
+      invalidChangeHandler('player1Yellow');
+    }
+    if (player1ColourCheckbox.checked && player2ColourCheckbox.checked) {
+      invalidChangeHandler('player1Red');
+    }
+  });
+  player2TypeCheckbox.addEventListener('change', () => {
+    if (!player1TypeCheckbox.checked && !player2TypeCheckbox.checked) {
+      invalidChangeHandler('player2Computer');
+    }
+  });
+  player2ColourCheckbox.addEventListener('change', () => {
+    if (!player2ColourCheckbox.checked && !player1ColourCheckbox.checked) {
+      invalidChangeHandler('player2Yellow');
+    }
+    if (player2ColourCheckbox.checked && player1ColourCheckbox.checked) {
+      invalidChangeHandler('player2Red');
+    }
+  });
 
   // Keyboard control in the game
   document.addEventListener('keydown', (e) => {
