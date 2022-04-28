@@ -314,10 +314,6 @@ input[type="email"] {
   white-space: nowrap;
 }
 
-.section:first-of-type {
-  height: 100%;
-}
-
 .setting-heading {
   display: none;
 }
@@ -586,6 +582,10 @@ input[type="email"] {
 }
 
 /*--------------- Leaderboard page ---------------*/
+
+.section.leaderboard {
+  min-height: 100%;
+}
 
 .leaderboard-table {
   margin: 1em auto;
