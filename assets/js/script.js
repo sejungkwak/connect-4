@@ -68,7 +68,7 @@ function startBtnHandler() {
     return invalidChangeHandler('colour');
   }
   if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    let text = 'Please make sure each player name is unique.';
+    let text = `Please make sure each player's name is unique.`;
     return showAlert(text);
   }
 
@@ -330,58 +330,131 @@ function checkGameOver() {
 // Source: Tom Campbell's "Coding Connect 4 with JavaScript"(https://www.youtube.com/watch?v=kA9OOeUXXSU)
 /**
  * Runs after the computer or human player places a disc.
- * @param {string} playerColour 
- * @returns {array} The 4 cells that are in a line
+ * @param {string} playerColour The current player's colour.
+ * @returns {array} The 4 cells that are in a line.
  */
 function checkWinner(playerColour) {
   const cells = qsa('.cell').splice(NUM_OF_COLUMN);
 
   for (let index = 0; index < NUM_OF_ROW * NUM_OF_COLUMN; index++) {
-    // horizontal line
-    if (
-      index % NUM_OF_COLUMN < 4 &&
-      cells[index].classList.contains(playerColour) &&
-      cells[index + 1].classList.contains(playerColour) &&
-      cells[index + 2].classList.contains(playerColour) &&
-      cells[index + 3].classList.contains(playerColour)
-    ) {
-      return ([cells[index], cells[index + 1], cells[index + 2], cells[index + 3]]);
-    }
+    const horizontalWin = horizontal4Check(index, cells[index], cells[index + 1], cells[index + 2], cells[index + 3], playerColour);
+    const verticalWin = vertical4Check(index, cells[index], cells[index + NUM_OF_COLUMN], cells[index + NUM_OF_COLUMN * 2], cells[index + NUM_OF_COLUMN * 3], playerColour);
+    const mainDiagonalWin = mainDiagonal4Check(index, cells[index], cells[index + NUM_OF_COLUMN + 1], cells[index + NUM_OF_COLUMN * 2 + 2], cells[index + NUM_OF_COLUMN * 3 + 3], playerColour);
+    const offDiagonalWin = offDiagonal4Check(index, cells[index], cells[index + NUM_OF_COLUMN - 1], cells[index + NUM_OF_COLUMN * 2 - 2], cells[index + NUM_OF_COLUMN * 3 - 3], playerColour);
 
-    // vertical line
-    if (
-      index < NUM_OF_COLUMN * 3 &&
-      cells[index].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 2].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 3].classList.contains(playerColour)
-    ) {
-      return ([cells[index], cells[index + NUM_OF_COLUMN], cells[index + NUM_OF_COLUMN * 2], cells[index + NUM_OF_COLUMN * 3]]);
+    if (horizontalWin) {
+      return horizontalWin;
     }
+    if (verticalWin) {
+      return verticalWin;
+    }
+    if (mainDiagonalWin) {
+      return mainDiagonalWin;
+    }
+    if (offDiagonalWin) {
+      return offDiagonalWin;
+    }
+  }
+}
 
-    // main diagonal(\) line
-    if (
-      index % NUM_OF_COLUMN < 4 &&
-      index < NUM_OF_COLUMN * 3 - 3 &&
-      cells[index].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN + 1].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 2 + 2].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 3 + 3].classList.contains(playerColour)
-    ) {
-      return ([cells[index], cells[index + NUM_OF_COLUMN + 1], cells[index + NUM_OF_COLUMN * 2 + 2], cells[index + NUM_OF_COLUMN * 3 + 3]]);
-    }
+/**
+ * Runs after a disc is placed.
+ * @param {number} index 
+ * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
+ * @param {object} cell2 The div element(cell) which is the value at the index+1 position in the array of cells.
+ * @param {object} cell3 The div element(cell) which is the value at the index+2 position in the array of cells.
+ * @param {object} cell4 The div element(cell) which is the value at the index+3 position in the array of cells.
+ * @param {string} colour The current player's disc colour
+ * @returns {array} The cells that are 4 in a row.
+ */
+function horizontal4Check(index, cell1, cell2, cell3, cell4, colour) {
+  if (
+    index % NUM_OF_COLUMN < 4 &&
+    checkCellColour(cell1, cell2, cell3, cell4, colour)
+  ) {
+    return ([cell1, cell2, cell3, cell4]);
+  }
+}
 
-    // off-diagonal(/) line
-    if (
-      index % NUM_OF_COLUMN >= 3 &&
-      index < NUM_OF_COLUMN * 3 &&
-      cells[index].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN - 1].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 2 - 2].classList.contains(playerColour) &&
-      cells[index + NUM_OF_COLUMN * 3 - 3].classList.contains(playerColour)
-    ) {
-      return ([cells[index], cells[index + NUM_OF_COLUMN - 1], cells[index + NUM_OF_COLUMN * 2 - 2], cells[index + NUM_OF_COLUMN * 3 - 3]]);
-    }
+/**
+ * Runs after a disc is placed and
+ * if the horizontal win condition is not met.
+ * @param {number} index 
+ * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
+ * @param {object} cell2 The div element(cell) which is the value at the index+7 position in the array of cells.
+ * @param {object} cell3 The div element(cell) which is the value at the index+14 position in the array of cells.
+ * @param {object} cell4 The div element(cell) which is the value at the index+21 position in the array of cells.
+ * @param {string} colour The current player's disc colour
+ * @returns {array} The cells that are 4 in a vertical line.
+ */
+function vertical4Check(index, cell1, cell2, cell3, cell4, colour) {
+  if (
+    index < NUM_OF_COLUMN * 3 &&
+    checkCellColour(cell1, cell2, cell3, cell4, colour)
+  ) {
+    return ([cell1, cell2, cell3, cell4]);
+  }
+}
+
+/**
+ * Runs after a disc is placed and
+ * if the horizontal and vertical win conditions are not met.
+ * @param {number} index 
+ * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
+ * @param {object} cell2 The div element(cell) which is the value at the index+8 position in the array of cells.
+ * @param {object} cell3 The div element(cell) which is the value at the index+16 position in the array of cells.
+ * @param {object} cell4 The div element(cell) which is the value at the index+24 position in the array of cells.
+ * @param {string} colour The current player's disc colour
+ * @returns {array} The cells that are 4 in a main diagonal line.
+ */
+function mainDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
+  if (
+    index % NUM_OF_COLUMN < 4 &&
+    index < NUM_OF_COLUMN * 3 - 3 &&
+    checkCellColour(cell1, cell2, cell3, cell4, colour)
+  ) {
+    return ([cell1, cell2, cell3, cell4]);
+  }
+}
+
+/**
+ * Runs after a disc is placed and
+ * if other win conditions are not met.
+ * @param {number} index 
+ * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
+ * @param {object} cell2 The div element(cell) which is the value at the index+6 position in the array of cells.
+ * @param {object} cell3 The div element(cell) which is the value at the index+12 position in the array of cells.
+ * @param {object} cell4 The div element(cell) which is the value at the index+18 position in the array of cells.
+ * @param {string} colour The current player's disc colour
+ * @returns {array} The cells that are 4 in a off-diagonal line.
+ */
+function offDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
+  if (
+    index % NUM_OF_COLUMN >= 3 &&
+    index < NUM_OF_COLUMN * 3 &&
+    checkCellColour(cell1, cell2, cell3, cell4, colour)
+  ) {
+    return ([cell1, cell2, cell3, cell4]);
+  }
+}
+
+/**
+ * Runs when checking the win conditions.
+ * @param {object} cell1 The div element: the first cell in a line.
+ * @param {object} cell2 The div element: the second cell in a line.
+ * @param {object} cell3 The div element: the third cell in a line.
+ * @param {object} cell4 The div element: the fourth cell in a line.
+ * @param {string} colour The current player's disc colour
+ * @returns {boolean} True if all the target cells have the current player's disc colour.
+ */
+function checkCellColour(cell1, cell2, cell3, cell4, colour) {
+  if (
+    cell1.classList.contains(colour) &&
+    cell2.classList.contains(colour) &&
+    cell3.classList.contains(colour) &&
+    cell4.classList.contains(colour)
+  ) {
+    return true;
   }
 }
 
