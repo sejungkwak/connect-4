@@ -765,16 +765,10 @@ function addToLocalstorage(name, point, win) {
  * Runs when the Leaderboard page opens.
  */
 function getFromLocalstorage() {
-  const noDataText = elById('noDataText');
-  const table = elById('leaderboardTable');
-  const tbody = elById('leaderboardTableBody');
   const data = JSON.parse(localStorage.getItem('scores'));
 
   if (!data) {
-    noDataText.style.display = 'block';
-    table.style.opacity = '0';
-    leaderboardDeleteBtn.style.display = 'none';
-    return;
+    return displayNoScoreText();
   }
 
   // Source: CRice's answer on Stack Overflow(https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
@@ -790,29 +784,55 @@ function getFromLocalstorage() {
     return newArray;
   }, []);
 
+  renderLeaderboardScore(mergedData);
+}
+
+/**
+ * Runs when there is no score data in
+ * local storage.
+ */
+function displayNoScoreText() {
+  const noDataText = elById('noDataText');
+  const table = elById('leaderboardTable');
+
+  noDataText.style.display = 'block';
+  table.style.opacity = '0';
+  leaderboardDeleteBtn.style.display = 'none';
+}
+
+/**
+ * Runs when there is score data
+ * in local storage.
+ * @param {array} data Player name, Points, Number of wins, Number of games the player played.
+ */
+function renderLeaderboardScore(data) {
+  const noDataText = elById('noDataText');
+  const table = elById('leaderboardTable');
+  const tbody = elById('leaderboardTableBody');
+
   table.style.opacity = '1';
   tbody.innerHTML = '';
   leaderboardDeleteBtn.style.display = 'flex';
   noDataText.style.display = 'none';
 
   // Source: MDN(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-  mergedData.sort((a, b) => {
+  data.sort((a, b) => {
     return b.point - a.point;
   });
 
-  if (mergedData.length > 5) {
+  if (data.length > 5) {
     for (let i = 0; i < 5; i++) {
       tbody.innerHTML += `
         <tr>
-          <td class="leaderboard-table-name">${mergedData[i].name}</td>
-          <td>${mergedData[i].point}</td>
-          <td>${mergedData[i].win}</td>
-          <td>${parseFloat((+mergedData[i].win / +mergedData[i].games) * 100).toFixed(2)}%</td>
+          <td class="leaderboard-table-name">${data[i].name}</td>
+          <td>${data[i].point}</td>
+          <td>${data[i].win}</td>
+          <td>${parseFloat((+data[i].win / +data[i].games) * 100).toFixed(2)}%</td>
         </tr>
       `;
     }
   } else {
-    mergedData.forEach(item => {
+    data.forEach(item => {
       tbody.innerHTML += `
         <tr>
           <td class="leaderboard-table-name">${item.name}</td>
