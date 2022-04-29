@@ -43,61 +43,28 @@ let computerTurn;
 let gamePlayed = 0;
 let isMuted = true;
 
-/* 
-Fix for iOS audio issue
-Source: user2415116 and AndrewL's answer on Stack Overflow(https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
-*/
+// Fix for the iOS audio issue.
+// Source: user2415116 and AndrewL's answer on Stack Overflow(https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
 const soundEffect = new Audio();
 soundEffect.autoplay = true;
+// Silent MP3 file
 soundEffect.src =
   'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
 
 /**
- * Runs when the user pressed
- * the start button on the New Game page.
- * Validates the form input values.
+ * Runs when a user pressed the "start" button on the New Game page.
  */
 function startBtnHandler() {
-  let player1Type = elById('player1Type').checked ? 'human' : 'computer';
-  let player1Colour = elById('player1Colour').checked ? 'red' : 'yellow';
-  let player1Name = elById('player1Name').value.trim();
-  let player2Type = elById('player2Type').checked ? 'human' : 'computer';
-  let player2Colour = elById('player2Colour').checked ? 'red' : 'yellow';
-  let player2Name = elById('player2Name').value.trim();
-
-  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    return showAlert('newGame');
+  const isPlayerNameValid = validatePlayerName();
+  if (isPlayerNameValid) {
+    gamePlayed = 0;
+    renderPage('game');
+    runGame();
   }
-
-  if (player1Type === 'computer' && player2Type === 'human') {
-    player1Name = player1Name === '' ? 'Computer' : player1Name;
-    player2Name = player2Name === '' ? 'You' : player2Name;
-  }
-  if (player1Type === 'human' && player2Type === 'computer') {
-    player1Name = player1Name === '' ? 'You' : player1Name;
-    player2Name = player2Name === '' ? 'Computer' : player2Name;
-  }
-  if (player1Type === 'human' && player2Type === 'human') {
-    player1Name = player1Name === '' ? player1Colour : player1Name;
-    player2Name = player2Name === '' ? player2Colour : player2Name;
-  }
-
-  playerData = {
-    player1Type,
-    player1Colour,
-    player1Name,
-    player2Type,
-    player2Colour,
-    player2Name
-  };
-
-  gamePlayed = 0;
-  renderPage('game');
-  runGame();
 }
 
 /**
- * Runs when the New Game form input values are valid.
+ * Runs when input values on the New Game page are valid.
  * Creates and configures a new game.
  */
 function runGame() {
@@ -107,6 +74,7 @@ function runGame() {
   computerTurn = false;
   gamePlayed++;
 
+  // Makes the player1 play first in every odd-numbered game.
   if (gamePlayed % 2 === 0) {
     player1Turn = false;
   } else {
@@ -140,6 +108,7 @@ function computerMove() {
   computerTurn = true;
 
   if (gameOver) return;
+  // This function runs again if the target column is full.
   if (!freeCell) {
     return computerMove();
   }
@@ -156,12 +125,12 @@ function computerMove() {
 function playerMove() {
   const cells = qsa('.cell');
 
-  /* 
-  Detect touch device
-  Source: KaMeHb's answer on Stack Overflow(https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
-  */
+
+  // Detects touchscreen device.
+  // Source: KaMeHb's answer on Stack Overflow(https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
   const isMobile = window.matchMedia('(hover: none)').matches;
 
+  // Disables mouseover event listener if it is a touchscreen device.
   if (isMobile) {
     for (let cell of cells) {
       cell.addEventListener('click', calculateColIndex);
@@ -175,8 +144,7 @@ function playerMove() {
 }
 
 /**
- * Runs when a human player presses
- * one of the arrow keys.
+ * Runs when a human player presses one of the arrow keys.
  * @param {string} pressedKey
  */
 function keydownHandler(pressedKey) {
@@ -187,6 +155,8 @@ function keydownHandler(pressedKey) {
   if (gameOver || gameOver === undefined) return;
   if (computerTurn || computerTurn === undefined) return;
 
+  // Changes a visible column indicator disc's colour to the board colour.
+  // Column indicator disc: a disc that is on top of the first row.
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
     if (!cells[i].classList.contains('invisible')) {
       if (pressedKey === 'ArrowLeft' || pressedKey === 'ArrowRight') {
@@ -196,6 +166,8 @@ function keydownHandler(pressedKey) {
     }
   }
 
+  // Moves a visible column indicator disc to the left
+  // or makes a column indicator disc visible on top of the last column.
   if (pressedKey === 'ArrowLeft') {
     if (invisibleCells.length === NUM_OF_COLUMN - 1 && visibleCellIndex !== 0) {
       return cells[visibleCellIndex - 1].classList.remove('invisible');
@@ -203,6 +175,8 @@ function keydownHandler(pressedKey) {
       return cells[NUM_OF_COLUMN - 1].classList.remove('invisible');
     }
   }
+  // Moves a visible column indicator disc to the right
+  // or makes a column indicator disc visible on top of the first column.
   if (pressedKey === 'ArrowRight') {
     if (invisibleCells.length === NUM_OF_COLUMN - 1 && visibleCellIndex !== NUM_OF_COLUMN - 1) {
       return cells[visibleCellIndex + 1].classList.remove('invisible');
@@ -210,6 +184,7 @@ function keydownHandler(pressedKey) {
       return cells[0].classList.remove('invisible');
     }
   }
+  // Drops a disc if there is a column indicator disc, or else does nothing.
   if (pressedKey === 'ArrowDown') {
     if (invisibleCells.length === NUM_OF_COLUMN) {
       return;
@@ -221,6 +196,8 @@ function keydownHandler(pressedKey) {
 
 /**
  * Runs when a human player moves the mouse on the board.
+ * Makes a column indicator disc move as the mouse moves.
+ * column indicator disc: a disc that is on top of the first row.
  * @param {object} event
  */
 function cellMouseoverHandler(event) {
@@ -237,7 +214,7 @@ function cellMouseoverHandler(event) {
 
 /**
  * Runs when a human player clicks on the board.
- * @param {object} event Mouse click event
+ * @param {object} event Mouse click event.
  */
 function calculateColIndex(event) {
   const cells = qsa('.cell');
@@ -248,7 +225,7 @@ function calculateColIndex(event) {
 /**
  * Runs when a human player clicks on the board or
  * presses the down arrow key.
- * @param {number} colIndex
+ * @param {number} colIndex The index of the target column.
  */
 function cellClickHandler(colIndex) {
   const cells = qsa('.cell');
@@ -262,9 +239,9 @@ function cellClickHandler(colIndex) {
 
 /**
  * Runs after the computer picks a column or
- * a human player's target column is calculated.
- * @param {number} colIndex The index of the column
- * @returns {object} cell An empty cell
+ * a human player's target column index is calculated.
+ * @param {number} colIndex The index of the target column.
+ * @returns {object} cell The lowest empty cell(div element) in the target column.
  */
 function findFreeCell(colIndex) {
   const cells = qsa(`[data-coords-col="${colIndex}"]`);
@@ -277,7 +254,7 @@ function findFreeCell(colIndex) {
 }
 
 /**
- * Runs when there's an empty cell in the column.
+ * Runs when there's an empty cell in the target column.
  * Places a disc into the target cell.
  * @param {object} cell
  */
@@ -287,23 +264,12 @@ function placeDisc(cell) {
     ${player1Turn ? playerData.player1Colour.charAt(0) : playerData.player2Colour.charAt(0)}
   `;
   freeCellCounter--;
-
-  const isGameOver = checkGameOver();
-
-  if (isGameOver === false) {
-    if (!isMuted) {
-      soundEffect.src = 'assets/sounds/drop.mp3';
-      soundEffect.play();
-    }
-    updatePlayer();
-  }
+  checkGameOver();
 }
 
 /**
  * Runs after a disc is placed.
- * @returns {boolean | function}
- * Returns false if the game is not over,
- * otherwise calls displayResult().
+ * @returns {function} Calls displayResult() if the game is over.
  */
 function checkGameOver() {
   if (freeCellCounter === 0) {
@@ -311,7 +277,7 @@ function checkGameOver() {
     addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
     return displayResult('draw');
   } else {
-    const connected = checkWinner(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+    const connected = checkForWin(player1Turn ? playerData.player1Colour : playerData.player2Colour);
     if (connected) {
       const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
       const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
@@ -319,7 +285,8 @@ function checkGameOver() {
       addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
       return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
     } else {
-      return false;
+      playDropSound();
+      updatePlayer();
     }
   }
 }
@@ -328,9 +295,9 @@ function checkGameOver() {
 /**
  * Runs after the computer or human player places a disc.
  * @param {string} playerColour The current player's colour.
- * @returns {array} The 4 cells that are in a line.
+ * @returns {array} The 4 cells(div elements) that are in a line.
  */
-function checkWinner(playerColour) {
+function checkForWin(playerColour) {
   const cells = qsa('.cell').splice(NUM_OF_COLUMN);
 
   for (let index = 0; index < NUM_OF_ROW * NUM_OF_COLUMN; index++) {
@@ -402,7 +369,7 @@ function vertical4Check(index, cell1, cell2, cell3, cell4, colour) {
  * @param {object} cell3 The div element(cell) which is the value at the index+16 position in the array of cells.
  * @param {object} cell4 The div element(cell) which is the value at the index+24 position in the array of cells.
  * @param {string} colour The current player's disc colour
- * @returns {array} The cells that are 4 in a main diagonal line.
+ * @returns {array} The cells that are 4 in a main diagonal(\) line.
  */
 function mainDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
@@ -415,15 +382,14 @@ function mainDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
 }
 
 /**
- * Runs after a disc is placed and
- * if other win conditions are not met.
+ * Runs after a disc is placed and if other win conditions are not met.
  * @param {number} index 
  * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
  * @param {object} cell2 The div element(cell) which is the value at the index+6 position in the array of cells.
  * @param {object} cell3 The div element(cell) which is the value at the index+12 position in the array of cells.
  * @param {object} cell4 The div element(cell) which is the value at the index+18 position in the array of cells.
  * @param {string} colour The current player's disc colour
- * @returns {array} The cells that are 4 in a off-diagonal line.
+ * @returns {array} The cells that are 4 in a off-diagonal(/) line.
  */
 function offDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
@@ -466,7 +432,6 @@ function checkCellColour(cell1, cell2, cell3, cell4, colour) {
 function displayResult(result, player = null, point = null, cells = null) {
   const overlay = document.createElement('aside');
   let message;
-  overlay.className = 'overlay';
 
   if (result === 'draw') {
     message = `<h2 class="alert-text">It's a draw!</h2>`;
@@ -479,11 +444,7 @@ function displayResult(result, player = null, point = null, cells = null) {
     cells.forEach(cell => cell.innerText = '★');
   }
 
-  if (!isMuted) {
-    soundEffect.src = 'assets/sounds/end.mp3';
-    soundEffect.play();
-  }
-
+  overlay.className = 'overlay';
   overlay.innerHTML = `
     <div class="alert-container result">
       ${message}
@@ -492,6 +453,7 @@ function displayResult(result, player = null, point = null, cells = null) {
   `;
   gameSection.appendChild(overlay);
   boardEl.style.marginTop = '4rem';
+  playWinSound();
 
   elById('playAgainBtn').addEventListener('click', runGame);
 }
@@ -531,7 +493,8 @@ function updateName(currentPlayerName) {
 
 /**
  * Runs at the beginning of each player's turn.
- * Update the class name of the first row cells.
+ * Update the class name of column indicator discs
+ * that are on top of the first row.
  * @param {string} currentPlayerColour
  */
 function updateColour(currentPlayerColour) {
@@ -544,8 +507,27 @@ function updateColour(currentPlayerColour) {
 }
 
 /**
- * Runs when the user clicks
- * the sound/mute icon.
+ * Runs when a player drops a disc and the game is still on.
+ */
+function playDropSound() {
+  if (!isMuted) {
+    soundEffect.src = 'assets/sounds/drop.mp3';
+    soundEffect.play();
+  }
+}
+
+/**
+ * Runs when a game is over.
+ */
+function playWinSound() {
+  if (!isMuted) {
+    soundEffect.src = 'assets/sounds/end.mp3';
+    soundEffect.play();
+  }
+}
+
+/**
+ * Runs when a user clicks the sound/mute icon.
  */
 function soundBtnToggler() {
   const soundBtns = qsa('.volume-btn');
@@ -559,10 +541,31 @@ function soundBtnToggler() {
 }
 
 /**
+ * Runs at the beginning of each game.
+ */
+function createGrid() {
+  boardEl.innerHTML = '';
+  boardEl.style.marginTop = 'unset';
+
+  for (let i = 0; i < NUM_OF_ROW + 1; i++) {
+    for (let j = 0; j < NUM_OF_COLUMN; j++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      if (i === 0) {
+        cell.className += ' invisible';
+      } else {
+        cell.dataset.coordsCol = j;
+      }
+      boardEl.appendChild(cell);
+    }
+  }
+}
+
+/**
  * Runs when input values are invalid
  * on the New Game page.
  * @param {string} type The settings the player changed.
- * @returns {boolean} The other player's checkbox value.
  */
 function invalidChangeHandler(type) {
   if (type === 'player1Computer') {
@@ -592,11 +595,54 @@ function invalidChangeHandler(type) {
 }
 
 /**
- * Runs when the user inputs the same name
- * for both players and clicks the start button
- * on the New Game page.
- * Or when the user clicks the delete data button
- * on the Leaderboard page.
+ * Runs after a user pressed the "start" button on the New Game page.
+ * @returns {function | object} Calls the showAlert function
+ * if both players have the same name. Returns playerData object otherwise.
+ */
+function validatePlayerName() {
+  let player1Type = player1TypeCheckbox.checked ? 'human' : 'computer';
+  let player1Colour = player1ColourCheckbox.checked ? 'red' : 'yellow';
+  let player1Name = elById('player1Name').value.trim();
+  let player2Type = player2TypeCheckbox.checked ? 'human' : 'computer';
+  let player2Colour = player2ColourCheckbox.checked ? 'red' : 'yellow';
+  let player2Name = elById('player2Name').value.trim();
+
+  // Displays alert if both players have the same name.
+  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
+    return showAlert('newGame');
+  }
+
+  // Sets the player's name to the default name if a user doesn't input a name.
+  if (player1Type === 'computer' && player2Type === 'human') {
+    player1Name = player1Name === '' ? 'Computer' : player1Name;
+    player2Name = player2Name === '' ? 'You' : player2Name;
+  }
+  if (player1Type === 'human' && player2Type === 'computer') {
+    player1Name = player1Name === '' ? 'You' : player1Name;
+    player2Name = player2Name === '' ? 'Computer' : player2Name;
+  }
+  if (player1Type === 'human' && player2Type === 'human') {
+    player1Name = player1Name === '' ? player1Colour : player1Name;
+    player2Name = player2Name === '' ? player2Colour : player2Name;
+  }
+
+  elById('player1Name').value = '';
+  elById('player2Name').value = '';
+
+  playerData = {
+    player1Type,
+    player1Colour,
+    player1Name,
+    player2Type,
+    player2Colour,
+    player2Name
+  };
+  return playerData;
+}
+
+/**
+ * Runs when a user inputs the same name for both players on the New Game page.
+ * Or when a user clicks the "delete data" button on the Leaderboard page.
  */
 function showAlert(pageName) {
   const overlay = document.createElement('aside');
@@ -613,8 +659,8 @@ function showAlert(pageName) {
     `;
     btn = `
       <ul class="btns">
-        <li><button class="btn alert-btn" id="deleteScoreBtn">ok</button></li>
-        <li><button class="btn btn-primary alert-btn" id="cancelDeleteBtn">cancel</button></li>
+        <li><button class="btn btn-primary alert-btn" id="deleteScoreBtn">ok</button></li>
+        <li><button class="btn alert-btn" id="cancelDeleteBtn">cancel</button></li>
       </ul>
     `;
   }
@@ -643,8 +689,7 @@ function showAlert(pageName) {
 }
 
 /**
- * Runs when the user clicks
- * a button on an alert popup.
+ * Runs when a user clicks a button on an alert popup.
  */
 function closeAlert(pageName) {
   if (pageName === 'newGame') {
@@ -668,30 +713,7 @@ function closeAlert(pageName) {
 }
 
 /**
- * Runs at the beginning of each game.
- */
-function createGrid() {
-  boardEl.innerHTML = '';
-  boardEl.style.marginTop = 'unset';
-
-  for (let i = 0; i < NUM_OF_ROW + 1; i++) {
-    for (let j = 0; j < NUM_OF_COLUMN; j++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
-
-      if (i === 0) {
-        cell.className += ' invisible';
-      } else {
-        cell.dataset.coordsCol = j;
-      }
-      boardEl.appendChild(cell);
-    }
-  }
-}
-
-/**
- * Runs when the user clicks one of the toggle icons
- * in the header on mobile.
+ * Runs when a user clicks one of the toggle icons in the header on mobile.
  */
 function toggleNav() {
   const nav = elById('nav');
@@ -709,8 +731,8 @@ function toggleNav() {
 }
 
 /**
- * Runs when the user clicks a button to open a page.
- * @param {string} name
+ * Runs when a user clicks a button to open a page.
+ * @param {string} name The page name.
  */
 function renderPage(name) {
   const targetSection = elById(`${name}`);
@@ -752,6 +774,8 @@ function renderPage(name) {
     const gameSectionHeader = elById('gameHeader');
     const noGameText = elById('noGameText');
 
+    // Displays a message if a user hasn't pressed the "start" button on the New Game page.
+    // Or else, displays the current player's name, sound icon and game board.
     if (playerData === undefined) {
       gameSectionHeader.style.display = 'none';
       boardEl.style.display = 'none';
@@ -769,14 +793,14 @@ function renderPage(name) {
 /**
  * Runs when the game is over.
  * Stores the result of the game in local storage.
- * @param {string} name The current player's name
- * @param {number} point The current player's points or 0 if it's a draw
- * @param {number} win 1 if there's a winner otherwise 0
+ * @param {string} name The current player's name.
+ * @param {number} point The current player's points, or 0 if it's a draw.
+ * @param {number} win 1 if there's a winner, or else 0.
  */
 function addToLocalstorage(name, point, win) {
   let opponentName = name === playerData.player1Name ? playerData.player2Name : playerData.player1Name;
   const scores = JSON.parse(localStorage.getItem('scores'));
-  const array = [];
+  const nesScoresArray = [];
   const player = {
     name,
     point,
@@ -795,20 +819,20 @@ function addToLocalstorage(name, point, win) {
     scores.push(opponent);
     localStorage.setItem('scores', JSON.stringify(scores));
   } else {
-    array.push(player);
-    array.push(opponent);
-    localStorage.setItem('scores', JSON.stringify(array));
+    nesScoresArray.push(player);
+    nesScoresArray.push(opponent);
+    localStorage.setItem('scores', JSON.stringify(nesScoresArray));
   }
 }
 
 /**
- * Runs when the Leaderboard page opens.
+ * Runs when a user opens the Leaderboard page.
  */
 function getFromLocalstorage() {
   const data = JSON.parse(localStorage.getItem('scores'));
 
   if (!data) {
-    return displayNoScoreText();
+    return displayNoDataText();
   }
 
   // Source: CRice's answer on Stack Overflow(https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
@@ -824,14 +848,13 @@ function getFromLocalstorage() {
     return newArray;
   }, []);
 
-  renderLeaderboardScore(mergedData);
+  displayLeaderboardScore(mergedData);
 }
 
 /**
- * Runs when there is no score data in
- * local storage.
+ * Runs when there is no score data in local storage.
  */
-function displayNoScoreText() {
+function displayNoDataText() {
   const noDataText = elById('noDataText');
   const table = elById('leaderboardTable');
 
@@ -841,11 +864,10 @@ function displayNoScoreText() {
 }
 
 /**
- * Runs when there is score data
- * in local storage.
+ * Runs when there is score data in local storage.
  * @param {array} data Player name, Points, Number of wins, Number of games the player played.
  */
-function renderLeaderboardScore(data) {
+function displayLeaderboardScore(data) {
   const noDataText = elById('noDataText');
   const table = elById('leaderboardTable');
   const tbody = elById('leaderboardTableBody');
@@ -886,8 +908,7 @@ function renderLeaderboardScore(data) {
 }
 
 /**
- * Runs when the user clicks
- * the "ok" button
+ * Runs when a user clicks the "ok" button
  * on the leaderboard data deletion alert popup.
  */
 function deleteData() {
@@ -903,8 +924,7 @@ function deleteData() {
 }
 
 /**
- * Runs when the user clicks the "send" button
- * on the contact page.
+ * Runs when a user clicks the "send" button on the contact page.
  */
 function sendMessage() {
   const contactSendBtn = elById('contactSendBtn');
@@ -949,6 +969,7 @@ function sendMessage() {
 
 /**
  * Runs after the DOM finishes loading.
+ * Adds event listeners to the elements.
  */
 function init() {
   // Button Click Event listeners
@@ -1027,7 +1048,7 @@ function init() {
     }
   });
 
-  // Keyboard control in the game
+  // Keyboard controls in the game
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
       e.preventDefault();
@@ -1042,7 +1063,7 @@ function init() {
     sendMessage();
   });
 
-  // Resets custom validation message
+  // Resets the custom validation message
   nameEl.addEventListener('change', () => {
     nameEl.setCustomValidity('');
   });
@@ -1051,10 +1072,8 @@ function init() {
   });
 }
 
-/* 
-Helper functions
-Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
-*/
+// Helper functions
+// Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
 
 /**
  * Helper function of document.getElementById()
