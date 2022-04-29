@@ -402,7 +402,7 @@ input[type="email"] {
   grid-template-columns: 1fr 2rem;
   justify-content: center;
   width: 90vw;
-  max-width: 40rem;
+  max-width: 33rem;
 }
 
 .current-player {
@@ -473,9 +473,9 @@ input[type="email"] {
   gap: 1vw 2vw;
   border-radius: 10px;
   width: 90vw;
-  max-width: 40rem;
+  max-width: 33rem;
   height: 84vw;
-  max-height: calc(40rem - 3em);
+  max-height: calc(33rem - 1.8em);
   padding: .5em;
   background-color: var(--main-dark-color);
 }
@@ -511,13 +511,6 @@ input[type="email"] {
   color: var(--main-light-color);
 }
 
-.result {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .notification {
   margin: 1em;
   font-size: 1.2rem;
@@ -540,6 +533,14 @@ input[type="email"] {
   justify-content: center;
   align-items: center;
   background-color: var(--overlay-color);
+}
+
+.landscape-overlay>.alert-container,
+.result {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /*--------------- Help page ---------------*/
@@ -833,7 +834,7 @@ input[type="email"] {
 
 /* Display mode recommendation message */
 
-@media screen and (max-height: 53rem) and (orientation: landscape) {
+@media screen and (max-height: 45rem) and (orientation: landscape) {
 
   .landscape-overlay {
     display: flex;
@@ -886,8 +887,12 @@ input[type="email"] {
     font-size: 2.5rem;
   }
 
+  .board-grid {
+    gap: .3em .6em;
+  }
+
   .cell {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   /*--------------- Leaderboard page ---------------*/
@@ -908,12 +913,6 @@ input[type="email"] {
 /*=============== Medium screen size devices from 46rem/736px width  ===============*/
 
 @media screen and (min-width: 46rem) {
-
-  /*--------------- Play page ---------------*/
-
-  .board-grid {
-    gap: .5em 1em;
-  }
 
   /*--------------- 404 page ---------------*/
 
@@ -1038,6 +1037,28 @@ input[type="email"] {
 
   .error-main>.btn {
     grid-area: button;
+  }
+
+}
+
+/*=============== Large screen size devices from 118.75rem/1900px width  ===============*/
+
+@media screen and (min-width: 118.75rem) {
+
+  /*--------------- Play page ---------------*/
+
+  .board-header {
+    max-width: 40rem;
+  }
+
+  .board-grid {
+    gap: .5em 1em;
+    max-width: 40rem;
+    max-height: calc(40rem - 3em);
+  }
+
+  .cell {
+    font-size: 2.5rem;
   }
 
 }
