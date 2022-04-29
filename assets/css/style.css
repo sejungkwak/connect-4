@@ -1051,7 +1051,7 @@ input[type="email"] {
     max-width: 40rem;
   }
 
-  .board-grid {
+  .game .board-grid {
     gap: .5em 1em;
     max-width: 40rem;
     max-height: calc(40rem - 3em);
