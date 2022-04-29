@@ -52,7 +52,7 @@ soundEffect.src =
   'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
 
 /**
- * Runs when a user pressed the "start" button on the New Game page.
+ * Runs when a user presses the "start" button on the New Game page.
  */
 function startBtnHandler() {
   const isPlayerNameValid = validatePlayerName();
@@ -124,7 +124,6 @@ function computerMove() {
  */
 function playerMove() {
   const cells = qsa('.cell');
-
 
   // Detects touchscreen device.
   // Source: KaMeHb's answer on Stack Overflow(https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
@@ -731,6 +730,16 @@ function toggleNav() {
 }
 
 /**
+ * Runs when a user presses anywhere on the main element while the nav menu is open.
+ */
+function closeNav() {
+  const navOpened = navCloseBtn.classList.contains('active');
+  if (navOpened) {
+    toggleNav();
+  }
+}
+
+/**
  * Runs when a user clicks a button to open a page.
  * @param {string} name The page name.
  */
@@ -764,10 +773,11 @@ function renderPage(name) {
     navBtn.classList.remove('active');
   }
 
+  toggleBtns[0].classList.add('active');
+  toggleBtns[1].classList.remove('active');
+
   if (name === 'settings' || name === 'game' || name === 'help' || name === 'leaderboard') {
     sectionInNav.classList.add('active');
-    toggleBtns[0].classList.add('active');
-    toggleBtns[1].classList.remove('active');
   }
 
   if (name === 'game') {
@@ -1070,6 +1080,8 @@ function init() {
   messageEl.addEventListener('change', () => {
     messageEl.setCustomValidity('');
   });
+
+  elById('mainEl').addEventListener('click', closeNav);
 }
 
 // Helper functions
