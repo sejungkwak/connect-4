@@ -30,6 +30,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 [Testing](#testing)
   - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
   - [Code Validation](#code-validation)
+  - [Functionality Testing](#functionality-testing)
   - [Performance Testing](#performance-testing)
   - [Bugs](#bugs)
 
@@ -395,6 +396,30 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
 <br>
 
+## Functionality Testing
+
+- I have tested the site's functionality manually in Safari and Chrome on different device types.
+  - Mobile
+    - Safari version 15 on iOS 15.4.1
+    - Chrome version 100.0 on Android 9
+  - Tablet
+    - Chrome version 78.0 on Android 8.1.0
+  - Desktop
+    - Safari version 15.4 on macOS Monterey version 12.3.1
+    - Chrome version 100.0 Windows 10
+- During the tests, I found bugs below.
+  - The __OK__ button on the display mode alert was not accessible when the game result box was on the screen.
+  - Custom validation messages for the contact form kept showing even when the input value was valid.
+  - A column indicator disc disappeared even when pressing the down arrow key on the full column.
+- I have fixed the issues and documented them in the [fixed bugs](#fixed-bugs) section. Please refer to the last three items in the section for more details.
+  - Inaccessible display mode alert button
+  - Contact form custom validation error
+  - Column indicator disc disappearing
+
+- All the tests passed after an aditional test: [View details](documentation/FUNCTIONALITY.md)
+
+<br>
+
 ## Performance Testing
 
 - I have measured the performance, accessibility, best practices and SEO using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome DevTools in incognito mode.
@@ -505,7 +530,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
 - Browser support for `min()` and `gap` for `flex`
 
-  - Error: The layout was not what I designed when viewing on an older browser.
+  - Error: The layout was not what I designed when viewing in an older browser.
 
     ![Bug: Browser compatibility](documentation/bugs/bug-min.jpeg)
 
@@ -534,14 +559,14 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - Fix: I used a single global variable that stores the `Audio()` constructor for all sound effects.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
 
-- Landscape mode alert display error
+- Inaccessible display mode alert button
 
-  - Error: The landscape alert was displayed in the layer below the game result popup. When both were visible, the alert's __OK__ button was not accessible.
+  - Error: The display mode alert was displayed in the layer below the game result popup. When both were visible, the alert's __OK__ button was not accessible.
 
-    ![Landscape mode alert](documentation/bugs/bug-landscape-alert.png)
+    ![Display mode alert](documentation/bugs/bug-landscape-alert.png)
 
-  - Reason: The landscape mode alert is drawn before the game result popup in the DOM.
-  - Fix: I increased the `z-index` value for the landscape mode alert to ensure the alert's __OK__ button is always accessible.
+  - Reason: The display mode alert is drawn before the game result popup in the DOM.
+  - Fix: I increased the `z-index` value for the display mode alert to ensure the alert's __OK__ button is always accessible.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/ceefa4fb4e915d9ce71f26b6463ee30457f9f887)
 
 - Contact form custom validation error
