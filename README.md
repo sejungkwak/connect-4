@@ -2,7 +2,7 @@
 
 _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikipedia.org/wiki/Connect_Four)*. The site will be targeted towards people who want to play a quick and fun game regardless of their age. The site can be used for adults to have a short getaway and for children to learn the rules. The main goal of this project is to implement my JavaScript knowledge in a real-world context.
 
-*Connect Four is a classic two-player strategy game, in which players take turns to drop their coloured disc into a 6-row by 7-column grid until one of the players forms a line of 4 discs horizontally, vertically or diagonally.
+*Connect Four is a classic two-player strategy game, in which players take turns dropping their coloured discs into a 6-row by 7-column grid to connect 4 of their discs in a line either horizontally, vertically or diagonally.
 
 ![Responsive Design](documentation/responsive.png)
 
@@ -49,23 +49,23 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 ## User Stories
 
 - As a First Time Visitor,
-  - I want to know how to play the game, so that I can enjoy it fully.
-  - I want to know clearly when it is my turn, so that I don't delay the game.
-  - I want to see the game board screen again when the game is over, so that I can figure out why I've won or lost.
+  - I want to know how to play the game so that I can enjoy it fully.
+  - I want to know clearly when it is my turn so that I don't delay the game.
+  - I want to see the game board screen again when the game is over so that I can figure out why I've won or lost.
 
 <br>
 
 - As a Returning Visitor,
-  - I want to be able to play the game on my phone, so that I can play it during a break at work.
-  - I want to play the game with my kids, so that we can have fun together.
-  - I want to play the game against a computer, so that I can play practice games.
+  - I want to be able to play the game on my phone so that I can play it during a break at work.
+  - I want to play the game with my kids so that we can have fun together.
+  - I want to play the game against the computer so that I can play practice games.
 
 <br>
 
 - As a Frequent User,
-  - I want to be able to check my rank, so that I can see how good I am.
-  - I want to be able to contact the developer, so that I can suggest my ideas.
-  - I want to play the game against other players online, so that I can experience different play styles.
+  - I want to be able to check my rank so that I can see how good I am.
+  - I want to be able to contact the developer so that I can suggest my ideas.
+  - I want to play the game against other players online so that I can experience different play styles.
 
 <br>
 
@@ -73,7 +73,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 
 - Colour Scheme
 
-  The best-known version of the physical game set which has been produced by [Hasbro](https://shop.hasbro.com/en-us/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4) uses 3 colours: blue for the grid, yellow and red for discs. I have followed this colour convention with my own interpretation using [Canva](https://www.canva.com/) > Create a design > Logo > Styles and the colour picker.
+  The best-known version of the physical game set that has been produced by [Hasbro](https://shop.hasbro.com/en-us/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4) uses 3 colours: blue for the grid, yellow and red for discs. I have followed this colour convention with my own interpretation using [Canva](https://www.canva.com/) > Create a design > Logo > Styles and the colour picker.
 
   ![Colour Scheme](documentation/colour-scheme.png)
 
@@ -124,7 +124,7 @@ I created a flowchart to visualise the process before writing JavaScript code.
 # Features
 
 ## Implemented Features
-The site features a fully responsive design and contains 4 game related pages(__New game__, __Play__, __Help__, __Leaderboard__), 3 supporting pages(__Contact__, __Success__, __Fail__) and a 404 page. The header and footer are identical for all pages except the 404 page.
+The site features a fully responsive design and contains 4 game-related pages(__New game__, __Play__, __Help__, __Leaderboard__), 3 supporting pages(__Contact__, __Success__, __Fail__) and a 404 page. The header and footer are identical for all pages except the 404 page.
 
 - Header
 
@@ -152,13 +152,17 @@ The site features a fully responsive design and contains 4 game related pages(__
 
   ![New Game](documentation/features/new-game.png)
 
-  - Upon landing _Connect 4_, this page is displayed for quick access to the game.
+  - Upon landing _Connect 4_, the __New Game__ page is displayed for quick access to the game.
   - The form allows users to change the game settings.
-  - Feedback is provided when the user changes to an invalid option. Both players must have a unique colour/name and at least one human player is required.
+  - The computer/human and colour options are switched when the user changes to an invalid option.
+    - Both players must have a unique colour.
+    - At least one human player is required.
 
-    | Invalid option | 2 computer players | Same colour | Same name |
-    | :-------------: | :-------------: | :---------: | :-----------: |
-    |  | ![Invalid player type alert](documentation/features/new-game-alert-type.png) | ![Invalid disc colour alert](documentation/features/new-game-alert-colour.png) | ![Invalid display name alert](documentation/features/new-game-alert-name.png) |
+    ![Invalid options](https://media.giphy.com/media/wojbK6duCOUtyKjXQU/giphy.gif)
+
+  - Feedback is provided when the user tries to start a game with the same name for both players.
+
+    ![Invalid display name alert](documentation/features/new-game-alert-name.png)
 
   - This page provides two buttons that open the __Play__ page.
 
@@ -187,7 +191,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
   ![Help page](documentation/features/help.png)
 
-  - This page contains 5 articles about the game objective, how to play, keyboard controls, points system and leaderboard to help users understand the game and the site specific rules.
+  - This page contains 5 articles about the game objective, how to play, keyboard controls, points system and leaderboard to help users understand the game and the site-specific rules.
   - Less than 1024px width devices show each article in a single column to optimise the layout.
 
 - __Leaderboard__ page
@@ -195,7 +199,10 @@ The site features a fully responsive design and contains 4 game related pages(__
   ![Leaderboard page](documentation/features/leaderboard.png)
 
   - This page displays the top 5 players who gained the highest points with the number of games they won and the win rate to allow them to see their performance.
-  - The user can delete data from local storage with the convenient __Delete data__ button.
+  - The user can delete data from local storage with the __Delete data__ button. Upon clicking the button, the alert box is displayed to prevent the user from deleting it accidentally.
+
+    ![Leaderboard alert box](documentation/features/leaderboard-alert.png)
+
   - The message is shown when there is no data to display or it is unable to get the data from local storage.
 
     ![Leaderboard page without data](documentation/features/leaderboard-nodata.png)
@@ -214,7 +221,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 
       - This form allows the user to send their message without having to open their email client.
       - All the fields are required and give feedback if empty(including whitespace) or invalid.
-      - Upon clicking the __Send__ button, the user is redirected to either the __Success__ or __Fail__ page.
+      - Upon clicking the __Send__ button, feedback is provided by redirecting the user to either the __Success__ or __Fail__ page depending on the status.
       - Less than 1024px width devices show each article in a single column to optimise the layout.
 
 - __Success__ page
@@ -247,7 +254,7 @@ The site features a fully responsive design and contains 4 game related pages(__
 - Smarter AI Player
 
   The computer player picks a cell to place a disc randomly, so a game against the computer is too easy. I would like to build a smarter AI that prevents the player from winning so easily for a more enjoyable game.
-  There is Pascal Pons's [tutorial blog](http://blog.gamesolver.org/) about the connect 4 solver using alpha-beta pruning algorithm. Unfortunately, I was not able to fully understand the algorithm in depth to implement it into this project.
+  There is Pascal Pons's [tutorial blog](http://blog.gamesolver.org/) about the connect 4 solver using the alpha-beta pruning algorithm. Unfortunately, I was not able to fully understand the algorithm in depth to implement it into this project.
 
 - Online live game platform
 
@@ -285,20 +292,21 @@ The site features a fully responsive design and contains 4 game related pages(__
 - [BrowserStack](https://live.browserstack.com/dashboard#os=iOS&os_version=12.0&device_browser=safari&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2Fsejungkwak.github.io%2Fconnect-4%2F&speed=1) was used to test the site on different devices/browsers.
 - [Can I use](https://caniuse.com/) was used to check browser compatibility.
 - [Canva](https://www.canva.com/en_gb/) was used to create the logo and favicon.
-- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling and to debug during development and to check runtime performance.
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling, to debug during development and to check runtime performance.
 - [Diagrams.net](https://app.diagrams.net/) was used to create the flowchart.
 - [Eightshapes](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%231C304A%0D%0A%23DE0F3F%0D%0A%23FFC736%0D%0A%23FAFAFA&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18) was used to check the colour combination for accessibility purposes.
+- [Ezgif](https://ezgif.com/) was used to convert PNG format images to WebP for the favicon.
 - [Favicon.io](https://favicon.io/) was used to create the favicon.
 - [Figma](https://www.figma.com/) was used to create the mockups.
-- [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icon in the footer. Each icon file was downloaded and converted to the svg path using VS Code.
-- [GIPHY](https://giphy.com/) was used to convert video files to gifs for the README.
+- [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icon in the footer. Each icon file was downloaded and converted to the SVG path using VS Code.
+- [GIPHY](https://giphy.com/) was used to convert video files to GIFs for the README.
 - [Git](https://git-scm.com/) was used for version control.
 - [GitHub](https://github.com/) was used to store and deploy the project's code.
 - [Gitpod](https://www.gitpod.io/) was used to develop and test my code.
 - [Google Fonts](https://fonts.google.com/) was used to import Fredoka One and Poppins into the style.css file.
 - [JSHint](https://jshint.com/) was used to check the JavaScript validity.
 - [Regex101](https://regex101.com/) was used to create a regular expression to remove whitespace inside a string for the contact form.
-- [Visual Studio Code](https://code.visualstudio.com/) was used to edit my code and create svg paths from svg image files.
+- [Visual Studio Code](https://code.visualstudio.com/) was used to edit my code and create SVG paths from SVG image files.
 - [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) was used to check the CSS validity.
 - [W3C Markup Validation Service](https://validator.w3.org/) was used to check the HTML markup validity.
 - [WAVE](https://wave.webaim.org/) was used to evaluate the accessibility.
@@ -313,19 +321,19 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - As a First Time Visitor,
 
-  - [x] I want to know how to play the game, so that I can enjoy it fully.
+  - [x] I want to know how to play the game so that I can enjoy it fully.
 
     : The user can find the rules on the __Help__ page as well as other information to enhance their play experience.
 
-  - [x] I want to know clearly when it is my turn, so that I don't delay the game.
+  - [x] I want to know clearly when it is my turn so that I don't delay the game.
 
     : The name on the turn indicator has a bigger font size and is hard to overlook.
 
       ![Player turn](documentation/testing/user-story-test/turn-indicator.png)
 
-  - [x] I want to see the game board screen again when the game is over, so that I can figure out why I've won or lost.
+  - [x] I want to see the game board screen again when the game is over so that I can figure out why I've won or lost.
 
-    : The whole game board is shown under the result modal overlay when the game is over.
+    : The whole game board is still visible even when the game is over.
 
       ![Game result](documentation/testing/user-story-test/end-game.png)
 
@@ -333,17 +341,17 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - As a Returning Visitor,
 
-  - [x] I want to be able to play the game on my phone, so that I can play it during a break at work.
+  - [x] I want to be able to play the game on my phone so that I can play it during a break at work.
 
-    : The site is fully responsive, so the user can play on any device size.
+    : The site is fully responsive. The user can play on any device size.
 
       ![Mobile view](documentation/testing/user-story-test/mobile.png)
 
-  - [x] I want to play the game with my kids, so that we can have fun together.
+  - [x] I want to play the game with my kids so that we can have fun together.
 
-    : The game can be played with two players by setting both of human/computer sliders to human on the __New Game__ page.
+    : The game can be played with two human players by setting both human/computer sliders to human on the __New Game__ page.
 
-  - [x] I want to play the game against a computer, so that I can play practice games.
+  - [x] I want to play the game against the computer so that I can play practice games.
 
     : The game can be played against the computer by setting one of human/computer sliders to computer on the __New Game__ page.
 
@@ -351,19 +359,19 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - As a Frequent User,
 
-  - [x] I want to be able to check my rank, so that I can see how good I am.
+  - [x] I want to be able to check my rank so that I can see how good I am.
 
-    : The user can check their points, the number of games they played and the win rate on the __Leaderboard__ page.
+    : The user can check their points, the number of games they won and the win rate on the __Leaderboard__ page.
 
-  - [x] I want to be able to contact the developer, so that I can suggest my ideas.
+  - [x] I want to be able to contact the developer so that I can suggest my ideas.
 
     : The user can send a message via the contact form without having to open their email client.
 
       | Contact form | Received email |
-      | :-----------: | :-----------: |
+      | :----------: | :------------: |
       | ![Contact form](documentation/testing/user-story-test/contact-test.png) | ![Contact form received](documentation/testing/user-story-test/contact-test-receive.png) |
 
-  - [ ] I want to play the game against other players online, so that I can experience different play styles.
+  - [ ] I want to play the game against other players online so that I can experience different play styles.
 
     : This feature has not been implemented as my back-end knowledge is not yet strong enough to build an online game platform.
 
@@ -380,7 +388,8 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - JS Validation
   - 1 warning was found when passing through [JSHint](https://jshint.com/).
-  - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. The remaining warning of `one undefined variable` is because I used a library called _EmailJS_. Please refer to the link below for more details.
+    - The remaining warning of `one undefined variable` is because I used a library called _EmailJS_.
+  - There were more warnings when I first ran through the validator. I resolved the majority of them, but one remains. Please refer to the link below for more details.
 
 - [View details](documentation/VALIDATION.md)
 
@@ -389,21 +398,21 @@ The site features a fully responsive design and contains 4 game related pages(__
 ## Performance Testing
 
 - I have measured the performance, accessibility, best practices and SEO using [Lighthouse](https://developers.google.com/web/tools/lighthouse) in Chrome DevTools in incognito mode.
-- The pages(__New game__, __Play__, __Help__, __Leaderboard__) in the navigation bar are all written in the index.html file. Lighthouse does not generate a report for each section.
+- The pages(__New game__, __Play__, __Help__, __Leaderboard__) in the navigation bar are all written in the index.html file. Lighthouse generates a report per URL.
 
   - Mobile
 
     | Page\Category | Performance | Accessibility | Best practices | SEO |
     | :-----------: | :---------: | :-----------: | :------------: | :-: |
-    |   New game / Play / Help / Leaderboard |     99      |      100      |      100       | 100 |
-    |   404         |     99      |      100      |      100       | 100 |
+    |   New game / Play / Help / Leaderboard | 99 | 100 | 100 | 100 |
+    |   404 | 99 | 100 | 100 | 100 |
   
   - Desktop
 
     | Page\Category | Performance | Accessibility | Best practices | SEO |
     | :-----------: | :---------: | :-----------: | :------------: | :-: |
-    |   New game / Play / Help / Leaderboard   |     100     |      100      |      100       | 100 |
-    |   404         |     100     |      100      |      100       | 100 |
+    |   New game / Play / Help / Leaderboard | 100 | 100 | 100 | 100 |
+    |   404 | 100 | 100 | 100 | 100 |
 
   - [View screenshots](documentation/PERFORMANCE.md)
 
@@ -420,16 +429,16 @@ The site features a fully responsive design and contains 4 game related pages(__
 
 - Alert overlay staying on the screen even on an unrelated page
 
-  - Error: Overlays created on the __New game__ page remain visible when changing to a different page.
-  - Reason: The overlay was added to the `main` element, not the __New game__ page.
+  - Error: Overlays created on the __New game__ page remain visible when opening a different page.
+  - Reason: The overlay was added to the `main` element, not the __New game__ page(`section`).
   - Fix: I changed the code to add the overlay inside the __New game__ page instead of the `main` element.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/73f03cc6f8c56746e15062147864f5b78e63ba20)
 
 - Consecutive mouse clicks disrupting the turn order
 
-  - Error: The disc was not placed with the right colour when the mouse was clicked twice before the computer placed a disc in a single-player mode.
-  - Reason: The computer places a disc a second after a human player makes a move. If they click the mouse faster than the computer's move, the `mouseclick` event listener was called twice.
-  - Fix: I initialised a global variable called computerTurn and added/changed the boolean value at the beginning of a game, and the beginning and end of the computer's turn.
+  - Error: The disc was not placed with the right colour when the mouse was clicked twice before the computer placed a disc.
+  - Reason: The computer places a disc a second after a human player makes a move. When the mouse was clicked faster than the computer's move, the `mouseclick` event listener was called twice.
+  - Fix: I initialised a global variable called 'computerTurn' and added/changed the boolean value at the beginning of a game, and the beginning and end of the computer's turn.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/5ae90aabc321edcfe04be774ba933cfc212a3f57)
 
 - Unexpected trailing zeros in the win rate
@@ -438,13 +447,13 @@ The site features a fully responsive design and contains 4 game related pages(__
 
     ![Win rate error](documentation/bugs/bug-tofix.png)
 
-  - Reason: Adding another arithmetic operator of `* 100` after the `toFixed()` method caused the issue.
+  - Reason: This is a well-known issue related to [floating-point arithmetic](https://floating-point-gui.de/). I used the `toFixed()` method to avoid it. However, I added another arithmetic operator of `* 100` after `toFixed()`.
   - Fix: I moved the `toFixed()` method to the end of the operators after all the calculations are done.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c3baa2b66fee59460e8a7f4bf4279773f9ff9300)
 
-- `keydown` event triggering twice
+- `keydown` event triggered twice
 
-  - Error: Pressing the left arrow or right arrow key made a helper disc move twice after the second game.
+  - Error: Pressing the left or right arrow key made a column indicator disc move twice after the second game.
 
     ![Bug: Keydown](https://media.giphy.com/media/TW3dAH71dJfSOaeWbi/giphy.gif)
 
@@ -452,32 +461,32 @@ The site features a fully responsive design and contains 4 game related pages(__
   - Fix: I changed the arrow keys' `keydown` event listener to a global function.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/b2677bae7450e36b54f738e7ecc57aaff3f35e7a)
 
-- Displaying 2 helper discs at the same time
+- Displaying 2 column indicator discs at the same time
 
-  - Error: A previous helper disc stayed visible when switching the keyboard control to the mouse.
+  - Error: A previous column indicator disc stayed visible when switching the keyboard control to the mouse.
 
     ![Bug: 2 discs displaying](https://media.giphy.com/media/iGY8s3np7XRSm8OmGr/giphy.gif)
 
   - Reason: The `mouseout` event handler was not called when switching the keyboard control to the mouse.
-  - Fix: I added code that makes the helper discs invisible in the `mouseover` event handle function.
+  - Fix: I added code that makes the column indicator discs invisible in the `mouseover` event handler.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/e108aaeef3595c3de1ec5238cd304e90e547d95a)
 
 - Multiple alert overlay
 
   - Error: An alert overlay on the __New game__ page kept being created when pressing the space bar multiple times on the same checkbox.
   - Reason: I did not consider keyboard controls, and there was no code to prevent the overlay from being created.
-  - Fix: I added a condition to check if there is already an overlay on the __New Game__ page, and if there is, delete it before creating another one.
+  - Fix: I added a condition to check if there is already an overlay on the __New Game__ page. If there is, delete it before creating another one.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b42419d3613ae65bc59db6f0ccb8056ff0b4477)
 
-- `aspect-ratio`
+- Browser support for `aspect-ratio`
 
-  - Error: Daniel Callaghan in Code Institute spotted a bug which prevented the placing of a disc if the computer didn't place a disc first and the board was squashed.
+  - Error: Daniel Callaghan at Code Institute spotted a bug which prevented him from placing a disc if the computer didn't place a disc in the target column first and the board was squashed.
 
     ![Bug: aspect-ratio](documentation/bugs/bug-aspect-ratio.png)
 
-    (The image was provided by Daniel Callaghan through the [_Slack_](https://slack.com/intl/en-ie/) peer-code-review channel)
+    (The image was provided by Daniel Callaghan through the [_Slack_](https://slack.com/intl/en-ie/) __peer-code-review__ channel)
   
-  - Reason:  According to [_Can I use_](https://caniuse.com/), the `aspect-ratio` property is only supported by newer browser versions that were released after 2021.
+  - Reason: According to [_Can I use_](https://caniuse.com/), the `aspect-ratio` property is only supported by newer browser versions that were released after 2021.
   - Fix: I removed the `aspect-ratio` property in CSS and added code to set the height of each cell in JS.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/fed5b161ad1f43bbafc72601db26331cb7735b39)
 
@@ -488,26 +497,26 @@ The site features a fully responsive design and contains 4 game related pages(__
     - The height of cells was not dynamically adjusted to the screen resizing.
     - The layout of other pages was not changed by screen resizing if a game hadn't been started.
 
-  - Reason: `Uncaught TypeError: Cannot read properties of null (reading 'clientWidth')`. The property I was referring to is a cell in the game board, and there is no cell if the user hasn't pressed the __START__ button on the __New Game__ page.
-  - Fix: I added the code that sets the height when the __Play__ page opens. I also added a condition inside the `resize` event listener to check if a game has started, if so, it calls the function that sets the height.
+  - Reason: `Uncaught TypeError: Cannot read properties of null (reading 'clientWidth')`. The property I was referring to is a cell(`div`) in the game board, and there is no cell if the user hasn't pressed the __START__ button on the __New Game__ page.
+  - Fix: I added the code that sets the cell's height when the __Play__ page opens. I also added a condition inside the `resize` event listener to check if a game has started. If so, it calls the function that sets the cell's height.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/32edb5295e56a90bdf7a94f0afbf6f50cfacfd08)
-  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `calc(board width - block margin)` to the board container height instead.
+  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `calc(board width - rows' block margin)` to the board container's height instead.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
-- `min()` and `gap` for `flex`
+- Browser support for `min()` and `gap` for `flex`
 
   - Error: The layout was not what I designed when viewing on an older browser.
 
     ![Bug: Browser compatibility](documentation/bugs/bug-min.jpeg)
 
   - Reason: According to [_Can I use_](https://caniuse.com/), `min()` and `gap` for the flexbox are supported by newer browser versions that were released after 2019 and 2020 respectively.
-  - Fix: I replaced the `min()` property with `width` and `max-width` where possible, and added a media query where impossible. For the `gap` property, I removed this property and added a margin to the child element.
+  - Fix: I replaced the `min()` property with `width` and `max-width` where possible or added a media query where impossible. For the `gap` property, I removed it and added a margin to the child element.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
 - Sound delay in Safari
 
   - Error: The disc drop sound was delayed or wasn't played in Safari when multiple discs were placed in a short time.
-  - Reason: The `Audio()` constructor was called globally.
+  - Reason: I was not able to spot the exact reason for the issue, but this seems something to do with _Apple_ disabling automatic sound playing.
   - Fix: I moved the code that calls the `Audio()` constructor inside the function that plays the sound. However, this change caused a freeze issue on iOS. Please refer to the next bug fix for more details.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/82caddcc05e56dec61f56d117416b68d31877b19)
 
@@ -515,11 +524,18 @@ The site features a fully responsive design and contains 4 game related pages(__
 
   - Error: The __Play__ page froze occasionally when the sound was on in Safari and Chrome on iOS.
   - Reason: The audio delay on iOS seems to be a known issue as _Apple_ have disabled automatic sound playing by default.
-  - Fix: I created a variable that stores the `Audio()` constructor, and added the `autoplay` property and set it to `true`. I then added the `src` property in the function that plays the sound.
+  - Fix: I created a global variable that stores the `Audio()` constructor. I set `autoplay = true` to it and added a silent MP3 file. I then changed the `src` property in the function that plays the sound.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/7c255968d9901c4dd6fafe4b2fbb5d10149edc7d)
 
-- Landscape mode alert display
-  
+- End game sound bug in Safari on iOS
+
+  - Error: The end game sound was not playing when the computer wins in Safari on iOS.
+  - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
+  - Fix: I used a single global variable that stores the `Audio()` constructor for all sound effects.
+  - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
+
+- Landscape mode alert display error
+
   - Error: The landscape alert was displayed in the layer below the game result popup. When both were visible, the alert's __OK__ button was not accessible.
 
     ![Landscape mode alert](documentation/bugs/bug-landscape-alert.png)
@@ -528,39 +544,32 @@ The site features a fully responsive design and contains 4 game related pages(__
   - Fix: I increased the `z-index` value for the landscape mode alert to ensure the alert's __OK__ button is always accessible.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/ceefa4fb4e915d9ce71f26b6463ee30457f9f887)
 
-- Contact form validation
-  - Error: The form was not submitted and kept showing the custom validation message even when the input value was valid if the name or message field was previously invalid.
+- Contact form custom validation error
+
+  - Error: The custom validation message kept showing even when the input value was valid if the name or message field was previously invalid.
 
     ![Bug: Contact form custom validation](documentation/bugs/bug-validation.png)
 
-  - Reason: I used the `setCustomValidity()` method to check for a lot of whitespace from the user. This function needs to be reset after firing which I did not consider.
+  - Reason: I used the `setCustomValidity()` method to give feedback if the message is less than 10 characters excluding whitespace. This function needs to be reset after firing which I did not consider.
   - Fix: I added a change event listener to the `input`(name) and `textarea`(message) elements and added `setCustomValidity('')` inside the code block.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/b62ec62958d74c971d97e7654fa26a9b4fea0d53)
 
-- Helper disc disappearing
+- Column indicator disc disappearing
 
-  - Error: Attempting to drop a disc with the down arrow key made the helper disc vanish even though the column was full and it was not a valid target.
-  - Reason: The code to make the helper disc invisible to simulate movement was always running when the user pressed the arrow keys.
-  - Fix: I changed the code to make the helper disc remain visible when pressing the down arrow key in a column that is already full.
+  - Error: Attempting to drop a disc with the down arrow key made the column indicator disc vanish even though the column was full and it was not a valid target.
+  - Reason: The code to make the column indicator disc invisible to simulate movement was always running when pressing the arrow keys.
+  - Fix: I changed the code to make the column indicator disc remain visible when pressing the down arrow key in a column that is already full.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c90f4779675562ad1df9f0566c9b60b9028b611e)
-
-- End game sound bug in Safari on iOS
-
-  - Error: The end game sound was not playing when the computer wins in Safari on iOS.
-  - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
-  - Fix: I used a single global variable for the sound effects and set it to the sound effect source where I wanted to play.
-  - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
-
 
 ### Known Bugs
 
 - Federated Learning of Cohorts (FLoC)
-  
+
   - There is an error message: `Error with Permissions-Policy header: Unrecognized feature: 'interest-cohort'.` in the console in Chrome and Opera. This appears because _GitHub Pages_ has disabled Federated Learning of Cohorts(FLoC) which is an API for gathering users' data.
 
     ![Bug: FLoc](documentation/bugs/bug-floc.png)
 
-  - I have found more information about FLoC in the following documents: 
+  - I have found more information about FLoC in the following documents:
     - WICG's [FLoC repository](https://github.com/WICG/floc)
     - [Federated Learning of Cohorts (FLoC)](https://docs.gitlab.com/ee/user/admin_area/settings/floc.html) on [GitLab Docs](https://docs.gitlab.com/)
     - [GitHub Pages: Permissions-Policy: interest-cohort=() Header added to all pages sites](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/) on [GitHub Changelog](https://github.blog/changelog/)
@@ -572,10 +581,10 @@ The site features a fully responsive design and contains 4 game related pages(__
 
     ![Bug: User-Agent reduction](documentation/bugs/bug-user-agent.png)
 
-  - I have found more information about _Google_'s User-Agent reduction plan in this article [User-Agent reduction
+  - I have found more information about _Google_'s User-Agent reduction plan in the article [User-Agent reduction
 ](https://developer.chrome.com/docs/privacy-sandbox/user-agent/#:~:text=%23%20What%20is%20User%2DAgent%20reduction,a%20reduced%20User%2DAgent%20header.) on [Chrome Developers](https://developer.chrome.com/)
 
-  - The User-Agent deprecation does not prevent me from using this external library and I was not able to find a better alternative to _EmailJS_, so I have decided to ignore this issue for now.
+  - The User-Agent deprecation does not prevent me from using _EmailJS_ and I was not able to find a better alternative to it, so I have decided to ignore this issue for now.
 
 [Back To **Table of Contents**](#table-of-contents)
 
@@ -663,10 +672,10 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 
 - I referenced the [MDN Web Docs](https://developer.mozilla.org/en-US/), [W3schools](https://www.w3schools.com/) and [Stack Overflow](https://stackoverflow.com/) for JavaScript concepts.
 
-- Checking winner
+- Checking for a win
   - Source: Tom Campbell's YouTube video [Coding Connect 4 with JavaScript](https://www.youtube.com/watch?v=kA9OOeUXXSU)
     - Using the difference of the cells' indices: On a 6-row by 7-column grid where the top leftmost position is 0 and the top rightmost position is 6, the 2 consecutive cells in a horizontal line have 1 index difference, in a vertical line have 7, in a main diagonal line(\\) have 8 and in an off-diagonal line(/) have 6.
-  - I adapted his algorithm to check for a winning move, but I created my own approach by retrieving the cell's owner in the `div`(cell)'s `class` attribute.
+  - I adapted his algorithm to check for a win, but I created my own approach by retrieving the cell's owner in the `div`(cell)'s `class` attribute.
 
 - Merging multiple objects into one
   - Source: CRice's answer on [Stack Overflow](https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
@@ -683,15 +692,15 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
     - Using the `scrollTo({ top: 0, behavior: 'smooth' })` method to jump to the top of the page smoothly.
   - I found that using this technique, I could display a new page much more conveniently on a mobile device, by opening it at the very beginning.
 
-- Detect touch device
+- Detect touchscreen device
   - Source: KaMeHb's answer on [Stack Overflow](https://stackoverflow.com/questions/56324813/how-to-detect-touch-device-in-2019)
-    - The `matchMedia()` method and media feature with the `matches` property to detect touch devices.
-  - I used this method to detect touch devices and not add the `mouseover` event listener to the cell.
+    - The `matchMedia()` method and media feature with the `matches` property to detect touchscreen devices.
+  - I used this method to detect touchscreen devices and not add the `mouseover` event listener to the cell.
 
 - iPhone audio autoplay
   - Source: user2415116 and AndrewL's answer on [Stack Overflow](https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari)
-    - Storing the `Audio()` constructor in a variable, adding the `autoplay` property to it and changing the `src` enables it to play the sound once the user turns on the sound with an iPhone.
-  - I used this method to fix a bug that was causing freezes on the __Play__ page when the sound is on.
+    - Storing the `Audio()` constructor in a variable, setting `autoplay = true` to it, adding a silent MP3 file and changing `src` afterwards enables it to play the sound once the user turns on the sound with an iPhone.
+  - I used this method to fix bugs that were causing sound-related issues on iOS.
 
 - Helper functions
   - Source: Web Dev Simplified's [Stop Wasting Your Time - Use These 16 JS Utility Functions Instead](https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
@@ -704,7 +713,7 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 
   - I have downloaded 2 sounds from [Zapsplat](https://www.zapsplat.com/) and used them for the game sound effects.
     - Disc dropping: [Bright ping or pluck, notification tone, generic use. Version 1](https://www.zapsplat.com/music/bright-ping-or-pluck-notification-tone-generic-use-version-1/)
-    - Game ending: [Alert, prompt, win, positive tone 005](https://www.zapsplat.com/music/alert-prompt-win-positive-tone-005/)
+    - Game over: [Alert, prompt, win, positive tone 005](https://www.zapsplat.com/music/alert-prompt-win-positive-tone-005/)
 
 - Rules
 
@@ -712,7 +721,7 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 
 - Flowchart
 
-  - I have found Ahmad M. Sarhan, Adnan Shaout and Michele Shock's study paper [Real-Time Connect 4 Game Using Artificial Intelligence](https://thescipub.com/pdf/jcssp.2009.283.289.pdf). The study itself did not influence this project because it was implementing AI using the influence mapping algorithm in C++. However, the flowcharts in the paper influenced me on how to create my own flowchart.
+  - I have found Ahmad M. Sarhan, Adnan Shaout and Michele Shock's study paper [Real-Time Connect 4 Game Using Artificial Intelligence](https://thescipub.com/pdf/jcssp.2009.283.289.pdf). The study itself did not influence this project because it was implementing AI using the influence mapping algorithm in C++. However, the flowcharts in the paper helped me create my own flowchart.
 
 [Back To **Table of Contents**](#table-of-contents)
 
