@@ -271,22 +271,21 @@ function placeDisc(cell) {
  * @returns {function} Calls displayResult() if the game is over.
  */
 function checkGameOver() {
-  if (freeCellCounter === 0) {
+  const connected = checkForWin(player1Turn ? playerData.player1Colour : playerData.player2Colour);
+
+  if (connected) {
+    const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
+    const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
+    gameOver = true;
+    addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
+    return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
+  } else if (freeCellCounter === 0) {
     gameOver = true;
     addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, 0, 0);
     return displayResult('draw');
   } else {
-    const connected = checkForWin(player1Turn ? playerData.player1Colour : playerData.player2Colour);
-    if (connected) {
-      const player1Point = 42 - qsa(`.${playerData.player1Colour}`).length + NUM_OF_COLUMN;
-      const player2Point = 42 - qsa(`.${playerData.player2Colour}`).length + NUM_OF_COLUMN;
-      gameOver = true;
-      addToLocalstorage(player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, 1);
-      return displayResult('winner', player1Turn ? playerData.player1Name : playerData.player2Name, player1Turn ? player1Point : player2Point, connected);
-    } else {
-      playDropSound();
-      updatePlayer();
-    }
+    playDropSound();
+    updatePlayer();
   }
 }
 
