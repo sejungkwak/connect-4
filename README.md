@@ -181,6 +181,10 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - The first character of the disc colour is inside all placed discs for the colour blind users.
   - The game board is being adjusted to the screen size.
   - The user can play the game with arrow keys to allow the user to control depending on their preference.
+  - The game result is displayed with the __PLAY AGAIN__ button to allow the user to start another game with the same settings.
+
+    ![Game result modal](documentation/features/play-gameover.png)
+
   - If the user hasn't started a game and opens this page, the message displays instead of the game board to let the user know how to start a game. The user can easily navigate to the __New Game__ page by clicking the button.
 
     ![Play page without a game](documentation/features/play-nogame.png)
@@ -201,7 +205,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
   ![Leaderboard page](documentation/features/leaderboard.png)
 
   - This page displays the top 5 players who gained the highest points with the number of games they won and the win rate to allow them to see their performance.
-  - The user can delete data from local storage with the __Delete data__ button. Upon clicking the button, the alert box is displayed to prevent the user from deleting it accidentally.
+  - The user can delete data from local storage with the __DELETE DATA__ button. Upon clicking the button, the alert box is displayed to prevent the user from deleting it accidentally.
 
     ![Leaderboard alert box](documentation/features/leaderboard-alert.png)
 
@@ -223,7 +227,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
       - This form allows the user to send their message without having to open their email client.
       - All the fields are required and give feedback if empty(including whitespace) or invalid.
-      - Upon clicking the __Send__ button, feedback is provided by redirecting the user to either the __Success__ or __Fail__ page depending on the status.
+      - Upon clicking the __SEND__ button, feedback is provided by redirecting the user to either the __Success__ or __Fail__ page depending on the status.
       - Less than 1024px width devices show each article in a single column to optimise the layout.
 
 - __Success__ page
@@ -335,8 +339,6 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - [x] I want to see the game board screen again when the game is over so that I can figure out why I've won or lost.
 
     : The whole game board is still visible even when the game is over.
-
-      ![Game result](documentation/testing/user-story-test/end-game.png)
 
 <br>
 
