@@ -28,7 +28,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
   - [Programs](#programs)
 
 [Testing](#testing)
-  - [Testing User Stories](#testing-user-stories-from-user-experience-ux-section)
+  - [Testing User Stories](#testing-user-stories-from-the-user-experience-ux-section)
   - [Code Validation](#code-validation)
   - [Functionality Testing](#functionality-testing)
   - [Performance Testing](#performance-testing)
@@ -42,6 +42,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 [Credits](#credits)
   - [Code](#code)
   - [Content](#content)
+  - [Acknowledgements](#acknowledgements)
 
 <br>
 
@@ -106,7 +107,7 @@ _CONNECT 4_ is a website hosting a game called [Connect Four](https://en.wikiped
 - To achieve these goals:
 	- It is written in a single HTML file.
   - Each section is shown one at a time. This provides the user with the experience of separate pages for each section while ensuring the browser does not need to reload the page.
-	- The __New game__ page is on the landing screen.
+	- The __New game__ page is the landing page of the website.
 - I created wireframes and mockups for mobile and desktop.
 - [View Wireframes and Mockups](documentation/DESIGN.md)
 
@@ -288,25 +289,24 @@ The site features a fully responsive design and contains 4 game-related pages(__
 ## Programs
 
 - [Am I Responsive](http://ami.responsivedesign.is/) was used to create the image showing a responsive design for the README.
-- [Awesome Screenshot and Screen Recorder](https://chrome.google.com/webstore/detail/awesome-screenshot-and-sc/nlipoenfbbikpbjkfpfillcgkoblgpmj) was used to take the screenshots of the entire page for the README.
 - [Balsamiq](https://balsamiq.com/) was used to create the wireframes.
 - [BrowserStack](https://live.browserstack.com/dashboard#os=iOS&os_version=12.0&device_browser=safari&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2Fsejungkwak.github.io%2Fconnect-4%2F&speed=1) was used to test the site on different devices/browsers.
 - [Can I use](https://caniuse.com/) was used to check browser compatibility.
 - [Canva](https://www.canva.com/en_gb/) was used to create the logo and favicon.
-- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling, to debug during development and to check runtime performance.
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) was used to view the site's styling, debug during development and check runtime performance.
 - [Diagrams.net](https://app.diagrams.net/) was used to create the flowchart.
 - [Eightshapes](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%231C304A%0D%0A%23DE0F3F%0D%0A%23FFC736%0D%0A%23FAFAFA&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18) was used to check the colour combination for accessibility purposes.
 - [Ezgif](https://ezgif.com/) was used to convert PNG format images to WebP for the favicon.
 - [Favicon.io](https://favicon.io/) was used to create the favicon.
 - [Figma](https://www.figma.com/) was used to create the mockups.
-- [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icon in the footer. Each icon file was downloaded and converted to the SVG path using VS Code.
+- [Font Awesome](https://fontawesome.com/) was used for the responsive hamburger menu icons as well as the _GitHub_ and envelope icons in the footer. Each icon file was downloaded and converted to the SVG path using VS Code.
 - [GIPHY](https://giphy.com/) was used to convert video files to GIFs for the README.
 - [Git](https://git-scm.com/) was used for version control.
 - [GitHub](https://github.com/) was used to store and deploy the project's code.
 - [Gitpod](https://www.gitpod.io/) was used to develop and test my code.
 - [Google Fonts](https://fonts.google.com/) was used to import Fredoka One and Poppins into the style.css file.
 - [JSHint](https://jshint.com/) was used to check the JavaScript validity.
-- [Regex101](https://regex101.com/) was used to create a regular expression to remove whitespace inside a string for the contact form.
+- [Regex101](https://regex101.com/) was used to create a regular expression to remove whitespace inside a string in the contact form.
 - [Visual Studio Code](https://code.visualstudio.com/) was used to edit my code and create SVG paths from SVG image files.
 - [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) was used to check the CSS validity.
 - [W3C Markup Validation Service](https://validator.w3.org/) was used to check the HTML markup validity.
@@ -318,7 +318,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
 # Testing
 
-## Testing User Stories from User Experience (UX) Section
+## Testing User Stories from the User Experience (UX) Section
 
 - As a First Time Visitor,
 
@@ -410,13 +410,13 @@ The site features a fully responsive design and contains 4 game-related pages(__
 - During the tests, I found bugs below.
   - The __OK__ button on the display mode alert was not accessible when the game result box was on the screen.
   - Custom validation messages for the contact form kept showing even when the input value was valid.
-  - A column indicator disc disappeared even when pressing the down arrow key on the full column.
+  - A column indicator disc disappeared even when pressing the down arrow key on a full column.
 - I have fixed the issues and documented them in the [fixed bugs](#fixed-bugs) section. Please refer to the last three items in the section for more details.
   - Inaccessible display mode alert button
   - Contact form custom validation error
   - Column indicator disc disappearing
 
-- All the tests passed after an aditional test: [View details](documentation/FUNCTIONALITY.md)
+- All the tests passed after the additional fixes: [View details](documentation/FUNCTIONALITY.md)
 
 <br>
 
@@ -472,7 +472,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
     ![Win rate error](documentation/bugs/bug-tofix.png)
 
-  - Reason: This is a well-known issue related to [floating-point arithmetic](https://floating-point-gui.de/). I used the `toFixed()` method to avoid it. However, I added another arithmetic operator of `* 100` after `toFixed()`.
+  - Reason: This is related to [floating-point arithmetic](https://floating-point-gui.de/). I used the `toFixed()` method to avoid the floating point inaccuracy error. However, I added another arithmetic operator of `* 100` after `toFixed()`.
   - Fix: I moved the `toFixed()` method to the end of the operators after all the calculations are done.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c3baa2b66fee59460e8a7f4bf4279773f9ff9300)
 
@@ -513,7 +513,8 @@ The site features a fully responsive design and contains 4 game-related pages(__
   
   - Reason: According to [_Can I use_](https://caniuse.com/), the `aspect-ratio` property is only supported by newer browser versions that were released after 2021.
   - Fix: I removed the `aspect-ratio` property in CSS and added code to set the height of each cell in JS.
-  - [View commit details](https://github.com/sejungkwak/connect-4/commit/fed5b161ad1f43bbafc72601db26331cb7735b39)
+  - [View commit details / CSS](https://github.com/sejungkwak/connect-4/commit/c230c64d9131e0a26a0307f326589c34a79621f7)
+  - [View commit details / JS](https://github.com/sejungkwak/connect-4/commit/fed5b161ad1f43bbafc72601db26331cb7735b39)
 
 - Screen resizing
   
@@ -541,7 +542,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 - Sound delay in Safari
 
   - Error: The disc drop sound was delayed or wasn't played in Safari when multiple discs were placed in a short time.
-  - Reason: I was not able to spot the exact reason for the issue, but this seems something to do with _Apple_ disabling automatic sound playing.
+  - Reason: I was not able to spot the exact reason for the issue, but this seems to be something to do with _Apple_ disabling automatic sound playing.
   - Fix: I moved the code that calls the `Audio()` constructor inside the function that plays the sound. However, this change caused a freeze issue on iOS. Please refer to the next bug fix for more details.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/82caddcc05e56dec61f56d117416b68d31877b19)
 
@@ -549,7 +550,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
   - Error: The __Play__ page froze occasionally when the sound was on in Safari and Chrome on iOS.
   - Reason: The audio delay on iOS seems to be a known issue as _Apple_ have disabled automatic sound playing by default.
-  - Fix: I created a global variable that stores the `Audio()` constructor. I set `autoplay = true` to it and added a silent MP3 file. I then changed the `src` property in the function that plays the sound.
+  - Fix: I created a global variable that stores the `Audio()` constructor, set `autoplay = true` to it and added a silent MP3 file. I then changed the `src` property in the function that plays the sound.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/7c255968d9901c4dd6fafe4b2fbb5d10149edc7d)
 
 - End game sound bug in Safari on iOS
@@ -583,7 +584,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
   - Error: Attempting to drop a disc with the down arrow key made the column indicator disc vanish even though the column was full and it was not a valid target.
   - Reason: The code to make the column indicator disc invisible to simulate movement was always running when pressing the arrow keys.
-  - Fix: I changed the code to make the column indicator disc remain visible when pressing the down arrow key in a column that is already full.
+  - Fix: I changed the code to make the column indicator disc remain visible when pressing the down arrow key on a column that is already full.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c90f4779675562ad1df9f0566c9b60b9028b611e)
 
 ### Known Bugs
@@ -705,10 +706,10 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 - Merging multiple objects into one
   - Source: CRice's answer on [Stack Overflow](https://stackoverflow.com/questions/49020000/reduce-multiple-objects-into-one-adding-values-together)
     - Checking if there are more than 2 objects in an array that have the same value and merging those objects using the `reduce()` and `find()` methods.
-  - I used this method to merge objects from local storage data to display on the __Leaderboard__ page.
+  - I used this method to merge objects by each player's name from local storage data to display on the __Leaderboard__ page.
 
 - Sorting data by the value inside objects
-  - Source: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+  - Source: The example [Creating, displaying, and sorting an array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#creating_displaying_and_sorting_an_array) of the article __Array.prototype.sort()__ on _MDN Web Docs_
     - Comparing the values of objects using the subtraction operator to sort the objects.
   - I used this method to sort the data by player's points to display on the __Leaderboard__ page.
 
@@ -730,13 +731,13 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 - Helper functions
   - Source: Web Dev Simplified's [Stop Wasting Your Time - Use These 16 JS Utility Functions Instead](https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
     - Storing a repeated method in a function to reduce typing.
-  - I used this method to store `document.getElementById()` and `document.querySelectorAll()` which is then stored in an array using the spread operator.
+  - I used this method for `document.getElementById()` and `document.querySelectorAll()` which is then stored in an array using the spread operator.
 
 ## Content
 
 - Sounds
 
-  - I have downloaded 2 sounds from [Zapsplat](https://www.zapsplat.com/) and used them for the game sound effects.
+  - I have downloaded 2 MP3 files from [Zapsplat](https://www.zapsplat.com/) and used them for the game sound effects.
     - Disc dropping: [Bright ping or pluck, notification tone, generic use. Version 1](https://www.zapsplat.com/music/bright-ping-or-pluck-notification-tone-generic-use-version-1/)
     - Game over: [Alert, prompt, win, positive tone 005](https://www.zapsplat.com/music/alert-prompt-win-positive-tone-005/)
 
@@ -747,6 +748,13 @@ These steps demonstrate how to make a copy of this repository on your _GitHub_ a
 - Flowchart
 
   - I have found Ahmad M. Sarhan, Adnan Shaout and Michele Shock's study paper [Real-Time Connect 4 Game Using Artificial Intelligence](https://thescipub.com/pdf/jcssp.2009.283.289.pdf). The study itself did not influence this project because it was implementing AI using the influence mapping algorithm in C++. However, the flowcharts in the paper helped me create my own flowchart.
+
+## Acknowledgements
+
+- My fiancé Ciarán Maher for his support, feedback and proofreading.
+- My friends Hwayoung Kim, Junga Choi, Sena Park and Haeyoung Lee for their feedback.
+- My mentor Narender Singh for his guidance and advice.
+- Fellow students Daniel Callaghan, Ken Sheridan, Shahidul Islam and Cohort Facilitator Kasia Bogucka at Code Institute for their feedback.
 
 [Back To **Table of Contents**](#table-of-contents)
 
