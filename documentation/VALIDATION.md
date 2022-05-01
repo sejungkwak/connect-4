@@ -1,11 +1,11 @@
 # Table of Contents
 
 - [HTML Validation](#html-validation)
-  - Home page
+  - New game / Play / Help / Leaderboard page
   - 404 page
 
 - [CSS Validation](#css-validation)
-  - Home page
+  - New game / Play / Help / Leaderboard page
   - 404 page
   - Previous Warnings
 
@@ -18,9 +18,9 @@
 
 # HTML Validation
 
-## Home page
+## New game / Play / Help / Leaderboard page
 
-![Home page](testing/w3c-testing-markup/home.png)
+![New game / Play / Help / Leaderboard page](testing/w3c-testing-markup/home.png)
 
 ## 404 page
 
@@ -32,9 +32,9 @@
 
 # CSS Validation
 
-## Home page
+## New game / Play / Help / Leaderboard page
 
-![Home page](testing/w3c-testing-css/home.png)
+![New game / Play / Help / Leaderboard page](testing/w3c-testing-css/home.png)
 
 ## 404 page
 
@@ -78,7 +78,7 @@ I chose the options shown in the below image when I ran the code through JSHint.
 
   - Message: `One undefined variable`
 
-    - `emailjs` method is called at line 846 and this is not a variable that I can define in my custom JS file because EmailJS is an email API library and its CDN is linked to the index.html file at line 290 right above the custom JS file link.
+    - `emailjs` method is called at line 956 and this is not a variable that I can define in my custom JS file because EmailJS is an email API library and its CDN is linked to the index.html file at line 290 right above the custom JS file link.
 
 ## Previous Warnings
 
