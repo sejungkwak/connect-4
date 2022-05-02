@@ -51,22 +51,10 @@ soundEffect.autoplay = true;
 soundEffect.src =
   'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
 
-/**
- * Runs when a user presses the "start" button on the New Game page.
- */
-function startBtnHandler() {
-  const isPlayerNameValid = validatePlayerName();
-  if (isPlayerNameValid) {
-    gamePlayed = 0;
-    renderPage('game');
-    runGame();
-  }
-}
-
-/**
- * Runs when input values on the New Game page are valid.
- * Creates and configures a new game.
- */
+/**----------------------------------------------------------------------------
+ * Runs after the user clicks the "start" or "play again" button:
+ * Starts a new game.
+ -----------------------------------------------------------------------------*/
 function runGame() {
   const overlays = qsa('.overlay');
   freeCellCounter = 42;
@@ -99,9 +87,10 @@ function runGame() {
   }
 }
 
-/**
- * Runs when it's the computer's turn.
- */
+/**----------------------------------------------------------------------------
+ * Runs when it's the computer's turn:
+ * Picks a random number to place a disc.
+ -----------------------------------------------------------------------------*/
 function computerMove() {
   const randomNumber = Math.floor(Math.random() * NUM_OF_COLUMN);
   const freeCell = findFreeCell(randomNumber);
@@ -118,10 +107,10 @@ function computerMove() {
   }, 1000);
 }
 
-/**
- * Runs when it's a human player's turn.
+/**----------------------------------------------------------------------------
+ * Runs when it's a human player's turn:
  * Adds mouse event listeners.
- */
+ -----------------------------------------------------------------------------*/
 function playerMove() {
   const cells = qsa('.cell');
 
@@ -142,10 +131,12 @@ function playerMove() {
   }
 }
 
-/**
- * Runs when a human player presses one of the arrow keys.
- * @param {string} pressedKey
- */
+/**----------------------------------------------------------------------------
+ * Runs when a player presses one of the arrow keys:
+ * Changes the visibility of a column indicator disc.
+ * Column indicator disc: a disc that is on top of the first row.
+ * @param {string} pressedKey ArrowLeft, ArrowRight or ArrowDown.
+ -----------------------------------------------------------------------------*/
 function keydownHandler(pressedKey) {
   const cells = qsa('.cell');
   const invisibleCells = qsa('.cell.invisible');
@@ -155,7 +146,6 @@ function keydownHandler(pressedKey) {
   if (computerTurn || computerTurn === undefined) return;
 
   // Changes a visible column indicator disc's colour to the board colour.
-  // Column indicator disc: a disc that is on top of the first row.
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
     if (!cells[i].classList.contains('invisible')) {
       if (pressedKey === 'ArrowLeft' || pressedKey === 'ArrowRight') {
@@ -193,12 +183,12 @@ function keydownHandler(pressedKey) {
   }
 }
 
-/**
- * Runs when a human player moves the mouse on the board.
+/**----------------------------------------------------------------------------
+ * Runs when a player moves the mouse on the board:
  * Makes a column indicator disc move as the mouse moves.
- * column indicator disc: a disc that is on top of the first row.
- * @param {object} event
- */
+ * Column indicator disc: a disc that is on top of the first row.
+ * @param {object} event Mouseover event.
+ -----------------------------------------------------------------------------*/
 function cellMouseoverHandler(event) {
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
@@ -211,21 +201,22 @@ function cellMouseoverHandler(event) {
   cells[colIndex].classList.remove('invisible');
 }
 
-/**
- * Runs when a human player clicks on the board.
+/**----------------------------------------------------------------------------
+ * Runs when a player clicks on the board:
+ * Calculates the target column's index.
  * @param {object} event Mouse click event.
- */
+ -----------------------------------------------------------------------------*/
 function calculateColIndex(event) {
   const cells = qsa('.cell');
   const colIndex = cells.indexOf(event.target) % 7;
   cellClickHandler(colIndex);
 }
 
-/**
- * Runs when a human player clicks on the board or
- * presses the down arrow key.
+/**----------------------------------------------------------------------------
+ * Runs when a player clicks on the board or presses the down arrow key:
+ * Calls the function that Places a disc if there is an available cell.
  * @param {number} colIndex The index of the target column.
- */
+ -----------------------------------------------------------------------------*/
 function cellClickHandler(colIndex) {
   const cells = qsa('.cell');
   const freeCell = findFreeCell(colIndex);
@@ -236,12 +227,12 @@ function cellClickHandler(colIndex) {
   placeDisc(freeCell);
 }
 
-/**
- * Runs after the computer picks a column or
- * a human player's target column index is calculated.
+/**----------------------------------------------------------------------------
+ * Runs after the target column is calculated:
+ * Returns the lowest empty cell(div element) of the target column.
  * @param {number} colIndex The index of the target column.
- * @returns {object} cell The lowest empty cell(div element) in the target column.
- */
+ * @returns {object} cell The lowest empty cell of the target column.
+ -----------------------------------------------------------------------------*/
 function findFreeCell(colIndex) {
   const cells = qsa(`[data-coords-col="${colIndex}"]`);
 
@@ -252,11 +243,11 @@ function findFreeCell(colIndex) {
   }
 }
 
-/**
- * Runs when there's an empty cell in the target column.
+/**----------------------------------------------------------------------------
+ * Runs when there's an empty cell in the target column:
  * Places a disc into the target cell.
- * @param {object} cell
- */
+ * @param {object} cell The lowest empty cell of the target column.
+ -----------------------------------------------------------------------------*/
 function placeDisc(cell) {
   cell.classList.add(player1Turn ? playerData.player1Colour : playerData.player2Colour);
   cell.textContent = `
@@ -266,10 +257,10 @@ function placeDisc(cell) {
   checkGameOver();
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs after a disc is placed.
  * @returns {function} Calls displayResult() if the game is over.
- */
+ -----------------------------------------------------------------------------*/
 function checkGameOver() {
   const connected = checkForWin(player1Turn ? playerData.player1Colour : playerData.player2Colour);
 
@@ -289,15 +280,16 @@ function checkGameOver() {
   }
 }
 
-// Source: Tom Campbell's "Coding Connect 4 with JavaScript"(https://www.youtube.com/watch?v=kA9OOeUXXSU)
-/**
- * Runs after the computer or human player places a disc.
+/**----------------------------------------------------------------------------
+ * Runs after the computer or human player places a disc:
+ * Checks if the current player has formed 4 discs in a line.
  * @param {string} playerColour The current player's colour.
  * @returns {array} The 4 cells(div elements) that are in a line.
- */
+ -----------------------------------------------------------------------------*/
 function checkForWin(playerColour) {
   const cells = qsa('.cell').splice(NUM_OF_COLUMN);
 
+  // Source: Tom Campbell's "Coding Connect 4 with JavaScript"(https://www.youtube.com/watch?v=kA9OOeUXXSU)
   for (let index = 0; index < NUM_OF_ROW * NUM_OF_COLUMN; index++) {
     const horizontalWin = horizontal4Check(index, cells[index], cells[index + 1], cells[index + 2], cells[index + 3], playerColour);
     const verticalWin = vertical4Check(index, cells[index], cells[index + NUM_OF_COLUMN], cells[index + NUM_OF_COLUMN * 2], cells[index + NUM_OF_COLUMN * 3], playerColour);
@@ -319,16 +311,16 @@ function checkForWin(playerColour) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs after a disc is placed.
- * @param {number} index 
- * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
- * @param {object} cell2 The div element(cell) which is the value at the index+1 position in the array of cells.
- * @param {object} cell3 The div element(cell) which is the value at the index+2 position in the array of cells.
- * @param {object} cell4 The div element(cell) which is the value at the index+3 position in the array of cells.
+ * @param {number} index
+ * @param {object} cell1 The cell/div element which is at the index position in the array of cells.
+ * @param {object} cell2 The cell which is at the index+1 position in the array of cells.
+ * @param {object} cell3 The cell which is at the index+2 position in the array of cells.
+ * @param {object} cell4 The cell which is at the index+3 position in the array of cells.
  * @param {string} colour The current player's disc colour
  * @returns {array} The cells that are 4 in a row.
- */
+ -----------------------------------------------------------------------------*/
 function horizontal4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
     index % NUM_OF_COLUMN < 4 &&
@@ -338,17 +330,17 @@ function horizontal4Check(index, cell1, cell2, cell3, cell4, colour) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs after a disc is placed and
  * if the horizontal win condition is not met.
  * @param {number} index 
- * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
- * @param {object} cell2 The div element(cell) which is the value at the index+7 position in the array of cells.
- * @param {object} cell3 The div element(cell) which is the value at the index+14 position in the array of cells.
- * @param {object} cell4 The div element(cell) which is the value at the index+21 position in the array of cells.
+ * @param {object} cell1 The cell/div element which is at the index position in the array of cells.
+ * @param {object} cell2 The cell which is at the index+7 position in the array of cells.
+ * @param {object} cell3 The cell which is at the index+14 position in the array of cells.
+ * @param {object} cell4 The cell which is at the index+21 position in the array of cells.
  * @param {string} colour The current player's disc colour
  * @returns {array} The cells that are 4 in a vertical line.
- */
+ -----------------------------------------------------------------------------*/
 function vertical4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
     index < NUM_OF_COLUMN * 3 &&
@@ -358,17 +350,17 @@ function vertical4Check(index, cell1, cell2, cell3, cell4, colour) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs after a disc is placed and
  * if the horizontal and vertical win conditions are not met.
  * @param {number} index 
- * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
- * @param {object} cell2 The div element(cell) which is the value at the index+8 position in the array of cells.
- * @param {object} cell3 The div element(cell) which is the value at the index+16 position in the array of cells.
- * @param {object} cell4 The div element(cell) which is the value at the index+24 position in the array of cells.
+ * @param {object} cell1 The cell/div element which is at the index position in the array of cells.
+ * @param {object} cell2 The cell which is at the index+8 position in the array of cells.
+ * @param {object} cell3 The cell which is at the index+16 position in the array of cells.
+ * @param {object} cell4 The cell which is at the index+24 position in the array of cells.
  * @param {string} colour The current player's disc colour
  * @returns {array} The cells that are 4 in a main diagonal(\) line.
- */
+ -----------------------------------------------------------------------------*/
 function mainDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
     index % NUM_OF_COLUMN < 4 &&
@@ -379,16 +371,16 @@ function mainDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs after a disc is placed and if other win conditions are not met.
  * @param {number} index 
- * @param {object} cell1 The div element(cell) which is the value at the index position in the array of cells.
- * @param {object} cell2 The div element(cell) which is the value at the index+6 position in the array of cells.
- * @param {object} cell3 The div element(cell) which is the value at the index+12 position in the array of cells.
- * @param {object} cell4 The div element(cell) which is the value at the index+18 position in the array of cells.
+ * @param {object} cell1 The cell/div element which is at the index position in the array of cells.
+ * @param {object} cell2 The cell which is at the index+6 position in the array of cells.
+ * @param {object} cell3 The cell which is at the index+12 position in the array of cells.
+ * @param {object} cell4 The cell which is at the index+18 position in the array of cells.
  * @param {string} colour The current player's disc colour
  * @returns {array} The cells that are 4 in a off-diagonal(/) line.
- */
+ -----------------------------------------------------------------------------*/
 function offDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   if (
     index % NUM_OF_COLUMN >= 3 &&
@@ -399,15 +391,15 @@ function offDiagonal4Check(index, cell1, cell2, cell3, cell4, colour) {
   }
 }
 
-/**
- * Runs when checking the win conditions.
+/**----------------------------------------------------------------------------
+ * Runs when checking win conditions.
  * @param {object} cell1 The div element: the first cell in a line.
  * @param {object} cell2 The div element: the second cell in a line.
  * @param {object} cell3 The div element: the third cell in a line.
  * @param {object} cell4 The div element: the fourth cell in a line.
  * @param {string} colour The current player's disc colour
  * @returns {boolean} True if all the target cells have the current player's disc colour.
- */
+ -----------------------------------------------------------------------------*/
 function checkCellColour(cell1, cell2, cell3, cell4, colour) {
   if (
     cell1.classList.contains(colour) &&
@@ -419,14 +411,14 @@ function checkCellColour(cell1, cell2, cell3, cell4, colour) {
   }
 }
 
-/**
- * Runs when the game is over.
- * Displays the result of the game and the "play again" button.
+/**----------------------------------------------------------------------------
+ * Runs when the game is over:
+ * Displays the game result and the "play again" button.
  * @param {string} result
  * @param {string} player The winner if there is a winner
  * @param {number} point The point if there is a winner
  * @param {array} cells The 4 cells in a line
- */
+ -----------------------------------------------------------------------------*/
 function displayResult(result, player = null, point = null, cells = null) {
   const overlay = document.createElement('aside');
   let message;
@@ -456,10 +448,10 @@ function displayResult(result, player = null, point = null, cells = null) {
   elById('playAgainBtn').addEventListener('click', runGame);
 }
 
-/**
- * Runs after dropping a disc and
- * if the game is not over.
- */
+/**----------------------------------------------------------------------------
+ * Runs after dropping a disc and if the game is not over:
+ * Updates the current player.
+ -----------------------------------------------------------------------------*/
 function updatePlayer() {
   player1Turn = player1Turn ? false : true;
   updateName(player1Turn ? playerData.player1Name : playerData.player2Name);
@@ -471,11 +463,11 @@ function updatePlayer() {
   }
 }
 
-/**
- * Runs at the beginning of each player's turn.
+/**----------------------------------------------------------------------------
+ * Runs at the beginning of each player's turn:
  * Displays the player's name on the screen.
  * @param {string} currentPlayerName
- */
+ -----------------------------------------------------------------------------*/
 function updateName(currentPlayerName) {
   const currentPlayerEl = elById('currentPlayer');
   let text;
@@ -489,12 +481,11 @@ function updateName(currentPlayerName) {
   currentPlayerEl.innerText = text;
 }
 
-/**
- * Runs at the beginning of each player's turn.
- * Update the class name of column indicator discs
- * that are on top of the first row.
+/**----------------------------------------------------------------------------
+ * Runs at the beginning of each player's turn:
+ * Update the class name of cells that are on top of the first row.
  * @param {string} currentPlayerColour
- */
+ -----------------------------------------------------------------------------*/
 function updateColour(currentPlayerColour) {
   const topCells = qsa('.cell');
   for (let i = 0; i < NUM_OF_COLUMN; i++) {
@@ -504,9 +495,9 @@ function updateColour(currentPlayerColour) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a player drops a disc and the game is still on.
- */
+ -----------------------------------------------------------------------------*/
 function playDropSound() {
   if (!isMuted) {
     soundEffect.src = 'assets/sounds/drop.mp3';
@@ -514,9 +505,9 @@ function playDropSound() {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a game is over.
- */
+ -----------------------------------------------------------------------------*/
 function playWinSound() {
   if (!isMuted) {
     soundEffect.src = 'assets/sounds/end.mp3';
@@ -524,9 +515,9 @@ function playWinSound() {
   }
 }
 
-/**
- * Runs when a user clicks the sound/mute icon.
- */
+/**----------------------------------------------------------------------------
+ * Runs when a user clicks the sound or mute icon.
+ -----------------------------------------------------------------------------*/
 function soundBtnToggler() {
   const soundBtns = qsa('.volume-btn');
   isMuted = isMuted ? false : true;
@@ -538,9 +529,9 @@ function soundBtnToggler() {
   return isMuted;
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs at the beginning of each game.
- */
+ -----------------------------------------------------------------------------*/
 function createGrid() {
   boardEl.innerHTML = '';
   boardEl.style.marginTop = 'unset';
@@ -560,11 +551,11 @@ function createGrid() {
   }
 }
 
-/**
- * Runs when input values are invalid
- * on the New Game page.
+/**----------------------------------------------------------------------------
+ * Runs when the user changes the computer/human or colour option to invalid:
+ * Switches the opponent's option to make the settings valid.
  * @param {string} type The settings the player changed.
- */
+ -----------------------------------------------------------------------------*/
 function invalidChangeHandler(type) {
   if (type === 'player1Computer') {
     player2TypeCheckbox.checked = true;
@@ -592,12 +583,28 @@ function invalidChangeHandler(type) {
   }
 }
 
-/**
- * Runs after a user pressed the "start" button on the New Game page.
- * @returns {function | object} Calls the showAlert function
- * if both players have the same name. Returns playerData object otherwise.
- */
+/**----------------------------------------------------------------------------
+ * Runs when the user pressed the "start" button on the New Game page:
+ * Checks if both players have the same name.
+ * @returns {function} Calls the showAlert function if input values are invalid,
+ * or else calls the setPlayerName function.
+ -----------------------------------------------------------------------------*/
 function validatePlayerName() {
+  let player1Name = elById('player1Name').value.trim();
+  let player2Name = elById('player2Name').value.trim();
+
+  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
+    return showAlert('newGame');
+  } else {
+    return setPlayerName();
+  }
+}
+
+/**----------------------------------------------------------------------------
+ * Runs when each player's name is unique:
+ * Sets the player's name to the default name if the user doesn't input a name.
+ -----------------------------------------------------------------------------*/
+function setPlayerName() {
   let player1Type = player1TypeCheckbox.checked ? 'human' : 'computer';
   let player1Colour = player1ColourCheckbox.checked ? 'red' : 'yellow';
   let player1Name = elById('player1Name').value.trim();
@@ -605,12 +612,6 @@ function validatePlayerName() {
   let player2Colour = player2ColourCheckbox.checked ? 'red' : 'yellow';
   let player2Name = elById('player2Name').value.trim();
 
-  // Displays alert if both players have the same name.
-  if (player1Name && player2Name && player1Name.toUpperCase() === player2Name.toUpperCase()) {
-    return showAlert('newGame');
-  }
-
-  // Sets the player's name to the default name if a user doesn't input a name.
   if (player1Type === 'computer' && player2Type === 'human') {
     player1Name = player1Name === '' ? 'Computer' : player1Name;
     player2Name = player2Name === '' ? 'You' : player2Name;
@@ -626,7 +627,14 @@ function validatePlayerName() {
 
   elById('player1Name').value = '';
   elById('player2Name').value = '';
+  configureGame(player1Type, player1Colour, player1Name, player2Type, player2Colour, player2Name);
+}
 
+/**----------------------------------------------------------------------------
+ * Runs after the input validation of the New Game page is done:
+ * Assign the input values to the playerData variable.
+ -----------------------------------------------------------------------------*/
+function configureGame(player1Type, player1Colour, player1Name, player2Type, player2Colour, player2Name) {
   playerData = {
     player1Type,
     player1Colour,
@@ -635,13 +643,15 @@ function validatePlayerName() {
     player2Colour,
     player2Name
   };
-  return playerData;
+  gamePlayed = 0;
+  renderPage('game');
+  runGame();
 }
 
-/**
- * Runs when a user inputs the same name for both players on the New Game page.
- * Or when a user clicks the "delete data" button on the Leaderboard page.
- */
+/**----------------------------------------------------------------------------
+ * Runs when a user inputs the same name for both players on the New Game page,
+ * or when a user clicks the "delete data" button on the Leaderboard page.
+ -----------------------------------------------------------------------------*/
 function showAlert(pageName) {
   const overlay = document.createElement('aside');
   let message;
@@ -686,9 +696,9 @@ function showAlert(pageName) {
   closeAlert(pageName);
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a user clicks a button on an alert popup.
- */
+ -----------------------------------------------------------------------------*/
 function closeAlert(pageName) {
   if (pageName === 'newGame') {
     const nameAlertCloseBtn = elById('nameAlertCloseBtn');
@@ -710,9 +720,9 @@ function closeAlert(pageName) {
   }
 }
 
-/**
- * Runs when a user clicks one of the toggle icons in the header on mobile.
- */
+/**----------------------------------------------------------------------------
+ * Runs when a user clicks a nav menu toggle icon(≡, ⨉) on mobile.
+ -----------------------------------------------------------------------------*/
 function toggleNav() {
   const nav = elById('nav');
   const toggleBtns = qsa('.nav-toggle-btn');
@@ -728,9 +738,9 @@ function toggleNav() {
   }
 }
 
-/**
- * Runs when a user presses anywhere on the main element while the nav menu is open.
- */
+/**----------------------------------------------------------------------------
+ * Runs when a user clicks the main element while the nav menu is open.
+ -----------------------------------------------------------------------------*/
 function closeNav() {
   const navOpened = navCloseBtn.classList.contains('active');
   if (navOpened) {
@@ -738,10 +748,10 @@ function closeNav() {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a user clicks a button to open a page.
  * @param {string} name The page name.
- */
+ -----------------------------------------------------------------------------*/
 function renderPage(name) {
   const targetSection = elById(`${name}`);
   const nav = elById('nav');
@@ -799,13 +809,13 @@ function renderPage(name) {
   }
 }
 
-/**
- * Runs when the game is over.
+/**----------------------------------------------------------------------------
+ * Runs when the game is over:
  * Stores the result of the game in local storage.
  * @param {string} name The current player's name.
  * @param {number} point The current player's points, or 0 if it's a draw.
  * @param {number} win 1 if there's a winner, or else 0.
- */
+ -----------------------------------------------------------------------------*/
 function addToLocalstorage(name, point, win) {
   let opponentName = name === playerData.player1Name ? playerData.player2Name : playerData.player1Name;
   const scores = JSON.parse(localStorage.getItem('scores'));
@@ -834,9 +844,10 @@ function addToLocalstorage(name, point, win) {
   }
 }
 
-/**
- * Runs when a user opens the Leaderboard page.
- */
+/**----------------------------------------------------------------------------
+ * Runs when a user opens the Leaderboard page:
+ * Gets the game results data from local storage.
+ -----------------------------------------------------------------------------*/
 function getFromLocalstorage() {
   const data = JSON.parse(localStorage.getItem('scores'));
 
@@ -860,9 +871,9 @@ function getFromLocalstorage() {
   displayLeaderboardScore(mergedData);
 }
 
-/**
- * Runs when there is no score data in local storage.
- */
+/**----------------------------------------------------------------------------
+ * Runs when there is no game results data in local storage.
+ -----------------------------------------------------------------------------*/
 function displayNoDataText() {
   const noDataText = elById('noDataText');
   const table = elById('leaderboardTable');
@@ -872,10 +883,11 @@ function displayNoDataText() {
   leaderboardDeleteBtn.style.display = 'none';
 }
 
-/**
- * Runs when there is score data in local storage.
- * @param {array} data Player name, Points, Number of wins, Number of games the player played.
- */
+/**----------------------------------------------------------------------------
+ * Runs when there is game results data in local storage.
+ * @param {array} data
+ *    Player name, Points, Number of wins, Number of games the player played.
+ -----------------------------------------------------------------------------*/
 function displayLeaderboardScore(data) {
   const noDataText = elById('noDataText');
   const table = elById('leaderboardTable');
@@ -916,10 +928,10 @@ function displayLeaderboardScore(data) {
   }
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a user clicks the "ok" button
  * on the leaderboard data deletion alert popup.
- */
+ -----------------------------------------------------------------------------*/
 function deleteData() {
   const table = elById('leaderboardTable');
   const tbody = elById('leaderboardTableBody');
@@ -932,9 +944,9 @@ function deleteData() {
   noDataText.style.display = 'block';
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Runs when a user clicks the "send" button on the contact page.
- */
+ -----------------------------------------------------------------------------*/
 function sendMessage() {
   const contactSendBtn = elById('contactSendBtn');
   const templateParams = {
@@ -976,10 +988,10 @@ function sendMessage() {
   }
 }
 
-/**
- * Runs after the DOM finishes loading.
+/**----------------------------------------------------------------------------
+ * Runs after the DOM finishes loading:
  * Adds event listeners to the elements.
- */
+ -----------------------------------------------------------------------------*/
 function init() {
   // Button Click Event listeners
   logoLink.addEventListener('click', () => {
@@ -1002,7 +1014,7 @@ function init() {
   });
   settingStartBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    startBtnHandler();
+    validatePlayerName();
   });
   settingCloseBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1057,6 +1069,14 @@ function init() {
     }
   });
 
+  // Resets the contact form custom validation message
+  nameEl.addEventListener('change', () => {
+    nameEl.setCustomValidity('');
+  });
+  messageEl.addEventListener('change', () => {
+    messageEl.setCustomValidity('');
+  });
+
   // Keyboard controls in the game
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' && gameSection.classList.contains('active')) {
@@ -1072,34 +1092,26 @@ function init() {
     sendMessage();
   });
 
-  // Resets the custom validation message
-  nameEl.addEventListener('change', () => {
-    nameEl.setCustomValidity('');
-  });
-  messageEl.addEventListener('change', () => {
-    messageEl.setCustomValidity('');
-  });
-
   elById('mainEl').addEventListener('click', closeNav);
 }
 
 // Helper functions
 // Source: Web Dev Simplified's "Stop Wasting Your Time - Use These 16 JS Utility Functions Instead"(https://www.youtube.com/watch?v=EoUIS2PxKCs&t=202s)
 
-/**
+/**----------------------------------------------------------------------------
  * Helper function of document.getElementById()
  * @param {string} id The element's id
  * @returns The element object that matches the id
- */
+ -----------------------------------------------------------------------------*/
 function elById(id) {
   return document.getElementById(id);
 }
 
-/**
+/**----------------------------------------------------------------------------
  * Helper function of document.querySelectorAll()
  * @param {string} selector 
  * @returns {array} An array of node list that matches the selector
- */
+ -----------------------------------------------------------------------------*/
 function qsa(selector) {
   return [...document.querySelectorAll(selector)];
 }
