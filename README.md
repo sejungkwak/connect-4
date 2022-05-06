@@ -541,26 +541,28 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - Fix: I replaced the `min()` property with `width` and `max-width` where possible or added a media query where impossible. For the `gap` property, I removed it and added a margin to the child element.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
-- Sound delay in Safari
+- Sound effects related issues
 
-  - Error: The disc drop sound was delayed or wasn't played in Safari when multiple discs were placed in a short time.
-  - Reason: I was not able to spot the exact reason for the issue, but this seems to be something to do with _Apple_ disabling automatic sound playing.
-  - Fix: I moved the code that calls the `Audio()` constructor inside the function that plays the sound. However, this change caused a freeze issue on iOS. Please refer to the next bug fix for more details.
-  - [View commit details](https://github.com/sejungkwak/connect-4/commit/82caddcc05e56dec61f56d117416b68d31877b19)
+  - Sound delay in Safari
 
-- Freeze issue when the sound is on in Safari and Chrome on iOS
+    - Error: The disc drop sound was delayed or wasn't played in Safari when multiple discs were placed in a short time.
+    - Reason: I was not able to spot the exact reason for the issue, but this seems to be something to do with _Apple_ disabling automatic sound playing.
+    - Fix: I moved the code that calls the `Audio()` constructor inside the function that plays the sound. However, this change caused a freeze issue on iOS. Please refer to the next bug fix for more details.
+    - [View commit details](https://github.com/sejungkwak/connect-4/commit/82caddcc05e56dec61f56d117416b68d31877b19)
 
-  - Error: The __Play__ page froze occasionally when the sound was on in Safari and Chrome on iOS.
-  - Reason: The audio delay on iOS seems to be a known issue as _Apple_ have disabled automatic sound playing by default.
-  - Fix: I created a global variable that stores the `Audio()` constructor, set `autoplay = true` to it and added a silent MP3 file. I then changed the `src` property in the function that plays the sound.
-  - [View commit details](https://github.com/sejungkwak/connect-4/commit/7c255968d9901c4dd6fafe4b2fbb5d10149edc7d)
+  - Freeze issue on iOS
 
-- End game sound bug in Safari on iOS
+    - Error: The __Play__ page froze occasionally when the sound was on in Safari and Chrome on iOS.
+    - Reason: The audio delay on iOS seems to be a known issue as _Apple_ have disabled automatic sound playing by default.
+    - Fix: I created a global variable that stores the `Audio()` constructor, set `autoplay = true` to it and added a silent MP3 file. I then changed the `src` property in the function that plays the sound.
+    - [View commit details](https://github.com/sejungkwak/connect-4/commit/7c255968d9901c4dd6fafe4b2fbb5d10149edc7d)
 
-  - Error: The end game sound was not playing when the computer wins in Safari on iOS.
-  - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
-  - Fix: I used a single global variable that stores the `Audio()` constructor for all sound effects.
-  - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
+  - End game sound bug in Safari on iOS
+
+    - Error: The end game sound was not playing when the computer wins in Safari on iOS.
+    - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
+    - Fix: I used a single global variable that stores the `Audio()` constructor for all sound effects.
+    - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
 
 - Inaccessible display mode alert button
 
@@ -590,6 +592,27 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c90f4779675562ad1df9f0566c9b60b9028b611e)
 
 ### Known Bugs
+
+- Dropping disc sound effect error
+
+  - The dropping disc sound effect is not playing properly or is clipped when the user clicks the mouse more than twice per second.
+  - There was an error message logged in the console when multiple discs were placed in a short time when the sound was on.
+
+    - Chrome
+      ![Promise error in Chrome](documentation/bugs/bug-promise-chrome.png)
+    - Safari
+      ![Promise error in Safari](documentation/bugs/bug-promise-safari.png)
+
+  - As the above images indicate, the error occurred because the previous `play()` method was interrupted before the promise was fulfilled. I used `async` `await` to help handle the error and it returns nothing if the promise is rejected. This means the sound does not play when multiple discs are placed in a short time.
+  - The error message does not print in the console anymore as I created a catch block to trap the error message.
+  - I have tried several techniques to try ensure the promise is not rejected in the first place and the sound plays properly.
+
+    - Changed the sound: I replaced the dropping sound effect with other shorter sounds and a shortened version of my current sound.
+    - `setTimeout` to control the sound effect start time: I experimented with a 2 seconds time out for playing the sound effect to try to control the execution of the `play()` method. Even though this reduced the number of error messages, it did not completely fix it. It also created very noticeable delay between the user input and the sound effect playing.
+    - Prevented the mouse click handler function from being executed while the sound is playing: I created a global variable, assigned `true` to it when the sound started playing and changed the value to `false` 2 seconds afterwards with `setTimeout`. While the value was `true`, the mouse click handler function was not executed. This method reduced the number of error messages, but the player turn indicator(`currentPlayer`) changed before the user could interact again. I found this was more problematic than the sound not playing.
+    - Added more `Audio()` constructors: I set 3 `Audio()` constructors with the same sound for the computer, player1 and player2. This method made the sound play simultaneously and worked perfectly in Chrome. However, the sound was not synced with placing a disc in Safari on macOS and it caused the freeze issue in Safari on iOS.
+
+  - After trying several different ways to fix the issue, I was not able to find a satisfactory solution for this particular issue even though I spent a lot of time on it. In the end, I decided to leave this as a known bug as it does not impact the normal user experience as the error only occurs when the user clicks the mouse multiple times per second depending on the browser.
 
 - Federated Learning of Cohorts (FLoC)
 
