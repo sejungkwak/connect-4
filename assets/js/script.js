@@ -498,21 +498,23 @@ function updateColour(currentPlayerColour) {
 /**----------------------------------------------------------------------------
  * Runs when a player drops a disc and the game is still on.
  -----------------------------------------------------------------------------*/
-function playDropSound() {
-  if (!isMuted) {
-    soundEffect.src = 'assets/sounds/drop.mp3';
-    soundEffect.play();
+async function playDropSound() {
+  if (isMuted) return;
+  soundEffect.src = 'assets/sounds/drop.mp3';
+  try {
+    await soundEffect.play();
+  } catch (e) {
+    return;
   }
 }
 
 /**----------------------------------------------------------------------------
- * Runs when a game is over.
+ * Runs when the game is over.
  -----------------------------------------------------------------------------*/
 function playWinSound() {
-  if (!isMuted) {
-    soundEffect.src = 'assets/sounds/end.mp3';
-    soundEffect.play();
-  }
+  if (isMuted) return;
+  soundEffect.src = 'assets/sounds/end.mp3';
+  soundEffect.play();
 }
 
 /**----------------------------------------------------------------------------
