@@ -1072,10 +1072,10 @@ function init() {
   });
 
   // Resets the contact form custom validation message
-  nameEl.addEventListener('change', () => {
+  nameEl.addEventListener('input', () => {
     nameEl.setCustomValidity('');
   });
-  messageEl.addEventListener('change', () => {
+  messageEl.addEventListener('input', () => {
     messageEl.setCustomValidity('');
   });
 
