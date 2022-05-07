@@ -456,7 +456,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
 - Alert overlay staying on the screen even on an unrelated page
 
-  - Error: Overlays created on the __New game__ page remain visible when opening a different page.
+  - Error: Overlays created on the __New game__ page remained visible when opening a different page.
   - Reason: The overlay was added to the `main` element, not the __New game__ page(`section`).
   - Fix: I changed the code to add the overlay inside the __New game__ page instead of the `main` element.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/73f03cc6f8c56746e15062147864f5b78e63ba20)
@@ -464,8 +464,8 @@ The site features a fully responsive design and contains 4 game-related pages(__
 - Consecutive mouse clicks disrupting the turn order
 
   - Error: The disc was not placed with the right colour when the mouse was clicked twice before the computer placed a disc.
-  - Reason: The computer places a disc a second after a human player makes a move. When the mouse was clicked faster than the computer's move, the `mouseclick` event listener was called twice.
-  - Fix: I initialised a global variable called 'computerTurn' and added/changed the boolean value at the beginning of a game, and the beginning and end of the computer's turn.
+  - Reason: The computer places a disc a second after a human player makes a move. When the mouse was clicked faster than the computer's move, the mouse click event listener was called twice.
+  - Fix: I initialised a global variable called `computerTurn` and added/changed the boolean value at the beginning of a game, and the beginning and end of the computer's turn.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/5ae90aabc321edcfe04be774ba933cfc212a3f57)
 
 - Unexpected trailing zeros in the win rate
@@ -528,7 +528,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - Reason: `Uncaught TypeError: Cannot read properties of null (reading 'clientWidth')`. The property I was referring to is a cell(`div`) in the game board, and there is no cell if the user hasn't pressed the __START__ button on the __New Game__ page.
   - Fix: I added the code that sets the cell's height when the __Play__ page opens. I also added a condition inside the `resize` event listener to check if a game has started. If so, it calls the function that sets the cell's height.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/32edb5295e56a90bdf7a94f0afbf6f50cfacfd08)
-  - However, I removed the code in JS at the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `calc(board width - rows' block margin)` to the board container's height instead.
+  - However, I removed the code in JS in the end since I needed to add extra code for the 404 page which is not linked to the JS file. I added `calc(board width - rows' block margin)` to the board container's height instead.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/935b172029f2b459480588464926b4f33f9dc381)
 
 - Browser support for `min()` and `gap` for `flex`
@@ -559,7 +559,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
   - End game sound bug in Safari on iOS
 
-    - Error: The end game sound was not playing when the computer wins in Safari on iOS.
+    - Error: The end game sound was not playing when the computer won in Safari on iOS.
     - Reason: I was not able to figure out the reason for the bug. However, I reckon it is related to _Apple_ disabling automatic sound playing.
     - Fix: I used a single global variable that stores the `Audio()` constructor for all sound effects.
     - [View commit details](https://github.com/sejungkwak/connect-4/commit/2b9b6476a0d024555f5adc93c45eabac2257ebd2)
@@ -599,8 +599,11 @@ The site features a fully responsive design and contains 4 game-related pages(__
   - There was an error message logged in the console when multiple discs were placed in a short time when the sound was on.
 
     - Chrome
+
       ![Promise error in Chrome](documentation/bugs/bug-promise-chrome.png)
+    
     - Safari
+    
       ![Promise error in Safari](documentation/bugs/bug-promise-safari.png)
 
   - As the above images indicate, the error occurred because the previous `play()` method was interrupted before the promise was fulfilled. I used `async` `await` to help handle the error and it returns nothing if the promise is rejected. This means the sound does not play when multiple discs are placed in a short time.
@@ -609,7 +612,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
     - Changed the sound: I replaced the dropping sound effect with other shorter sounds and a shortened version of my current sound.
     - `setTimeout` to control the sound effect start time: I experimented with a 2 seconds time out for playing the sound effect to try to control the execution of the `play()` method. Even though this reduced the number of error messages, it did not completely fix it. It also created very noticeable delay between the user input and the sound effect playing.
-    - Prevented the mouse click handler function from being executed while the sound is playing: I created a global variable, assigned `true` to it when the sound started playing and changed the value to `false` 2 seconds afterwards with `setTimeout`. While the value was `true`, the mouse click handler function was not executed. This method reduced the number of error messages, but the player turn indicator(`currentPlayer`) changed before the user could interact again. I found this was more problematic than the sound not playing.
+    - Prevented the mouse click handler function from being executed while the sound was playing: I created a global variable, assigned `true` to it when the sound started playing and changed the value to `false` 2 seconds afterwards with `setTimeout`. While the value was `true`, the mouse click handler function was not executed. This method reduced the number of error messages, but the player turn indicator(`currentPlayer`) changed before the user could interact again. I found this was more problematic than the sound not playing.
     - Added more `Audio()` constructors: I set 3 `Audio()` constructors with the same sound for the computer, player1 and player2. This method made the sound play simultaneously and worked perfectly in Chrome. However, the sound was not synced with placing a disc in Safari on macOS and it caused the freeze issue in Safari on iOS.
 
   - After trying several different ways to fix the issue, I was not able to find a satisfactory solution for this particular issue even though I spent a lot of time on it. In the end, I decided to leave this as a known bug as it does not impact the normal user experience as the error only occurs when the user clicks the mouse multiple times per second depending on the browser.
@@ -628,7 +631,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
 - User-Agent reduction
 
-  - There is an issue: `Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform "emailjs"` in the console in Chrome and Opera. This appears because _Google_ has planned to reduce User-Agent for improving user privacy and this part `t.exports=n("navigator","userAgent")||""}` in [EmailJS code](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js) seems to be causing the issue.
+  - There is an issue: `Audit usage of navigator.userAgent, navigator.appVersion, and navigator.platform "emailjs"` in the console in Chrome and Opera. This appears because _Google_ has planned to reduce User-Agent for improving user privacy and this part `t.exports=n("navigator","userAgent")||""}` in [_EmailJS_ code](https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js) seems to be causing the issue.
 
     ![Bug: User-Agent reduction](documentation/bugs/bug-user-agent.png)
 
