@@ -309,6 +309,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 - [GitHub](https://github.com/) was used to store and deploy the project's code.
 - [Gitpod](https://www.gitpod.io/) was used to develop and test my code.
 - [Google Fonts](https://fonts.google.com/) was used to import Fredoka One and Poppins into the style.css file.
+- [Grammarly](https://www.grammarly.com/) was used to check for errors in the README.
 - [JSHint](https://jshint.com/) was used to check the JavaScript validity.
 - [Regex101](https://regex101.com/) was used to create a regular expression to remove whitespace inside a string in the contact form.
 - [Visual Studio Code](https://code.visualstudio.com/) was used to edit my code and create SVG paths from SVG image files.
@@ -474,7 +475,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
     ![Win rate error](documentation/bugs/bug-tofix.png)
 
-  - Reason: This is related to [floating-point arithmetic](https://floating-point-gui.de/). I used the `toFixed()` method to avoid the floating point inaccuracy error. However, I added another arithmetic operator of `* 100` after `toFixed()`.
+  - Reason: This is related to [floating-point arithmetic](https://floating-point-gui.de/). I used the `toFixed()` method to avoid the floating-point inaccuracy error. However, I added another arithmetic operator of `* 100` after `toFixed()`.
   - Fix: I moved the `toFixed()` method to the end of the operators after all the calculations are done.
   - [View commit details](https://github.com/sejungkwak/connect-4/commit/c3baa2b66fee59460e8a7f4bf4279773f9ff9300)
 
@@ -608,10 +609,10 @@ The site features a fully responsive design and contains 4 game-related pages(__
 
   - As the above images indicate, the error occurred because the previous `play()` method was interrupted before the promise was fulfilled. I used `async` `await` to help handle the error and it returns nothing if the promise is rejected. This means the sound does not play when multiple discs are placed in a short time.
   - The error message does not print in the console anymore as I created a catch block to trap the error message.
-  - I have tried several techniques to try ensure the promise is not rejected in the first place and the sound plays properly.
+  - I have tried several techniques to try to ensure the promise is not rejected in the first place and the sound plays properly.
 
     - Changed the sound: I replaced the dropping sound effect with other shorter sounds and a shortened version of my current sound.
-    - `setTimeout` to control the sound effect start time: I experimented with a 2 seconds time out for playing the sound effect to try to control the execution of the `play()` method. Even though this reduced the number of error messages, it did not completely fix it. It also created very noticeable delay between the user input and the sound effect playing.
+    - `setTimeout` to control the sound effect start time: I experimented with a 2 seconds time out for playing the sound effect to try to control the execution of the `play()` method. Even though this reduced the number of error messages, it did not completely fix it. It also created a very noticeable delay between the user input and the sound effect playing.
     - Prevented the mouse click handler function from being executed while the sound was playing: I created a global variable, assigned `true` to it when the sound started playing and changed the value to `false` 2 seconds afterwards with `setTimeout`. While the value was `true`, the mouse click handler function was not executed. This method reduced the number of error messages, but the player turn indicator(`currentPlayer`) changed before the user could interact again. I found this was more problematic than the sound not playing.
     - Added more `Audio()` constructors: I set 3 `Audio()` constructors with the same sound for the computer, player1 and player2. This method made the sound play simultaneously and worked perfectly in Chrome. However, the sound was not synced with placing a disc in Safari on macOS and it caused the freeze issue in Safari on iOS.
 
@@ -627,7 +628,7 @@ The site features a fully responsive design and contains 4 game-related pages(__
     - WICG's [FLoC repository](https://github.com/WICG/floc)
     - [Federated Learning of Cohorts (FLoC)](https://docs.gitlab.com/ee/user/admin_area/settings/floc.html) on [GitLab Docs](https://docs.gitlab.com/)
     - [GitHub Pages: Permissions-Policy: interest-cohort=() Header added to all pages sites](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/) on [GitHub Changelog](https://github.blog/changelog/)
-  - According to _GitHub Pages_, FLoC has been disabled to avoid users being tracked and categorised. As the Chrome DevTools Lighthouse does not report any negative performance issues, I have decided not to pursue any further.
+  - According to _GitHub Pages_, FLoC has been disabled to avoid users being tracked and categorised. As the Chrome DevTools Lighthouse does not report any negative performance issues, I have decided not to pursue it any further.
 
 - User-Agent reduction
 
